@@ -1,0 +1,22 @@
+# Secrets — never commit
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Datos generados en runtime (los leads capturados no se versionan)
+data/leads.jsonl
+
+# Índice vectorial generado — se reconstruye con el pipeline de ingesta
+data/index/
+
+# SO / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
