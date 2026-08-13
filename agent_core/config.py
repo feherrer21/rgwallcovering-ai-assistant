@@ -34,6 +34,20 @@ class Settings(BaseSettings):
     chunk_size: int = 700
     chunk_overlap: int = 120
 
+    # --- Recuperación ---------------------------------------------------
+    # Piso de relevancia (coseno). Por debajo se descarta el fragmento aunque
+    # sea el vecino más cercano.
+    #
+    # VALOR PROVISIONAL. Se calibra en la fase 6 barriendo el rango contra el
+    # set de evaluación; 0.62 es una conjetura razonable, no un resultado.
+    # Ver docs/04_plan.md fase 6.
+    relevance_floor: float = 0.62
+    top_k: int = 5
+    # Tope de fragmentos por documento. Con 27 artículos de longitud dispar,
+    # uno largo puede acaparar el contexto entero y dejar fuera la única
+    # fuente que sí respondía.
+    max_por_fuente: int = 2
+
     # --- Entrega de leads -----------------------------------------------
     leads_file: Path = DATA_DIR / "leads.jsonl"
     # Ronald confirmó info@ y adelantó que más adelante querrá añadir una o dos

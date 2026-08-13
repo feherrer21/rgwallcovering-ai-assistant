@@ -144,6 +144,69 @@ causing it, and both directions belong in an honest review.
 
 ---
 
+## Phase 2 — Retrieval
+
+### Entry 6 — Smoke test on the real corpus: the predicted failure, observed
+
+**Dimension:** correctness / product behaviour
+**Severity:** open — deliberately not fixed yet
+
+Eight queries against the built index at the provisional floor of 0.62.
+Recorded here rather than acted on: calibrating the floor is phase 6, against
+the full evaluation set. Tuning it now, against eight queries chosen by the
+person who wrote the code, is how a prototype ends up fitted to its own demo.
+
+**Working as intended:**
+
+| Query | Result |
+|---|---|
+| *"how long does an installation take?"* | Ronald's answers (A, 0.685) + trade knowledge (C, 0.648) |
+| *"do you remove old wallpaper?"* | Preparation doc (C, 0.759) |
+| *"what is the capital of Mongolia?"* | **Defers.** Best neighbour 0.512, below floor |
+
+**Failure 1 — false deferral.** *"do you work in Boston?"* defers at 0.560,
+but the answer exists: Ronald confirmed Rhode Island and Massachusetts, and
+Boston is in Massachusetts. The floor is too high for this query. The
+assistant will say "let me have the team confirm" to a question it can
+actually answer, which is a real product cost even though it is the safe
+direction to fail in.
+
+**Failure 2 — the cherry-blossom effect, measured.** *"what's the best
+material for a bathroom?"* returns the materials document (C, 0.666) — and
+then, essentially tied with it:
+
+```
+[A] 0.658  OUT-OF-THIS-WORLD DECOR
+[A] 0.658  Residential
+[A] 0.643  FIVE INTERIOR DESIGN AND WALLPAPER IDEAS
+[A] 0.638  2025: A New Beginning for Your Spaces!
+```
+
+Decorative essays scoring within 0.03 of the one document that genuinely
+answers the question. This is the prediction from `02_data_provenance.md`
+§1.2, now observed rather than argued: in a corpus that is 84% decorative
+prose, the signal and the noise occupy the same score band.
+
+**Failure 3 — out-of-scope queries do not defer.** *"can you install flooring
+for me?"* returns generic marketing chunks at 0.62. Nothing in the corpus says
+they do not do flooring, so the nearest neighbours are "we transform spaces"
+boilerplate — which is exactly the material most likely to lead a generator
+toward an accidental yes. Handling this may belong in the prompt rather than
+the retriever.
+
+**Structural observation:** all scores across all eight queries fall between
+0.51 and 0.76. `bge-small` compresses cosine similarity into a narrow band, so
+the floor is a sensitive knob: 0.56 versus 0.62 is the difference between
+answering the Boston question and deferring it. Phase 6 should sweep in steps
+of about 0.02, not 0.1.
+
+**Also noted:** *"2025: A New Beginning for Your Spaces!"* surfaces across
+unrelated queries. It appears to be generic marketing prose that sits near the
+centroid of the corpus — a hub chunk that is close to everything and specific
+to nothing.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was
