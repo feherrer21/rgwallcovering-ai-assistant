@@ -211,13 +211,33 @@ GET /health   → liveness
 
 ---
 
-## 6. Storage
+## 6. Storage and delivery
 
-JSONL append-only at `data/leads.jsonl`, gitignored.
+Two distinct concerns, previously conflated.
 
-`02` §3.2 records that this is inadequate for production on ephemeral-disk
-hosting. The `leads.guardar()` signature is the seam where a durable
-destination replaces it without touching the agent.
+**Storage** — JSONL append-only at `data/leads.jsonl`, gitignored. This is a
+local operational log, not the system of record.
+
+**Delivery** — the lead is emailed to `info@rgwallcovering.com` the moment it
+is captured: the structured fields and, above them, the written summary.
+
+**The email is the system of record.** Ronald runs a five-person business and
+already lives in that inbox; a database would mean a dashboard he has to
+remember to check, and a CRM would mean an account he has to maintain. His
+mail provider already gives durability, search, mobile access and a reply
+button that reaches the customer. Building storage infrastructure alongside
+that would be adding a worse copy of something he already has.
+
+This also dissolves the ephemeral-disk problem in `02` §3.2 rather than
+solving it: if the container restarts and `leads.jsonl` vanishes, nothing of
+value is lost, because the lead left the process the moment it was created.
+
+`leads.entregar()` is the seam. If Ronald later wants a spreadsheet or a CRM,
+a second delivery target is added there and nothing else changes.
+
+Failure handling: if delivery fails, the lead stays in the local JSONL and the
+failure is logged loudly. The visitor is never told their details were lost —
+they were not; they simply have not arrived yet.
 
 ---
 
@@ -238,10 +258,15 @@ destination replaces it without touching the agent.
 - API key server-side only. `.env` gitignored from commit 1.
 - CORS restricted to the client's origin in production; permissive locally.
 - **The `/chat` endpoint spends money.** Unauthenticated and unlimited, it is
-  an open invoice. Rate limiting per IP is required before deployment and is
-  **not** implemented in the prototype — named here as a known gap rather than
-  discovered later.
-- `GET /leads` exposes PII and must not survive to production unauthenticated.
+  an open invoice against Ronald's API budget. Since the target changed from
+  demonstration to something he can actually run, **per-IP rate limiting moves
+  from a named gap to a requirement** (T4.6). A prototype that never leaves
+  localhost can defer this; one intended for his website cannot.
+- `GET /leads` exposes PII. Removed or authenticated before deployment — with
+  email delivery in place it is a development convenience, not a feature.
+- Email credentials live in `.env` alongside the API key. A delivery failure
+  must never surface the address or the credential in a response to the
+  visitor.
 - Prompt injection: §4.2.
 
 ---

@@ -68,6 +68,26 @@ exercised locally, not deployed.
 **Done when:** the demo is usable by someone who is not me, and `POST /chat`
 returns the contract in `03` §5 against a local uvicorn.
 
+### Phase 4.5 — Lead delivery · ~1 h
+
+Added 2026-08-12, when the goal changed from demonstrating the idea to
+delivering something Ronald can run. See the S5 amendment in
+`01_problem_statement.md`.
+
+Captured leads are emailed to `info@rgwallcovering.com` — summary first,
+structured fields under it. The local JSONL becomes an operational log rather
+than the system of record.
+
+**Done when:** a lead captured in conversation arrives in a real inbox, and
+restarting the process loses nothing. Also when a delivery *failure* is
+handled: logged loudly, lead retained locally, visitor never told their
+details were lost.
+
+Also in this phase: per-IP rate limiting on `/chat` (T4.6). This was a named
+gap while the target was a local demonstration; the moment it is meant for
+Ronald's website it becomes a requirement, because the endpoint spends his
+money.
+
 ### Phase 5 — Evaluation harness and baseline · ~3 h
 
 The 30 fixed questions from `02` §2.2. Runner records reply, sources,
@@ -123,7 +143,31 @@ presentation surface, not the deliverable.
 baseline, phase 6 has nothing to measure against and phase 7 becomes
 speculation — and those two carry disproportionate weight in the assessment.
 If time runs short, the cut comes from phase 4 (a rougher demo) and never
-from 5, 6 or 7.
+from 4.5, 5, 6 or 7.
 
-**Total estimate: ~23.5 h**, excluding the ~4 h already spent on the discarded
+**Total estimate: ~25 h**, excluding the ~4 h already spent on the discarded
 spike and this specification.
+
+## What "done" means here
+
+This project has two audiences and they want different things. The assessment
+wants evidence of how the work was done; Ronald wants something that answers
+his customers and puts their details in his inbox.
+
+Where the two conflict, the tie-break is Ronald — with one exception: the
+evaluation baseline (phase 5) is committed before any tuning even though it
+costs time and produces no customer value, because without it every later
+claim about the product's behaviour is unfalsifiable. That is not ceremony;
+it is the only thing that distinguishes "it works" from "it seemed to work
+when I tried it".
+
+Ranked by what would most improve the product, cheapest first — and neither
+of the top two is engineering:
+
+1. **Ronald answers the six open questions** in `01_problem_statement.md`.
+   Each answer converts a deferral into a real answer, at zero engineering
+   cost. Highest value-per-hour available in the project.
+2. **Ronald fixes the Services page**, which currently serves template copy
+   about wind turbines to his prospective customers.
+3. **Ronald tags 15–20 portfolio images**, which is what would revive the
+   design-inspiration capability cut in `01`.

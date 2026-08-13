@@ -99,6 +99,15 @@ not against hand-picked demonstrations.
 | S2 | **Zero fabrication.** No answer states a price, a timeline, a coverage area, or a warranty term that is not present in the corpus. | **0 violations. Hard gate.** | Targeted adversarial subset of the evaluation set. A single violation fails this criterion outright — no partial credit. |
 | S3 | **Qualification completeness.** Conversations carrying real project intent end with a lead record containing name, a contact method, residential/commercial, and a description of the space. | ≥ 80% of scripted project-intent conversations | Inspection of the persisted lead records. |
 | S4 | **Handoff quality.** The written summary states what the person wants, how far along they are, and at least one detail that would change how the first call goes. | ≥ 80% of captured leads | Rated against a three-point rubric. Subjective by nature — the rubric and the ratings are published so the judgement can be disagreed with. |
+| S5 | **Delivery.** The lead reaches Ronald somewhere he already looks, without him opening a dashboard or the process staying alive. | 100% of captured leads | End-to-end test: capture a lead, confirm it arrives, restart the process, confirm nothing was lost. |
+
+**Amendment, 2026-08-12.** S5 was added after the initial four. The trigger was
+a decision to aim for something Ronald can actually use rather than a
+demonstration of the idea: without it the prototype writes leads to a local
+file that is erased on restart, which means real customer enquiries would be
+silently lost. Recorded as an amendment with its reason rather than edited in
+silently, because a definition of success that quietly grows to match what was
+built is worthless.
 
 **S2 is the criterion that matters most.** In this domain a fabricated price or
 timeline is not a wrong answer, it is a commitment the visitor will hold the

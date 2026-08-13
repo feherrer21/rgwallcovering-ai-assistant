@@ -76,6 +76,24 @@ implementation is visible in history.
       `03` §5; record the transcript as evidence it was tested.
 - [ ] **T4.4** `README.md` — setup, how to run both, how to rebuild the index.
 
+## Phase 4.5 — Lead delivery
+
+- [ ] **T4.5.1** `leads.entregar()` — email the lead to
+      `info@rgwallcovering.com`. Summary first, structured fields under it,
+      plain text. Subject line carries name and residential/commercial so it
+      is triageable from a phone lock screen.
+- [ ] **T4.5.2** Wire delivery into `registrar_lead` so capture and delivery
+      are one step. A lead that is stored but not sent is a lost customer.
+- [ ] **T4.5.3** Failure handling: delivery failure is logged loudly, the lead
+      is retained in the local JSONL, and the visitor is **not** told anything
+      went wrong — their details are not lost, only delayed.
+- [ ] **T4.5.4** End-to-end test: capture a lead in conversation, confirm
+      arrival in a real inbox, restart the process, confirm nothing is lost.
+- [ ] **T4.5.5** Ask Ronald to confirm the destination address, and whether he
+      wants painting enquiries through the same channel.
+- [ ] **T4.6** Per-IP rate limiting on `POST /chat`. Now a requirement rather
+      than a named gap, because the endpoint spends Ronald's API budget.
+
 ## Phase 5 — Evaluation
 
 - [ ] **T5.1** `eval/questions.yaml` — the 30 questions, categorised per
@@ -117,8 +135,9 @@ implementation is visible in history.
 ## Phase 9 — Communicate
 
 - [ ] **T9.1** One stakeholder slide, addressed to Ronald, not to an assessor.
-- [ ] **T9.2** Demo recording or transcript, **including a case handled
-      badly** — required, not optional.
+- [ ] **T9.2** Demo transcript, **including a case handled badly** — required,
+      not optional. Transcript rather than recording: the checklist accepts
+      either, and the time goes to phase 4.5 instead.
 - [ ] **T9.3** `docs/06_effort.md` — hours estimated vs actual, what was cut
       (Portkey, design inspiration, streaming, rate limiting) and why.
 
