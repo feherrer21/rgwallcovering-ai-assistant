@@ -9,8 +9,13 @@ Nivel:     A — confirmado por el dueño. Afirmable como hecho.
 Responde 5 de las 6 preguntas abiertas de docs/01_problem_statement.md.
 
 LO QUE SIGUE SIN RESPUESTA, y el agente sigue derivando:
-  - Si la visita técnica se cobra o va incluida. Ronald confirmó que existe,
-    no si tiene coste.
+  - Cuánto cuesta la visita cuando se cobra, y bajo qué umbral concreto de
+    distancia o alcance pasa a cobrarse. Ronald aportó (2026-08-12) los
+    principios generales del sector por los que se guía, no una regla propia.
+    Ese texto describía lo que hacen "muchas empresas" y "algunas empresas":
+    es conocimiento de sector, no política de RG, y por eso vive en
+    c_visita.md como nivel C. Lo único afirmable como nivel A es que la
+    decisión es caso por caso.
   - Cuánto tarda en pasar un presupuesto desde el primer contacto. Contestó
     la duración de la INSTALACIÓN, que es otra pregunta.
   - Duración y condiciones concretas de la garantía. Confirmó que la hay.
@@ -29,6 +34,13 @@ The following is confirmed directly by Ronald Giraldo, the owner.
 RG Wallcovering assesses the space before quoting. In practice this means
 either a site visit, or the client providing detailed information about the
 space in advance — a project is not priced on a vague description either way.
+
+Whether that visit carries a charge **depends on the project**. Ronald has
+confirmed that he decides case by case, along the lines that are usual in the
+trade — distance and how much detailed consultancy is involved are the kinds
+of thing that move it. He has not stated a fixed rule, so there is no default
+to quote: the honest answer to "is the visit free?" is that it depends and the
+team confirms it when the appointment is arranged.
 
 ## How long installation takes
 

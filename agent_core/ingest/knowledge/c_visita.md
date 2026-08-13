@@ -44,3 +44,22 @@ taking a risk that ultimately lands on the customer.
 A visit is normally short — measurements, a look at the surfaces, a
 conversation about what the client wants and which materials suit the space
 and the use. Samples may be left behind. A written quote follows.
+
+## Whether a visit is charged — how it varies across the trade
+
+Practice differs between companies, and it generally follows one of two
+patterns.
+
+**Assessment at no charge.** Many companies carry out the assessment visit
+without charging for it, particularly where the project goes ahead or the
+client decides to engage them. The visit is treated as part of winning the
+work rather than as a service in itself.
+
+**A fee or deposit for the visit.** Some companies and independent contractors
+charge for the visit where it involves significant travel, or where what is
+being asked for is detailed consultancy rather than a measure-up. Where a fee
+is charged it is often credited against the total if the client goes ahead.
+
+Because it varies, this is worth asking about directly when arranging the
+appointment — it is a normal question and the answer should be clear before
+anyone books a time.
