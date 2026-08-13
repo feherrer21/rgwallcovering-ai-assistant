@@ -2,8 +2,15 @@
 
 **Actualizado:** 2026-08-12 · **Commits:** 14 · **Pruebas:** 31 en verde
 
-Documento vivo. Se actualiza al cerrar cada fase. Fuente de la verdad para
-"qué queda": `04_plan.md` (fases) y `05_tasks.md` (tareas).
+Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
+fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
+cuando una estimación resulta equivocada. Convención registrada en
+`CLAUDE.md`.
+
+Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
+(tareas). Este fichero es el estado, no el plan.
+
+**Último movimiento:** fase 3 al 83%; T3.6 bloqueada por falta de clave de API.
 
 ---
 

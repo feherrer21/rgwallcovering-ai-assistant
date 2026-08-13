@@ -9,6 +9,23 @@ Giraldo, the owner.
 Design decisions live in `docs/03_spec.md`. Read it before changing
 architecture. This file is the standing context for writing code here.
 
+## Keep `docs/PROGRESS.md` current
+
+**Update it as work happens, not at phase boundaries.** Any time a task moves,
+a blocker appears or clears, an estimate proves wrong, or something is decided
+that changes what remains — edit `docs/PROGRESS.md` in the same change.
+
+Two things in particular:
+
+- **Blockers, the moment they appear.** A blocker discovered and not written
+  down is a blocker rediscovered later.
+- **The submission checklist coverage table.** It is the honest answer to "how
+  much is left", because it is what is actually graded — phase percentages
+  are not.
+
+It costs a minute and it is the difference between knowing where the project
+stands and reconstructing it.
+
 ---
 
 ## The rule that overrides everything
