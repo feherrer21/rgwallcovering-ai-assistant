@@ -123,12 +123,16 @@ def vista_chat() -> None:
     st.rerun()
 
 
-def desbloqueado() -> bool:
+def desbloqueado(seccion: str) -> bool:
     """Pide la clave guardada en los secretos de la app.
 
     La URL es pública: sin esto, los datos de quien escribiera antes quedarían
     a la vista del siguiente visitante. Sin `ADMIN_TOKEN` configurado la
     pestaña no se abre para nadie, que es el estado por defecto.
+
+    `seccion` solo distingue el widget: las dos pestañas protegidas se dibujan
+    en la misma pasada y Streamlit no admite dos claves iguales. El desbloqueo
+    sí es compartido —una clave, las dos pestañas.
     """
     if not settings.admin_token:
         st.info("Set ADMIN_TOKEN in the app secrets to open this tab.")
@@ -137,7 +141,7 @@ def desbloqueado() -> bool:
     if st.session_state.get("desbloqueado"):
         return True
 
-    clave = st.text_input("Password", type="password", key="clave")
+    clave = st.text_input("Password", type="password", key=f"clave_{seccion}")
     if not clave:
         return False
     if hmac.compare_digest(clave, settings.admin_token):
@@ -155,7 +159,7 @@ def vista_leads() -> None:
     el disco es efímero, así que esta lista se vacía en cada reinicio y no se
     pierde nada: el lead salió por correo en el momento de capturarlo.
     """
-    if not desbloqueado():
+    if not desbloqueado("leads"):
         return
 
     registros = leads.listar(limite=20)
@@ -194,7 +198,7 @@ def vista_destinatarios() -> None:
     Escribe sobre `settings`, que es el mismo objeto que lee `leads.entregar()`
     y sobrevive a los reruns porque el módulo ya está importado.
     """
-    if not desbloqueado():
+    if not desbloqueado("recipients"):
         return
 
     if not settings.envio_configurado:

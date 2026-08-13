@@ -327,6 +327,40 @@ reports health while the thing it wraps is broken.
 
 ---
 
+### Entry 10 — The same blind spot as entry 9, one commit later
+
+**Dimension:** correctness / verification method
+**Severity:** medium — the deployed app crashed on open, for everyone
+
+The password gate was factored into one function and called from two tabs. It
+creates its widget with a fixed `key="clave"`, and Streamlit refuses two
+widgets with the same key in one pass, so the app raised
+`StreamlitDuplicateElementKey` at startup on Community Cloud. Every visitor got
+an error page instead of an assistant.
+
+Both checks I had run passed. `python demo_streamlit/app.py` executes the
+script with no session, so no widget registry exists to collide in. Requesting
+the served page returns 200 without executing the script at all — exactly the
+gap entry 9 was written about. I had recorded the lesson and then reused the
+same method.
+
+**Fix:** the key is now derived per section, `clave_leads` and
+`clave_recipients`; the unlocked state stays shared, so one password still
+opens both.
+
+**What actually closes it:** `streamlit.testing.v1.AppTest` runs the script
+with a real session context, in-process, without a browser. Three tests in
+`tests/test_demo.py` now assert the app starts clean with both protected tabs
+present, that the right password opens them, and that the wrong one does not.
+The first of those fails against the previous commit.
+
+**The lesson, restated because writing it down was not enough:** a verification
+that cannot reach the layer where the bug lives is not weak evidence, it is no
+evidence. The question to ask of a check is not "did it pass" but "what class
+of failure could this have seen".
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was

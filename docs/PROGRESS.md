@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 30 · **Pruebas:** 53 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 31 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -30,7 +30,7 @@ Fase 4.5 Entrega ████████████████░░░   83%
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 9 entradas
+Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 10 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
@@ -64,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 30 commits
+- Árbol de git limpio, 31 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -228,8 +228,10 @@ aprieta, el recorte sale de la fase 4, nunca de la 5, 6 o 7.
 
 9 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
 son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito), la
-8 (el resumen para Ronald narraba una corrección que nunca ocurrió) y la 9 (el
-demo devolvía 200 sin haber ejecutado una línea de la aplicación).
+8 (el resumen para Ronald narraba una corrección que nunca ocurrió) y la 9 con
+la 10, que son el mismo fallo de método: comprobar el demo con algo que no
+puede ver la capa donde vive el error. La 10 se cerró con `AppTest`, que
+ejecuta el script con sesión real, y dejó tres pruebas de regresión.
 
 ---
 
