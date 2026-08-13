@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 27 · **Pruebas:** 53 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 30 · **Pruebas:** 53 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -64,7 +64,9 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 27 commits
+- Árbol de git limpio, 30 commits
+- Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
+  Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
 ```bash
 # pruebas
