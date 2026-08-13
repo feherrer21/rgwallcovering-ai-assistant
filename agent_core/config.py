@@ -82,6 +82,21 @@ class Settings(BaseSettings):
     # --- API ------------------------------------------------------------
     allowed_origins: str = "*"
 
+    # Límite por IP en POST /chat. El endpoint gasta el presupuesto de API de
+    # Ronald: sin tope es una factura abierta contra él (03_spec.md §8).
+    #
+    # Una conversación real son 5-8 turnos, así que 10 por minuto no molesta a
+    # nadie y corta un bucle automatizado. El tope por hora existe aparte
+    # porque el goteo lento —uno cada seis segundos, todo el día— pasa por
+    # debajo del límite por minuto y es el que de verdad vacía la cuenta.
+    rate_limit_por_minuto: int = 10
+    rate_limit_por_hora: int = 60
+
+    # GET /leads devuelve datos personales. Sin token, el endpoint no se
+    # publica: responde 503 en lugar de servir nombres y teléfonos a quien
+    # pase por ahí (03_spec.md §8).
+    admin_token: str = ""
+
     @property
     def origins(self) -> list[str]:
         return [o.strip() for o in self.allowed_origins.split(",") if o.strip()]
