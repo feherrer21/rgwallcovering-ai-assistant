@@ -52,6 +52,55 @@ real recibido en bandeja (2026-08-13).
 
 ---
 
+## Cómo retomar
+
+Estado del entorno en la máquina de Fabián a 2026-08-13:
+
+- `.venv` creado con las dependencias instaladas
+- `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
+- `data/index/` construido: 365 fragmentos
+- `data/cache/` con las páginas del sitio descargadas
+- Árbol de git limpio, 21 commits
+
+```bash
+# pruebas
+./.venv/Scripts/python.exe -m pytest tests/ -q
+
+# reconstruir el índice (solo si cambian las fuentes o el troceado)
+./.venv/Scripts/python.exe -m agent_core.ingest.build
+
+# una conversación desde Python
+./.venv/Scripts/python.exe -c "from agent_core import run_turn; \
+    print(run_turn('do you work in Boston?').respuesta)"
+```
+
+### Decisión pendiente al retomar
+
+Fase 4 (frontends) o fase 5 (evaluación) primero.
+
+- **Fase 4 antes:** hay demo enseñable a Ronald el mismo día, y ver el agente
+  funcionando es lo que hace que conteste las cuatro preguntas que faltan y
+  se anime a etiquetar el portafolio.
+- **Fase 5 antes:** asegura el peso de la entrega. El baseline es la
+  precondición de la mejora medida y del análisis de fallos, que son las dos
+  cosas que el enunciado marca como de peso desproporcionado.
+
+Sin resolver. El plan dice que si el tiempo aprieta, el recorte sale de la
+fase 4.
+
+### Hilos abiertos que no están en ninguna tarea
+
+- El piso de relevancia en 0.62 falla en dos casos ya observados: deriva
+  *"do you work in Boston?"* aunque la respuesta existe, y no deriva
+  *"can you install flooring for me?"* aunque debería. Material para la
+  fase 6; el barrido va en pasos de 0.02, no de 0.1.
+- La entrada 8 del registro de revisión (el resumen inventaba una corrección)
+  se guarda como caso de regresión para el set de evaluación de la fase 5.
+- `LEAD_EMAIL_TO` apunta al correo de Fabián, no al de Ronald. Cambiarlo solo
+  cuando esto deje de ser una prueba.
+
+---
+
 ## Detalle por fase
 
 ### Especificación — completa
