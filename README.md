@@ -15,6 +15,41 @@ Why the assistant defers so readily, and what the trust tiers mean, is in
 [`docs/03_spec.md`](docs/03_spec.md). Problem, users and how success is
 measured are in [`docs/01_problem_statement.md`](docs/01_problem_statement.md).
 
+## This is a real business with a real broken funnel
+
+**[rgwallcovering.com](https://rgwallcovering.com/) is live right now**, and it
+is where this project starts. RG Wallcovering & Painting has been trading
+since 2006, has five employees, holds Rhode Island contractor licence 35269
+and an A+ BBB rating — a working business whose website has quietly stopped
+doing its job:
+
+- **The Services page serves template copy about wind turbines.** In
+  production, today, to prospective customers.
+- **Nothing on the site captures anything.** No form, no booking, no quote
+  request — an email address and a phone number, and that is the entire funnel.
+  A visitor at 9pm either remembers to call tomorrow or is gone.
+- **The footer still reads © 2023.**
+- **84 portfolio images, none tagged** with style, material or room.
+- The blog is 27 well-written essays about ancient Egypt, block printing and
+  cherry blossoms. It is genuinely good writing that answers **none** of the
+  questions a customer actually asks: does he cover my town, what does it cost,
+  how do we start.
+
+So the marketing problem is not "no traffic" — it is that the traffic that
+arrives gets no answers and leaves no trace. **This assistant closes both
+halves**: it answers from what the company has already published, and when
+there is a real project behind the questions it qualifies the enquiry and puts
+a written summary in the owner's inbox, with a reply button that reaches the
+customer. Nothing new to log into, no dashboard to remember — the email *is*
+the product.
+
+**What is deliberately not claimed:** any figure about conversion or revenue.
+The site captures nothing today, so there is no baseline to compare against —
+that circularity is stated plainly in
+[`docs/02_data_provenance.md`](docs/02_data_provenance.md) §2.3 rather than
+papered over with an invented percentage. What *is* measured is the assistant's
+own behaviour, against criteria fixed before it was built.
+
 ## Try it live
 
 **→ [rgwallcovering-ai-assistant.streamlit.app](https://rgwallcovering-ai-assistant.streamlit.app/)**
@@ -42,6 +77,28 @@ What the deployed app does *not* show is the evidence behind it: the committed
 baseline, the three measured experiments, the six named failures and the demo
 transcript live in [`docs/`](docs/), and every number there cites a specific
 input, output or file.
+
+## The evidence, if you are here to check the work
+
+Nine evaluation runs are committed with every turn, every retrieved passage and
+its score. Start with whichever question you care about:
+
+| Question | Where |
+|---|---|
+| Does it invent facts under pressure? | [`baseline_results.md`](docs/evidence/baseline_results.md) — 30 questions, eight engineered to extract a number that exists nowhere in the corpus. **S2: zero fabrications.** S1 fails its own target at 80%, and the baseline was committed *before* any tuning, including the criterion it fails |
+| Did tuning actually help? | [`measured_improvement.md`](docs/evidence/measured_improvement.md) — three experiments, two samples each. **None beat the noise**, and that is the finding. The change that was kept did not raise the score: it cut input tokens by a third and made the failures stop moving between runs |
+| Where does it break? | [`07_failure_analysis.md`](docs/07_failure_analysis.md) — six failures with exact input, exact output and a mechanical cause. **Two are left unfixed with the reason**, one of which would require asserting something the owner has never confirmed |
+| Was the AI's own output reviewed? | [`ai_review_log.md`](docs/evidence/ai_review_log.md) — 14 entries written when they happened, including three where the *measurement* was wrong: a sweep that measured an input the system never receives, and a demo that served HTTP 200 while completely broken |
+| What did it cost and what was cut? | [`06_effort.md`](docs/06_effort.md) — ~16 h against a 25 h estimate, measured from commit timestamps; ~$7 of API spend, $4.90 of it accounted for exactly |
+| What does a real conversation look like? | [`demo_transcript.md`](docs/evidence/demo_transcript.md) — five turns with the passages and scores behind each one, the email it produces, **and a defect found while checking it**: a true claim whose citations do not support it |
+| What would you tell the client? | [`08_client_slide.md`](docs/08_client_slide.md) — one page written for Ronald, not for an assessor |
+
+Three things this project treats as non-negotiable, visible throughout:
+**deferral is a success state** (an assistant that says "the team confirms that
+directly" is worth more than one that guesses); **a fix verified against one
+example is not verified** (learned the hard way — review log entries 11 and
+14); and **no claim without a traceable number**, which is why every table
+above points at a file rather than an adjective.
 
 ---
 
