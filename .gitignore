@@ -12,8 +12,10 @@ venv/
 # Datos generados en runtime (los leads capturados no se versionan)
 data/leads.jsonl
 
-# Índice vectorial generado — se reconstruye con el pipeline de ingesta
-data/index/
+# El índice vectorial SÍ se versiona (828 KB). Se reconstruye con el pipeline
+# de ingesta, pero el despliegue en Streamlit Cloud parte del repositorio: sin
+# él, la app arranca sin nada que responder, y construirlo allí saldría a
+# descargar el sitio del cliente desde un datacenter en cada redespliegue.
 
 # SO / editor
 .DS_Store

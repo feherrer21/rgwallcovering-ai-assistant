@@ -88,6 +88,40 @@ curl -X POST http://127.0.0.1:8000/chat \
   -d '{"message": "do you install wallpaper in Newport?"}'
 ```
 
+## Deploying the demo (Streamlit Community Cloud)
+
+The demo is what the owner is shown; the API is what his website would call.
+Only the demo is deployed.
+
+1. Point Community Cloud at this repository and `demo_streamlit/app.py`. The
+   index is committed, so there is nothing to build.
+2. In the app's **Secrets**, add — TOML, one per line:
+
+   ```toml
+   ANTHROPIC_API_KEY = "sk-ant-..."
+   SMTP_USER = "you@gmail.com"
+   SMTP_PASSWORD = "app-password"
+   LEAD_EMAIL_TO = "you@example.com"
+   ADMIN_TOKEN = "something-long"
+   MAX_TURNOS_DEMO = "20"
+   ```
+
+   The app copies these into the environment before importing `agent_core`,
+   which is what `config.py` reads. Locally the same values come from `.env`
+   and nothing changes.
+
+Two things exist in the demo *because* the URL is public. The per-IP limiter
+lives in the API, and this path does not go through it, so `MAX_TURNOS_DEMO`
+caps how many messages one session can spend. And the Leads tab asks for
+`ADMIN_TOKEN` — without that secret set, the tab does not open at all.
+
+The container's disk is ephemeral: `data/leads.jsonl` there empties on every
+restart, and nothing is lost by it. The lead left the process by email the
+moment it was captured, which is the whole point of the delivery design.
+
+The app sleeps when idle and the first boot downloads the embedding model, so
+wake it a few minutes before showing it to anyone.
+
 ## Tests
 
 ```bash
