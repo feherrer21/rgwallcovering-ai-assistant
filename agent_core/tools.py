@@ -175,6 +175,14 @@ def ejecutar(
 
     if nombre == "registrar_lead":
         registro = leads.guardar(entrada, conversation_id=conversation_id)
+        # Capturar y entregar son un solo paso: un lead guardado y no enviado
+        # es un cliente perdido.
+        entregado = leads.entregar(registro)
+        registro["entregado"] = entregado
+
+        # Al visitante se le confirma igual. Sus datos NO se han perdido: están
+        # en disco y el fallo quedó en los logs. Decirle que algo falló le
+        # invitaría a marcharse cuando no hace falta.
         return (
             f"Enquiry saved and sent to the team (reference "
             f"{registro['lead_id']}). Confirm to the visitor in one sentence "

@@ -12,8 +12,10 @@ se añadirían otros destinos.
 
 import json
 import logging
+import smtplib
 import uuid
 from datetime import datetime, timezone
+from email.message import EmailMessage
 from typing import Any
 
 from .config import settings
@@ -52,6 +54,55 @@ def guardar(datos: dict[str, Any], conversation_id: str = "") -> dict[str, Any]:
     # a sitios donde un lead no debería estar.
     log.info("Lead guardado (%s)", registro["lead_id"])
     return registro
+
+
+def entregar(registro: dict[str, Any]) -> bool:
+    """Envía el lead por correo. Devuelve True si salió.
+
+    Un fallo aquí NO se propaga: el lead ya está en disco y el visitante no
+    debe enterarse de nada. Se registra fuerte para que se vea en los logs,
+    porque un lead que no llega es un cliente perdido y merece ruido.
+
+    Esta función es la costura: si mañana Ronald quiere además una hoja de
+    cálculo o un CRM, se añade aquí y no se toca nada más.
+    """
+    if not settings.envio_configurado:
+        log.error(
+            "SIN ENVIAR lead %s: faltan credenciales SMTP. El lead está en %s",
+            registro.get("lead_id"),
+            settings.leads_file,
+        )
+        return False
+
+    mensaje = EmailMessage()
+    mensaje["Subject"] = asunto(registro)
+    mensaje["From"] = settings.remitente
+    mensaje["To"] = ", ".join(settings.destinatarios_lead)
+
+    # Para que Ronald pueda responder directamente al cliente desde su bandeja
+    # sin copiar y pegar la dirección.
+    if registro.get("email"):
+        mensaje["Reply-To"] = registro["email"]
+
+    mensaje.set_content(formatear(registro))
+
+    try:
+        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as s:
+            s.starttls()
+            s.login(settings.smtp_user, settings.smtp_password)
+            s.send_message(mensaje)
+    except (smtplib.SMTPException, OSError):
+        # exception() incluye la traza; no incluye el contenido del lead.
+        log.exception(
+            "FALLO AL ENVIAR el lead %s. Está guardado en %s y hay que "
+            "recuperarlo a mano.",
+            registro.get("lead_id"),
+            settings.leads_file,
+        )
+        return False
+
+    log.info("Lead %s entregado", registro.get("lead_id"))
+    return True
 
 
 def listar(limite: int = 100) -> list[dict[str, Any]]:

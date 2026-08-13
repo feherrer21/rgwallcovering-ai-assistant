@@ -50,10 +50,34 @@ class Settings(BaseSettings):
 
     # --- Entrega de leads -----------------------------------------------
     leads_file: Path = DATA_DIR / "leads.jsonl"
+
     # Ronald confirmó info@ y adelantó que más adelante querrá añadir una o dos
     # direcciones más, así que esto acepta lista separada por comas desde el
     # principio: añadir un destinatario no debe requerir tocar código.
+    #
+    # OJO en desarrollo: apunta esto a TU correo, no al de Ronald. Un lead de
+    # prueba en su bandeja es una llamada perdida a una persona que no existe.
     lead_email_to: str = "info@rgwallcovering.com"
+    lead_email_from: str = ""  # por defecto, el mismo que smtp_user
+
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+
+    @property
+    def envio_configurado(self) -> bool:
+        """¿Hay credenciales para enviar correo?
+
+        Sin esto la captura sigue funcionando y el lead queda en el fichero
+        local; lo único que no ocurre es la entrega. Se comprueba al arrancar
+        para poder avisar, no en mitad de una conversación.
+        """
+        return bool(self.smtp_user and self.smtp_password)
+
+    @property
+    def remitente(self) -> str:
+        return self.lead_email_from or self.smtp_user
 
     # --- API ------------------------------------------------------------
     allowed_origins: str = "*"
