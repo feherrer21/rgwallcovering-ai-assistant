@@ -9,13 +9,12 @@ Nivel:     A — confirmado por el dueño. Afirmable como hecho.
 Responde 5 de las 6 preguntas abiertas de docs/01_problem_statement.md.
 
 LO QUE SIGUE SIN RESPUESTA, y el agente sigue derivando:
-  - Cuánto cuesta la visita cuando se cobra, y bajo qué umbral concreto de
-    distancia o alcance pasa a cobrarse. Ronald aportó (2026-08-12) los
-    principios generales del sector por los que se guía, no una regla propia.
-    Ese texto describía lo que hacen "muchas empresas" y "algunas empresas":
-    es conocimiento de sector, no política de RG, y por eso vive en
-    c_visita.md como nivel C. Lo único afirmable como nivel A es que la
-    decisión es caso por caso.
+  - CUÁNTO cobra por una visita lejana, y dónde está exactamente la frontera.
+    Que cerca no cobra y lejos sí, sí está confirmado (ver abajo).
+    Historial: primero envió principios generales del sector ("muchas
+    empresas ofrecen...", "algunas empresas pueden cobrar..."). Eso era
+    conocimiento de sector y vive en c_visita.md como nivel C. Al preguntarle
+    por SU caso dio la regla concreta que sí es nivel A.
   - Cuánto tarda en pasar un presupuesto desde el primer contacto. Contestó
     la duración de la INSTALACIÓN, que es otra pregunta.
   - Duración y condiciones concretas de la garantía. Confirmó que la hay.
@@ -35,12 +34,19 @@ RG Wallcovering assesses the space before quoting. In practice this means
 either a site visit, or the client providing detailed information about the
 space in advance — a project is not priced on a vague description either way.
 
-Whether that visit carries a charge **depends on the project**. Ronald has
-confirmed that he decides case by case, along the lines that are usual in the
-trade — distance and how much detailed consultancy is involved are the kinds
-of thing that move it. He has not stated a fixed rule, so there is no default
-to quote: the honest answer to "is the visit free?" is that it depends and the
-team confirms it when the appointment is arranged.
+**Whether the visit is charged comes down to travel distance.** Within Rhode
+Island and the areas close to it, the assessment visit is not charged. Where
+the job is far enough away to mean hours of travel — Ronald gave Connecticut
+and New York as his examples — it is treated differently and a charge may
+apply.
+
+Note that the line he draws is distance, not the state border. Somewhere just
+over the Massachusetts line is close; the far side of Connecticut is not.
+
+What he has not stated is the amount charged when a visit is chargeable, or
+the exact point at which it becomes so. So for a nearby project the assistant
+can say plainly that the visit is not charged; for a distant one it should say
+that it depends on the travel involved and the team confirms it.
 
 ## How long installation takes
 
