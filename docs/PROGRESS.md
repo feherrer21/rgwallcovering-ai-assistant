@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 17 · **Pruebas:** 31 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 20 · **Pruebas:** 42 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,9 +10,9 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 3 **completa**. Primera conversación real de
-extremo a extremo ejecutada; un fallo alto encontrado y corregido en el
-resumen del lead (entrada 8 del registro de revisión).
+**Último movimiento:** entrega de leads funcionando de extremo a extremo —
+correo real recibido en bandeja (2026-08-13). Antes, fase 3 completa con un
+fallo alto corregido en el resumen del lead (entrada 8 del registro).
 
 ---
 
@@ -25,7 +25,7 @@ Fase 1  Ingesta  ███████████████████  100%
 Fase 2  Retrieval███████████████████  100%   T2.1–T2.4
 Fase 3  Agente   ███████████████████  100%   T3.1–T3.6
 Fase 4  Frontends░░░░░░░░░░░░░░░░░░░    0%
-Fase 4.5 Entrega ░░░░░░░░░░░░░░░░░░░    0%
+Fase 4.5 Entrega ████████████░░░░░░░   67%   correo real recibido
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
@@ -33,7 +33,7 @@ Fase 8  Revisión ████████░░░░░░░░░░░   40
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~14 h · restante ~11 h.**
+**Estimado 25 h · consumido ~15 h · restante ~10 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -111,7 +111,22 @@ regresión para el set de evaluación.
 Latencia observada: 6–13 s por turno. Tokens de entrada por turno: 1.558 →
 4.979 según crece la conversación.
 
-### Fases 4 a 9 — pendientes
+### Fase 4.5 — Entrega del lead · 4 de 6
+
+| | Tarea | Resultado |
+|:--:|---|---|
+| ✅ | T4.5.1 `entregar()` por correo | resumen arriba, `Reply-To` al cliente |
+| ✅ | T4.5.2 Capturar y entregar en un solo paso | un lead guardado y no enviado es un cliente perdido |
+| ✅ | T4.5.3 Camino de fallo | no propaga, log a ERROR con id y ruta, visitante no se entera |
+| ✅ | T4.5.4 **Correo real recibido en bandeja** | verificado 2026-08-13 |
+| ⬜ | T4.5.5 Confirmar destinatario con Ronald | pendiente de él |
+| ⬜ | T4.6 Rate limiting por IP | va con la API, fase 4 |
+
+El circuito completo está cerrado: conversación → calificación → lead en una
+bandeja real. Con el correo como sistema de registro, un reinicio del proceso
+no pierde nada.
+
+### Fases 4 y 6 a 9 — pendientes
 
 Sin empezar. Ver `05_tasks.md` para el desglose completo.
 
