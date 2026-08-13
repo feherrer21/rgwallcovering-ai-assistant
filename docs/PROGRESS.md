@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 36 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 37 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,10 +10,9 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 7 completa (2026-08-13) — seis fallos nombrados
-con entrada, salida y causa mecánica. El arreglado: los resúmenes que llegaban
-en español, del 45% al 0 en 15 muestras. Dos quedan sin arreglar con su razón
-escrita, y uno de ellos es ahora una pregunta para Ronald.
+**Último movimiento:** fase 9 completa (2026-08-13) — slide para Ronald,
+transcripción de demo con un caso que falla, y declaración de horas medida
+sobre el historial de git. **Las nueve fases están cerradas.**
 
 ---
 
@@ -30,11 +29,12 @@ Fase 4.5 Entrega ████████████████░░░   83%
 Fase 5  Evaluación███████████████████  100%   baseline commiteado
 Fase 6  Mejora   ███████████████████  100%   3 experimentos, 6 corridas
 Fase 7  Fallos   ███████████████████  100%   6 fallos nombrados, 1 arreglado
-Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 13 entradas
-Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
+Fase 8  Revisión ███████████████████  100%   13 entradas, cerrado
+Fase 9  Comunicar███████████████████  100%   slide, demo y horas
 ```
 
-**Estimado 25 h · consumido ~23 h · restante ~2 h.**
+**Estimado 25 h · real ~16 h medidas sobre el historial de git.**
+Desglose por fase y qué se cortó: `06_effort.md`.
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -64,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 36 commits
+- Árbol de git limpio, 37 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -88,13 +88,16 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 
 ### Lo siguiente
 
-**Fase 9, comunicar.** La slide para Ronald, la demo con un caso que falla y
-la declaración de horas. La fase 8 se cierra sola: el registro lleva 13
-entradas escritas cuando ocurrieron.
+**Las nueve fases están cerradas y las 13 casillas del checklist también.**
+Lo que queda no es entrega, es producto:
 
-El caso que falla para la demo ya está elegido y documentado: **`Q-02`**,
-que pierde el lead en 2 de 7 muestras con la misma frase palabra por palabra.
-Transcripción completa en `07_failure_analysis.md` §F2.
+1. **Arreglar `Q-02`** — pierde el lead en 2 de 7 muestras. Falta una frase de
+   precedencia: registrar primero, seguir preguntando después. Se mide con el
+   filtro por categoría, $0,19 la muestra.
+2. **Las cinco respuestas de Ronald.** Cada una convierte una derivación en
+   una respuesta real y no cuesta ni una línea de código.
+3. **Antes de publicarlo en su web:** IP real detrás del proxy,
+   `ALLOWED_ORIGINS` al dominio y `LEAD_EMAIL_TO` a su correo.
 
 ### Hilos abiertos que no están en ninguna tarea
 
@@ -335,11 +338,11 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Revisión del output de IA + un error cazado | 11 entradas; las 2, 8, 9 y 10 son errores cazados y corregidos |
 | ✅ | Análisis de fallos con inputs concretos | `07_failure_analysis.md`, 6 fallos |
 | ✅ | Una mejora medida, con lo que empeoró | `measured_improvement.md` |
-| ⬜ | Slide para el cliente | fase 9 |
-| ⬜ | Demo con un caso que falla | fase 9 |
-| ⬜ | Declaración de horas y qué se cortó | fase 9 |
+| ✅ | Slide para el cliente | `08_client_slide.md` |
+| ✅ | Demo con un caso que falla | `evidence/demo_transcript.md`, `Q-02` |
+| ✅ | Declaración de horas y qué se cortó | `06_effort.md` |
 
-**11 de 13 completas, 2 sin empezar.**
+**13 de 13 completas.**
 
 ---
 
