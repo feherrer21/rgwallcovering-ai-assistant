@@ -291,6 +291,42 @@ formatting time.
 
 ---
 
+## Phase 4 — Frontends
+
+### Entry 9 — The demo served HTTP 200 while being completely broken
+
+**Dimension:** correctness / verification method
+**Severity:** medium — it would have failed in front of Ronald, not in a test
+
+The generated `demo_streamlit/app.py` began with `from agent_core import ...`.
+The smoke test was a request to the app's root URL; it returned 200 and the
+startup log was clean, so the demo looked verified.
+
+It was not. `streamlit run` inserts the *script's* directory into `sys.path`,
+not the repository root, and Streamlit does not execute the script until a
+browser session connects over its websocket. So the 200 came from a server
+that had never run a line of the app. The first person to open the page — the
+owner, in the intended case — would have got a `ModuleNotFoundError` traceback
+rendered in the browser.
+
+Running the script directly, `python demo_streamlit/app.py`, surfaced it in one
+command:
+
+```
+ModuleNotFoundError: No module named 'agent_core'
+```
+
+**Fix:** the demo prepends the repository root to `sys.path` itself, so it
+works whichever way it is launched rather than only from one working directory.
+
+**Why it is in this log.** The bug is unremarkable; the near-miss is not. The
+evidence that satisfied me — a 200 and a clean log — was evidence about the web
+server, not about the application. That is the same mistake as entry 2, where
+the ingestion build reported success over an empty corpus: an artefact that
+reports health while the thing it wraps is broken.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was
@@ -298,6 +334,10 @@ formatting time.
 - Generated code defaults to defensive breadth — matching many possible class
   names, tolerating many possible schemas — which reads as robustness and in
   practice was the direct cause of entries 2 and 4.
+- **A green signal from the wrapper is not a green signal from the thing
+  wrapped.** Entry 2's build reported success over an empty corpus; entry 9's
+  web server reported 200 over an application that had never run. Both times
+  the check was one layer above where the failure was.
 - The pattern that caught entries 2, 3 and 4 was the same each time: **measure
   the output rather than read the code**. Counting blocks before and after a
   filter, counting U+FFFD, listing discovered URLs. None of these bugs were

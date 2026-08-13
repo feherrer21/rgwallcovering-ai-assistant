@@ -209,6 +209,13 @@ GET /leads    → recent leads (dev only; removed or authenticated before any
 GET /health   → liveness
 ```
 
+Implemented (T4.2) with the authenticated half of that choice: `/leads`
+requires the `X-Admin-Token` header, and with no `ADMIN_TOKEN` configured it
+returns 503 rather than serving anything. Unset is the default, so a
+deployment gets the removal unless someone deliberately turns it on.
+`/health` also reports whether the index loaded and whether email delivery is
+configured, so a degraded process can be diagnosed without reading its logs.
+
 ---
 
 ## 6. Storage and delivery

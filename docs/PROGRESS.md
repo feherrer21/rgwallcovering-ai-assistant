@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 20 · **Pruebas:** 42 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 24 · **Pruebas:** 53 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,9 +10,10 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** entrega de leads funcionando de extremo a extremo —
-correo real recibido en bandeja (2026-08-13). Antes, fase 3 completa con un
-fallo alto corregido en el resumen del lead (entrada 8 del registro).
+**Último movimiento:** fase 4 completa (2026-08-13) — API, demo, README y
+límite por IP, con los endpoints ejercitados contra el proceso real y la
+transcripción commiteada. Antes, la entrega de leads de extremo a extremo con
+correo recibido en bandeja.
 
 ---
 
@@ -24,8 +25,8 @@ Fase 0  Contexto ███████████████████  100%
 Fase 1  Ingesta  ███████████████████  100%   T1.1–T1.7
 Fase 2  Retrieval███████████████████  100%   T2.1–T2.4
 Fase 3  Agente   ███████████████████  100%   T3.1–T3.6
-Fase 4  Frontends░░░░░░░░░░░░░░░░░░░    0%
-Fase 4.5 Entrega ████████████░░░░░░░   67%   correo real recibido
+Fase 4  Frontends███████████████████  100%   T4.1–T4.4, API + demo
+Fase 4.5 Entrega ████████████████░░░   83%   correo real recibido
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
@@ -33,7 +34,7 @@ Fase 8  Revisión ████████░░░░░░░░░░░   40
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~15 h · restante ~10 h.**
+**Estimado 25 h · consumido ~17 h · restante ~8 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -60,11 +61,17 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 21 commits
+- Árbol de git limpio, 24 commits
 
 ```bash
 # pruebas
 ./.venv/Scripts/python.exe -m pytest tests/ -q
+
+# el demo (es lo que se le enseña a Ronald)
+./.venv/Scripts/python.exe -m streamlit run demo_streamlit/app.py
+
+# la API
+./.venv/Scripts/python.exe -m uvicorn backend.app.main:app --reload --port 8000
 
 # reconstruir el índice (solo si cambian las fuentes o el troceado)
 ./.venv/Scripts/python.exe -m agent_core.ingest.build
@@ -74,19 +81,13 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
     print(run_turn('do you work in Boston?').respuesta)"
 ```
 
-### Decisión pendiente al retomar
+### Lo siguiente
 
-Fase 4 (frontends) o fase 5 (evaluación) primero.
-
-- **Fase 4 antes:** hay demo enseñable a Ronald el mismo día, y ver el agente
-  funcionando es lo que hace que conteste las cuatro preguntas que faltan y
-  se anime a etiquetar el portafolio.
-- **Fase 5 antes:** asegura el peso de la entrega. El baseline es la
-  precondición de la mejora medida y del análisis de fallos, que son las dos
-  cosas que el enunciado marca como de peso desproporcionado.
-
-Sin resolver. El plan dice que si el tiempo aprieta, el recorte sale de la
-fase 4.
+**Fase 5, la evaluación.** Era la decisión abierta —fase 4 o fase 5 primero— y
+se resolvió haciendo la 4, que ya está cerrada: ahora hay demo que enseñarle a
+Ronald, que es lo que hace que conteste las preguntas que faltan. Sin baseline
+commiteado, la fase 6 no tiene contra qué medir y la fase 7 es especulación,
+así que a partir de aquí no hay nada por delante de la 5.
 
 ### Hilos abiertos que no están en ninguna tarea
 
@@ -98,6 +99,10 @@ fase 4.
   se guarda como caso de regresión para el set de evaluación de la fase 5.
 - `LEAD_EMAIL_TO` apunta al correo de Fabián, no al de Ronald. Cambiarlo solo
   cuando esto deje de ser una prueba.
+- La latencia medida por HTTP (5,4 s y 7,3 s en la transcripción de T4.3)
+  encaja con los 6–13 s de T3.6, pero en una web son muchos segundos mirando
+  una pantalla quieta. El contrato de §5 responde de una pieza, sin streaming;
+  si se decide cambiarlo, cambia el contrato. Anotado para la fase 6.
 
 ---
 
@@ -162,7 +167,28 @@ regresión para el set de evaluación.
 Latencia observada: 6–13 s por turno. Tokens de entrada por turno: 1.558 →
 4.979 según crece la conversación.
 
-### Fase 4.5 — Entrega del lead · 4 de 6
+### Fase 4 — Frontends · completa
+
+| | Tarea | Resultado |
+|:--:|---|---|
+| ✅ | T4.1 Demo en Streamlit | chat, panel de fuentes con nivel y score, pestaña de leads |
+| ✅ | T4.2 API FastAPI | `POST /chat`, `GET /health`, `GET /leads`, CORS |
+| ✅ | T4.3 Endpoints ejercitados con curl | `evidence/api_transcript.md`, 9 llamadas |
+| ✅ | T4.4 `README.md` | instalación, arranque de ambos, reconstrucción del índice |
+
+11 pruebas nuevas en `tests/test_api.py`, sin gastar llamadas al modelo.
+
+Dos decisiones que el spec dejaba abiertas, resueltas: `/leads` va detrás de
+`X-Admin-Token` y sin `ADMIN_TOKEN` configurado responde 503 —o sea, por
+defecto no existe—, y el límite por IP entra ahora y no antes de desplegar,
+porque `/chat` gasta el presupuesto de Ronald desde el primer visitante.
+
+**Hallazgo de T4.1:** `streamlit run` pone en `sys.path` la carpeta del script,
+no la raíz del repositorio, así que el demo no encontraba `agent_core`. No
+salió en el arranque —el servidor devuelve 200 antes de ejecutar el script— y
+solo apareció al ejecutarlo de verdad. Corregido en `demo_streamlit/app.py`.
+
+### Fase 4.5 — Entrega del lead · 5 de 6
 
 | | Tarea | Resultado |
 |:--:|---|---|
@@ -171,13 +197,13 @@ Latencia observada: 6–13 s por turno. Tokens de entrada por turno: 1.558 →
 | ✅ | T4.5.3 Camino de fallo | no propaga, log a ERROR con id y ruta, visitante no se entera |
 | ✅ | T4.5.4 **Correo real recibido en bandeja** | verificado 2026-08-13 |
 | ⬜ | T4.5.5 Confirmar destinatario con Ronald | pendiente de él |
-| ⬜ | T4.6 Rate limiting por IP | va con la API, fase 4 |
+| ✅ | T4.6 Rate limiting por IP | 10/min y 60/h, ventana deslizante en memoria |
 
 El circuito completo está cerrado: conversación → calificación → lead en una
 bandeja real. Con el correo como sistema de registro, un reinicio del proceso
 no pierde nada.
 
-### Fases 4 y 6 a 9 — pendientes
+### Fases 6 a 9 — pendientes
 
 Sin empezar. Ver `05_tasks.md` para el desglose completo.
 
@@ -187,9 +213,10 @@ aprieta, el recorte sale de la fase 4, nunca de la 5, 6 o 7.
 
 ### Fase 8 — Revisión del output de IA · registro abierto
 
-8 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
-son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito) y la
-8 (el resumen para Ronald narraba una corrección que nunca ocurrió).
+9 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
+son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito), la
+8 (el resumen para Ronald narraba una corrección que nunca ocurrió) y la 9 (el
+demo devolvía 200 sin haber ejecutado una línea de la aplicación).
 
 ---
 
@@ -202,7 +229,7 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Problem statement: dominio, usuario, problema, éxito | `01` |
 | ✅ | Por qué merece resolverse, en términos del cliente | `01` |
 | ✅ | Data provenance: origen, límites, datos sensibles | `02` |
-| ✅ | Prototipo funcionando de extremo a extremo | T3.6 ejecutada, lead capturado |
+| ✅ | Prototipo funcionando de extremo a extremo | T3.6 con lead capturado; API y demo en T4.3 |
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
@@ -224,8 +251,10 @@ uso real en la web de Ronald.
 
 | Hueco | Estado |
 |---|---|
-| Sin rate limiting en `/chat` | T4.6, requisito antes de desplegar |
-| `GET /leads` expone datos personales | quitar o autenticar antes de producción |
+| ~~Sin rate limiting en `/chat`~~ | cerrado en T4.6 |
+| ~~`GET /leads` expone datos personales~~ | cerrado: token, y 503 si no se configura |
+| El limitador usa la IP del socket e ignora `X-Forwarded-For` | detrás de un proxy inverso todos los visitantes comparten un cubo; hay que limitar en el proxy o resolver allí la IP real. Documentado en el README |
+| Un solo proceso, límite en memoria | con dos réplicas el tope se aplica por réplica. Para lo que protege, sirve |
 | Piso de relevancia sin calibrar | fase 6 |
 | Una fuente que devuelve 0 fragmentos no es error | detectado en la entrada 2 del registro; sin arreglar |
 | Inspiración de diseño fuera de alcance | cortada a propósito; requiere que Ronald etiquete 15-20 fotos |
@@ -237,7 +266,6 @@ uso real en la web de Ronald.
 | | |
 |---|---|
 | ⬜ | Rotar la clave de API: se pegó en el chat y sigue activa |
-| ⬜ | Credenciales de correo saliente para la entrega de leads (T4.5.1) |
 
 ## Pendiente de Ronald
 
