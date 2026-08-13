@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 31 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 33 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,10 +10,10 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 4 completa (2026-08-13) — API, demo, README y
-límite por IP, con los endpoints ejercitados contra el proceso real y la
-transcripción commiteada. Antes, la entrega de leads de extremo a extremo con
-correo recibido en bandeja.
+**Último movimiento:** fase 5 completa (2026-08-13) — baseline de 30 casos
+corrido, etiquetado y commiteado antes de tocar nada. S2, la puerta dura, pasa
+con 0 violaciones; S1 se queda en 80% contra un objetivo de 90. Antes, la fase
+4 con API, demo desplegado en Streamlit Cloud y límite por IP.
 
 ---
 
@@ -27,14 +27,14 @@ Fase 2  Retrieval███████████████████  100%
 Fase 3  Agente   ███████████████████  100%   T3.1–T3.6
 Fase 4  Frontends███████████████████  100%   T4.1–T4.4, API + demo
 Fase 4.5 Entrega ████████████████░░░   83%   correo real recibido
-Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
+Fase 5  Evaluación███████████████████  100%   baseline commiteado
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 10 entradas
+Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 11 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~17 h · restante ~8 h.**
+**Estimado 25 h · consumido ~19 h · restante ~6 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -64,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 31 commits
+- Árbol de git limpio, 33 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -88,20 +88,25 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 
 ### Lo siguiente
 
-**Fase 5, la evaluación.** Era la decisión abierta —fase 4 o fase 5 primero— y
-se resolvió haciendo la 4, que ya está cerrada: ahora hay demo que enseñarle a
-Ronald, que es lo que hace que conteste las preguntas que faltan. Sin baseline
-commiteado, la fase 6 no tiene contra qué medir y la fase 7 es especulación,
-así que a partir de aquí no hay nada por delante de la 5.
+**Fase 6, la mejora medida.** El baseline ya está commiteado, así que ahora
+hay contra qué medir. Los tres candidatos salen de `baseline_results.md` y
+están ordenados por valor: barrer el piso de relevancia en pasos de 0.02, hacer
+recuperable el inventario de servicios que hoy solo vive en el prompt, y
+arreglar la regresión del resumen de `Q-05` verificándola contra las cinco
+conversaciones, no contra una.
+
+Regla que no se negocia: se cambia **una** cosa, se vuelve a correr `eval/run.py`
+y se compara. Lo que empeore se escribe igual que lo que mejore.
 
 ### Hilos abiertos que no están en ninguna tarea
 
-- El piso de relevancia en 0.62 falla en dos casos ya observados: deriva
-  *"do you work in Boston?"* aunque la respuesta existe, y no deriva
-  *"can you install flooring for me?"* aunque debería. Material para la
-  fase 6; el barrido va en pasos de 0.02, no de 0.1.
-- La entrada 8 del registro de revisión (el resumen inventaba una corrección)
-  se guarda como caso de regresión para el set de evaluación de la fase 5.
+- El piso de relevancia en 0.62 falla en tres casos ya observados: deriva
+  *"do you work in Boston?"* y *"where are you based?"* aunque la respuesta
+  existe en nivel A, y en la prueba de humo no derivaba *"can you install
+  flooring for me?"* —esto último ya lo resuelve el inventario del prompt—.
+  El barrido de la fase 6 va en pasos de 0.02, no de 0.1.
+- La regresión de la entrada 8 **volvió** en el baseline (`Q-05`, entrada 11).
+  Sigue sin arreglar a propósito: el arreglo y su medición son de la fase 6.
 - `LEAD_EMAIL_TO` apunta al correo de Fabián, no al de Ronald. Cambiarlo solo
   cuando esto deje de ser una prueba.
 - La latencia medida por HTTP (5,4 s y 7,3 s en la transcripción de T4.3)
@@ -216,14 +221,23 @@ El circuito completo está cerrado: conversación → calificación → lead en 
 bandeja real. Con el correo como sistema de registro, un reinicio del proceso
 no pierde nada.
 
-### Fase 5 — Evaluación · en marcha
+### Fase 5 — Evaluación · completa
 
 | | Tarea | Resultado |
 |:--:|---|---|
 | ✅ | T5.1 `eval/questions.yaml` | 30 casos, reparto 8/8/4/5/5 exacto al de `02` §2.2, con A1–A5 |
 | ✅ | T5.2 `eval/run.py` | JSON completo + hoja CSV para etiquetar a mano |
-| ⬜ | T5.3 Etiquetar contra S1–S4 | |
-| ⬜ | T5.4 Commitear el baseline pase lo que pase | |
+| ✅ | T5.3 Etiquetado contra S1–S4 | rubro en `eval/rubric.md`, escrito antes de leer resultados |
+| ✅ | T5.4 Baseline commiteado **antes** de tocar nada | `evidence/baseline_results.md` |
+
+**El baseline: S1 80% (falla, objetivo 90) · S2 0 violaciones (pasa, y es la
+puerta dura) · S3 100% · S4 80%, justo en la línea.**
+
+Los seis fallos de S1 son respuestas **correctas** que no se pueden rastrear a
+un pasaje recuperado: cuatro salen del inventario de servicios que vive en el
+prompt, y dos de que el piso de 0.62 tapa un documento que sí existe. Y S4 cae
+por la regresión de la entrada 8: el resumen de `Q-05` narra una corrección que
+nunca ocurrió, en español, en una conversación en inglés.
 
 Las cinco conversaciones de calificación son multiturno: 30 casos son 40
 llamadas al modelo. Durante la corrida los leads van a `eval/results/` y el
@@ -240,7 +254,7 @@ aprieta, el recorte sale de la fase 4, nunca de la 5, 6 o 7.
 
 ### Fase 8 — Revisión del output de IA · registro abierto
 
-9 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
+11 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
 son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito), la
 8 (el resumen para Ronald narraba una corrección que nunca ocurrió) y la 9 con
 la 10, que son el mismo fallo de método: comprobar el demo con algo que no
@@ -262,14 +276,14 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
-| 🔶 | Revisión del output de IA + un error cazado | registro abierto, 8 entradas |
+| ✅ | Revisión del output de IA + un error cazado | 11 entradas; las 2, 8, 9 y 10 son errores cazados y corregidos |
 | ⬜ | Análisis de fallos con inputs concretos | fase 7 |
 | ⬜ | Una mejora medida, con lo que empeoró | fase 6 |
 | ⬜ | Slide para el cliente | fase 9 |
 | ⬜ | Demo con un caso que falla | fase 9 |
 | ⬜ | Declaración de horas y qué se cortó | fase 9 |
 
-**8 de 13 completas, 1 a medias, 4 sin empezar.**
+**9 de 13 completas, 4 sin empezar.**
 
 ---
 

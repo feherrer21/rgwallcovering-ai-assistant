@@ -361,6 +361,40 @@ of failure could this have seen".
 
 ---
 
+## Phase 5 — Baseline
+
+### Entry 11 — The entry 8 fix did not hold
+
+**Dimension:** correctness / regression
+**Severity:** high — it is the failure mode this project treats as worst
+
+Entry 8: a lead summary narrated a self-correction that never happened. The
+prompt was changed, the same five-turn conversation was re-run, the summary
+came back clean, and the case was kept as a regression case for the evaluation
+set. That was the right instinct and an insufficient test.
+
+In the baseline run, `Q-05` — a different conversation, three turns, a visitor
+who wants design help — produced:
+
+> "Le dije primero que la visita de evaluación no se cobraba y luego **lo
+> corregí en el chat**, aclarando que eso depende de la ubicación…"
+
+Nothing was corrected. The visit was mentioned once, correctly, and never
+walked back. The summary is also in Spanish, in an English conversation, for a
+reader who works in English.
+
+**Why it recurred:** the fix was verified against the single conversation that
+exposed it. One example is enough to show a bug is present and never enough to
+show it is gone. The evaluation set is what makes the difference — this was
+caught by a run that exercises five different qualification conversations,
+which is the first time the fix met a case it had not been tuned against.
+
+**Not fixed yet, on purpose.** The baseline is committed before any tuning,
+including this. The fix and its measurement belong to phase 6, and this time
+the verification is five conversations, not one.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was
