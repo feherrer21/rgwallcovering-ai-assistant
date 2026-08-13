@@ -12,6 +12,11 @@ venv/
 # Datos generados en runtime (los leads capturados no se versionan)
 data/leads.jsonl
 
+# Los leads de las corridas de evaluación son personas inventadas, pero tienen
+# la misma forma que uno real y no aportan nada al repositorio. Los resultados
+# (baseline_*.json / .csv) sí se versionan: son la evidencia.
+eval/results/leads_*.jsonl
+
 # El índice vectorial SÍ se versiona (828 KB). Se reconstruye con el pipeline
 # de ingesta, pero el despliegue en Streamlit Cloud parte del repositorio: sin
 # él, la app arranca sin nada que responder, y construirlo allí saldría a

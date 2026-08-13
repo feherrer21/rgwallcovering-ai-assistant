@@ -14,5 +14,8 @@ fastapi>=0.115
 uvicorn[standard]>=0.30
 streamlit>=1.37
 
+# Evaluación
+pyyaml>=6.0
+
 # Desarrollo
 pytest>=8.2

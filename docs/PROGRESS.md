@@ -216,6 +216,20 @@ El circuito completo está cerrado: conversación → calificación → lead en 
 bandeja real. Con el correo como sistema de registro, un reinicio del proceso
 no pierde nada.
 
+### Fase 5 — Evaluación · en marcha
+
+| | Tarea | Resultado |
+|:--:|---|---|
+| ✅ | T5.1 `eval/questions.yaml` | 30 casos, reparto 8/8/4/5/5 exacto al de `02` §2.2, con A1–A5 |
+| ✅ | T5.2 `eval/run.py` | JSON completo + hoja CSV para etiquetar a mano |
+| ⬜ | T5.3 Etiquetar contra S1–S4 | |
+| ⬜ | T5.4 Commitear el baseline pase lo que pase | |
+
+Las cinco conversaciones de calificación son multiturno: 30 casos son 40
+llamadas al modelo. Durante la corrida los leads van a `eval/results/` y el
+envío por correo se apaga — lo que se mide es el asistente, no el SMTP, y sin
+eso cada corrida serían cinco correos.
+
 ### Fases 6 a 9 — pendientes
 
 Sin empezar. Ver `05_tasks.md` para el desglose completo.
