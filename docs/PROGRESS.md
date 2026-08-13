@@ -29,7 +29,7 @@ Fase 4.5 Entrega ░░░░░░░░░░░░░░░░░░░    0%
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ██████░░░░░░░░░░░░░   30%   registro abierto, 6 entradas
+Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 8 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
@@ -92,7 +92,7 @@ ajusta con el tiempo real para `06_effort.md`.
 | ✅ | T2.3 Nivel, título, url y score por pasaje | |
 | ✅ | T2.4 Pruebas | 19 pruebas, índice sintético |
 
-### Fase 3 — Agente · 5 de 6
+### Fase 3 — Agente · completa
 
 | | Tarea | Resultado |
 |:--:|---|---|
@@ -121,9 +121,9 @@ aprieta, el recorte sale de la fase 4, nunca de la 5, 6 o 7.
 
 ### Fase 8 — Revisión del output de IA · registro abierto
 
-6 entradas en `ai_review_log.md`, escritas cuando ocurrieron. La que importa
-es la 2: el filtro de ruido generado vaciaba el corpus entero y el build
-reportaba éxito con código 0.
+8 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
+son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito) y la
+8 (el resumen para Ronald narraba una corrección que nunca ocurrió).
 
 ---
 
@@ -140,7 +140,7 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
-| 🔶 | Revisión del output de IA + un error cazado | registro abierto, 6 entradas |
+| 🔶 | Revisión del output de IA + un error cazado | registro abierto, 8 entradas |
 | ⬜ | Análisis de fallos con inputs concretos | fase 7 |
 | ⬜ | Una mejora medida, con lo que empeoró | fase 6 |
 | ⬜ | Slide para el cliente | fase 9 |
@@ -166,13 +166,19 @@ uso real en la web de Ronald.
 
 ---
 
+## Pendiente de Fabián
+
+| | |
+|---|---|
+| ⬜ | Rotar la clave de API: se pegó en el chat y sigue activa |
+| ⬜ | Credenciales de correo saliente para la entrega de leads (T4.5.1) |
+
 ## Pendiente de Ronald
 
 | | |
 |---|---|
 | ⬜ | **La página de Services sirve texto sobre turbinas eólicas.** Está en vivo. |
 | ⬜ | Cuánto cobra por una visita lejana (que cerca no cobra ya está confirmado) |
-| ⬜ | Rotar la clave de API: se pegó en el chat |
 | ⬜ | Cuánto tarda en pasar un presupuesto desde el primer contacto |
 | ⬜ | Condiciones concretas de la garantía |
 | ⬜ | Si instala wallpaper comprado por el cliente |
