@@ -41,12 +41,14 @@ ajusta con el tiempo real para `06_effort.md`.
 
 ## Bloqueos
 
-| Qué | Bloquea | Quién lo desbloquea |
-|---|---|---|
-| Credenciales de correo saliente | T4.5.1 (entrega del lead) | Fabián / Ronald |
-| ⚠️ La clave de API se pegó en el chat y no se rotó | nada ahora; sí antes de desplegar | Fabián: rotarla en la consola |
+**Ninguno bloquea el trabajo ahora mismo.**
 
-`ANTHROPIC_API_KEY` resuelto — `.env` configurado y verificado 2026-08-12.
+| Riesgo abierto | Bloquea | Quién lo cierra |
+|---|---|---|
+| ⚠️ La clave de API se pegó en el chat y sigue activa | nada hoy; sí el despliegue | Fabián: rotarla en la consola |
+
+Resueltos: `ANTHROPIC_API_KEY` (2026-08-12) y credenciales SMTP con correo
+real recibido en bandeja (2026-08-13).
 
 ---
 
