@@ -26,17 +26,21 @@ cold context window — no access to this conversation, no access to the
 specification, and instructed not to read any file in the repository. It
 received only the task description reproduced verbatim below.
 
-**Residual confound, stated:** the "after" generation runs in the main session
-and therefore *does* carry conversational context in addition to `CLAUDE.md`.
-The comparison is consequently **cold-with-nothing vs warm-with-artifact**,
-which overstates the artifact's effect. The mitigation is qualitative: the
-analysis in `context_artifact_effect.md` attributes each difference to either
-the artifact or the session context, and differences that cannot be
-confidently attributed are labelled as such rather than counted.
+**Correction, 2026-08-12.** This section previously recorded a compromise: the
+"after" run would happen in the main session, making the comparison
+**cold-with-nothing vs warm-with-artifact**, which overstates the artifact's
+effect. A second cold subagent was described as "considered and rejected for
+time".
 
-A cleaner design — a second cold subagent given only `CLAUDE.md` — was
-considered and rejected for time. Recorded as a limitation, not as a
-non-issue.
+That was wrong on the economics — the clean version cost about three minutes —
+and it was corrected before the experiment ran. **Both runs used cold
+subagents.** The second was permitted to read `CLAUDE.md` and explicitly
+forbidden from reading any other repository file. The only variable between
+the two conditions is the artifact.
+
+The residual limitations are now different and smaller: n = 1 per condition,
+so run-to-run variance is unmeasured, and both runs used the same model at the
+same effort. Both are recorded in `context_artifact_effect.md`.
 
 ## The prompt (identical for both runs, verbatim)
 
