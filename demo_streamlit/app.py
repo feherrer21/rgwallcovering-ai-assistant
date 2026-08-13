@@ -62,8 +62,8 @@ def preparar() -> bool:
 
 
 def main() -> None:
-    st.set_page_config(page_title="RG Wallcovering assistant", page_icon="🎨")
-    st.title("RG Wallcovering assistant")
+    st.set_page_config(page_title="RG Wallcovering AI Assistant", page_icon="🎨")
+    st.title("RG Wallcovering AI Assistant")
 
     if not preparar():
         st.error(
