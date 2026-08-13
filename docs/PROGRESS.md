@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 37 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 38 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,9 +10,10 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 9 completa (2026-08-13) — slide para Ronald,
-transcripción de demo con un caso que falla, y declaración de horas medida
-sobre el historial de git. **Las nueve fases están cerradas.**
+**Último movimiento:** `Q-02` arreglado y medido (2026-08-13) — el lead que se
+perdía en 2 de 7 muestras ahora se registra en 6 de 6, y el asistente registra
+**antes** de seguir preguntando. Con eso, **las nueve fases cerradas, las 13
+casillas del checklist y el último fallo abierto que dependía de nosotros.**
 
 ---
 
@@ -28,15 +29,13 @@ Fase 4  Frontends███████████████████  100%
 Fase 4.5 Entrega ████████████████░░░   83%   correo real recibido
 Fase 5  Evaluación███████████████████  100%   baseline commiteado
 Fase 6  Mejora   ███████████████████  100%   3 experimentos, 6 corridas
-Fase 7  Fallos   ███████████████████  100%   6 fallos nombrados, 1 arreglado
-Fase 8  Revisión ███████████████████  100%   13 entradas, cerrado
+Fase 7  Fallos   ███████████████████  100%   6 nombrados, 2 arreglados
+Fase 8  Revisión ███████████████████  100%   14 entradas, cerrado
 Fase 9  Comunicar███████████████████  100%   slide, demo y horas
 ```
 
 **Estimado 25 h · real ~16 h medidas sobre el historial de git.**
-Desglose por fase y qué se cortó: `06_effort.md`.
-Las horas consumidas son una estimación mía a partir del plan; Fabián las
-ajusta con el tiempo real para `06_effort.md`.
+Desglose por fase, qué se cortó y el gasto de API: `06_effort.md`.
 
 ---
 
@@ -64,7 +63,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 37 commits
+- Árbol de git limpio, 38 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -91,13 +90,12 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 **Las nueve fases están cerradas y las 13 casillas del checklist también.**
 Lo que queda no es entrega, es producto:
 
-1. **Arreglar `Q-02`** — pierde el lead en 2 de 7 muestras. Falta una frase de
-   precedencia: registrar primero, seguir preguntando después. Se mide con el
-   filtro por categoría, $0,19 la muestra.
-2. **Las cinco respuestas de Ronald.** Cada una convierte una derivación en
+1. **Las cinco respuestas de Ronald** (seis con la nueva pregunta 7). Cada una convierte una derivación en
    una respuesta real y no cuesta ni una línea de código.
-3. **Antes de publicarlo en su web:** IP real detrás del proxy,
+2. **Antes de publicarlo en su web:** IP real detrás del proxy,
    `ALLOWED_ORIGINS` al dominio y `LEAD_EMAIL_TO` a su correo.
+3. **Los dos fallos que quedan abiertos con su razón** (`A-02` y el "no
+   hacemos suelos"), uno de los cuales se destraba con la respuesta de Ronald.
 
 ### Hilos abiertos que no están en ninguna tarea
 
@@ -110,15 +108,16 @@ Lo que queda no es entrega, es producto:
   ocurrió) apareció 1 vez en 33 leads. La regla del prompt sigue puesta y
   aguanta casi siempre; ahora tiene 33 muestras detrás en vez de una.
   `07_failure_analysis.md` §F5.
-- **`Q-02` pierde el lead en 2 de 7 muestras** y es el siguiente arreglo:
-  falta una frase que diga qué manda cuando el visitante da su contacto con
-  un campo aún sin preguntar. §F2.
+- ~~`Q-02` pierde el lead~~ — arreglado y medido: 6 de 6 muestras limpias y,
+  lo que sostiene la afirmación, el asistente registra y **luego** pregunta en
+  las seis. §F2 y entrada 14 del registro.
 - `LEAD_EMAIL_TO` apunta al correo de Fabián, no al de Ronald. Cambiarlo solo
   cuando esto deje de ser una prueba.
-- La latencia medida por HTTP (5,4 s y 7,3 s en la transcripción de T4.3)
-  encaja con los 6–13 s de T3.6, pero en una web son muchos segundos mirando
-  una pantalla quieta. El contrato de §5 responde de una pieza, sin streaming;
-  si se decide cambiarlo, cambia el contrato. Anotado para la fase 6.
+- La latencia por turno (4–10 s en la demo grabada) es mucho tiempo mirando
+  una pantalla quieta en una web. El contrato de §5 responde de una pieza, sin
+  streaming; el streaming está cortado a propósito y el corte está declarado
+  en `06_effort.md`. Si se decide añadirlo, el contrato es aditivo y no rompe
+  a nadie.
 
 ---
 
@@ -381,3 +380,4 @@ uso real en la web de Ronald.
 | ⬜ | Condiciones concretas de la garantía |
 | ⬜ | Si instala wallpaper comprado por el cliente |
 | ⬜ | Etiquetar 15-20 fotos del portafolio (opcional, revive una función) |
+| ⬜ | **¿La lista de servicios está completa?** Pregunta 7, nueva: sin su respuesta el "no hacemos suelos" no se puede hacer auditable (F4) |

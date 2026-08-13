@@ -107,12 +107,37 @@ model asks the outstanding question instead of banking what it already has.
 The visitor, having just given their name and number, has no reason to reply
 again.
 
-**Why it is not fixed here.** The phase's discipline is one change, measured.
-F1 was chosen because it affects 45% of leads against this one's 29%, and
-because its cause was provable in a single line of text. F2's fix is a
-sentence stating precedence — *register first, keep asking after* — and it
-needs its own before/after on more than the three samples this session has
-left. It is the next change, and the harness to measure it already exists.
+**Fixed after the fact, and measured.** Phase 7's discipline is one change at
+a time, so this was left for its own before/after. `<saving_the_lead>` now
+states the precedence explicitly:
+
+> *"**That call comes first, ahead of any question you still want to ask.**
+> The moment they give you a name and a way to reach them, register what you
+> have — even if something useful is still missing, the location included.
+> Then keep the conversation going and ask… Someone who has just handed over
+> their phone number may not reply again, and a lead you are still improving
+> is a lead Ronald does not have."*
+
+| | Q-02 lead captured | Behaviour on turn 3 |
+|---|---|---|
+| Before | **5 of 7** | Asks for the location *instead of* registering |
+| After | **6 of 6** | Registers, **then** asks — in the same message |
+
+The count alone would not be enough: with a 29% failure rate, six clean
+samples come up by chance **12.8%** of the time. What carries the claim is the
+change in shape, which appears in all six and in none of the seven before:
+
+> *"Thanks Marcus — **your details are with the team** and they'll reach out to
+> set up an assessment. Where is the office located? It affects whether that
+> visit is charged."*
+
+The assistant no longer chooses between banking the lead and finishing
+qualification. It does both, in that order — which is what the missing
+sentence was for.
+
+**What it did not break:** across the six runs, 30 of 30 leads captured with
+all four S3 fields, 0 summaries in the wrong language, and a full 30-question
+control run held S2 at zero violations.
 
 ---
 

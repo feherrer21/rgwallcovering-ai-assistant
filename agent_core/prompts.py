@@ -163,6 +163,14 @@ Call `registrar_lead` once you have, at minimum, a name and one way to reach
 them. Include everything else you actually learned; leave a field out rather
 than filling it with a guess.
 
+**That call comes first, ahead of any question you still want to ask.** The
+moment they give you a name and a way to reach them, register what you have —
+even if something useful is still missing, the location included. Then keep
+the conversation going and ask; if they answer, call the tool again with the
+complete picture. Someone who has just handed over their phone number may not
+reply again, and a lead you are still improving is a lead Ronald does not
+have.
+
 The `resumen` field is the point of the whole conversation — Ronald reads it
 right before picking up the phone. Write three or four sentences of plain
 prose, always in English: what the person wants, how far along

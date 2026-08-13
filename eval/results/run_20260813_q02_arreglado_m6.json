@@ -1,0 +1,549 @@
+{
+  "fecha": "2026-08-13",
+  "modelo": "claude-opus-5",
+  "piso_relevancia": 0.62,
+  "top_k": 5,
+  "resumen": {
+    "casos": 5,
+    "derivados": 4,
+    "con_fuentes": 1,
+    "leads_capturados": 5,
+    "casos_de_calificacion": 5,
+    "segundos_totales": 89.0,
+    "segundos_por_caso": 17.8,
+    "tokens_entrada": 17775,
+    "tokens_salida": 3435
+  },
+  "casos": [
+    {
+      "id": "Q-01",
+      "categoria": "calificacion",
+      "esperado": "lead",
+      "prueba": "Residencial, intención clara, contacto entregado sin resistencia",
+      "turnos": [
+        {
+          "pregunta": "We just bought a house in Cranston and want wallpaper in the hallway.",
+          "consultas": [
+            "We just bought a house in Cranston and want wallpaper in the hallway."
+          ],
+          "respuesta": "Congratulations on the house — a hallway is a great spot for wallpaper, and Cranston is well within the area they work.\n\nDo you already have a pattern or style in mind, or would you want help choosing?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "WHAT KIND OF SPACE DOES RYAN MURPHY LIVE IN?",
+              "tier": "A",
+              "score": 0.702,
+              "url": "https://rgwallcovering.com/what-kind-of-space-does-ryan-murphy-live-in-2"
+            },
+            {
+              "titulo": "Residential",
+              "tier": "A",
+              "score": 0.7,
+              "url": "https://rgwallcovering.com/residential/"
+            },
+            {
+              "titulo": "COMBINE WALLPAPER",
+              "tier": "A",
+              "score": 0.699,
+              "url": "https://rgwallcovering.com/combine-wallpaper"
+            },
+            {
+              "titulo": "Business details from third-party directories",
+              "tier": "B",
+              "score": 0.699,
+              "url": ""
+            },
+            {
+              "titulo": "CREATIVE IDEAS TO USE WALLPAPER IN INTERIOR DECORATION",
+              "tier": "A",
+              "score": 0.698,
+              "url": "https://rgwallcovering.com/creative-ideas-to-use-wallpaper-in-interior-decoration"
+            }
+          ],
+          "segundos": 3.72,
+          "tokens_entrada": 1423,
+          "tokens_salida": 65
+        },
+        {
+          "pregunta": "It's about 40 feet of hallway, walls are painted now. Nothing chosen yet.",
+          "consultas": [
+            "It's about 40 feet of hallway, walls are painted now. Nothing chosen yet."
+          ],
+          "respuesta": "Forty feet of hallway is a good canvas — and painted walls are usually a straightforward starting point, though what's under the paint is really only knowable in person.\n\nSince nothing's chosen yet, would you want the design side too? They do material samples and renderings, not just installation.",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "What determines how long a wallcovering job takes",
+              "tier": "C",
+              "score": 0.675,
+              "url": ""
+            },
+            {
+              "titulo": "Wall preparation and wallpaper removal",
+              "tier": "C",
+              "score": 0.658,
+              "url": ""
+            },
+            {
+              "titulo": "Your favorite place in the world, in your Home",
+              "tier": "A",
+              "score": 0.656,
+              "url": "https://rgwallcovering.com/brooklyn"
+            },
+            {
+              "titulo": "THE BRICK, AN INVENTION THAT EVOLVES WITH HUMANITY",
+              "tier": "A",
+              "score": 0.648,
+              "url": "https://rgwallcovering.com/the-brick-an-invention-that-evolves-with-humanity"
+            }
+          ],
+          "segundos": 3.91,
+          "tokens_entrada": 1535,
+          "tokens_salida": 101
+        },
+        {
+          "pregunta": "Sure — Ana Ruiz, ana.ruiz@example.com.",
+          "consultas": [
+            "Sure — Ana Ruiz, ana.ruiz@example.com."
+          ],
+          "respuesta": "Thanks Ana — your details are with the team, and they'll reach out to talk through options and set up a look at the hallway.",
+          "derivado": true,
+          "rechazado": false,
+          "fuentes": [],
+          "segundos": 8.64,
+          "tokens_entrada": 1076,
+          "tokens_salida": 443
+        }
+      ],
+      "derivado": true,
+      "lead": {
+        "lead_id": "2010cf3f4aac",
+        "conversation_id": "Q-01",
+        "creado_en": "2026-08-13T19:13:43.518904+00:00",
+        "nombre": "Ana Ruiz",
+        "email": "ana.ruiz@example.com",
+        "tipo_proyecto": "residencial",
+        "ubicacion": "Cranston, RI",
+        "espacio": "Hallway, roughly 40 feet of wall, currently painted",
+        "necesita_diseno": true,
+        "resumen": "Ana and her family just bought a house in Cranston, RI and want wallpaper installed in the hallway — roughly 40 feet, walls currently painted. Nothing has been chosen yet, so she is open to design help: samples and selection guidance would be welcome on the first call. She has no reference style or deadline mentioned, so this is an early-stage residential project. I told her painted walls are usually a straightforward starting point but that what's under the paint can only really be assessed in person.",
+        "entregado": false
+      },
+      "segundos": 16.27,
+      "tokens_entrada": 4034,
+      "tokens_salida": 609
+    },
+    {
+      "id": "Q-02",
+      "categoria": "calificacion",
+      "esperado": "lead",
+      "prueba": "Comercial, con plazo, y da teléfono en vez de correo",
+      "turnos": [
+        {
+          "pregunta": "I manage a dental office and the reception walls look tired.",
+          "consultas": [
+            "I manage a dental office and the reception walls look tired."
+          ],
+          "respuesta": "Wallcovering or fresh paint can both make a big difference in a reception area. Do you have a look in mind already, or would you want help figuring out the direction?",
+          "derivado": true,
+          "rechazado": false,
+          "fuentes": [],
+          "segundos": 3.52,
+          "tokens_entrada": 91,
+          "tokens_salida": 51
+        },
+        {
+          "pregunta": "Commercial, and we'd like it done before the new year.",
+          "consultas": [
+            "Commercial, and we'd like it done before the new year."
+          ],
+          "respuesta": "Understood — before the new year, and a commercial space. Do you already have a design or material in mind for the reception walls, or would you like the team to propose something?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "2025: A New Beginning for Your Spaces!",
+              "tier": "A",
+              "score": 0.634,
+              "url": "https://rgwallcovering.com/2025-a-new-beginning-for-your-spaces"
+            }
+          ],
+          "segundos": 3.48,
+          "tokens_entrada": 460,
+          "tokens_salida": 71
+        },
+        {
+          "pregunta": "Marcus Webb, 401-555-0142.",
+          "consultas": [
+            "Marcus Webb, 401-555-0142."
+          ],
+          "respuesta": "Thanks Marcus — your details are with the team and they'll be in touch to talk through the reception walls. One thing that would help ahead of that: where is the office located?",
+          "derivado": true,
+          "rechazado": false,
+          "fuentes": [],
+          "segundos": 7.53,
+          "tokens_entrada": 800,
+          "tokens_salida": 347
+        }
+      ],
+      "derivado": true,
+      "lead": {
+        "lead_id": "046403f01d05",
+        "conversation_id": "Q-02",
+        "creado_en": "2026-08-13T19:13:58.429736+00:00",
+        "nombre": "Marcus Webb",
+        "telefono": "401-555-0142",
+        "tipo_proyecto": "comercial",
+        "espacio": "dental office reception walls",
+        "plazo": "before the new year",
+        "resumen": "Marcus Webb manages a dental office and says the reception walls look tired. He is looking at wallcovering or painting for that reception area and wants the work done before the new year. He has not yet said whether he has a design or material in mind, or where the office is located, so both are worth asking on the call. He gave his phone number early and no email.",
+        "entregado": false
+      },
+      "segundos": 14.53,
+      "tokens_entrada": 1351,
+      "tokens_salida": 469
+    },
+    {
+      "id": "Q-03",
+      "categoria": "calificacion",
+      "esperado": "lead",
+      "prueba": "Empieza preguntando precio y solo después revela el proyecto",
+      "turnos": [
+        {
+          "pregunta": "What would a nursery cost?",
+          "consultas": [
+            "What would a nursery cost?",
+            "how much does wallpaper installation cost",
+            "pricing and estimates for a small room"
+          ],
+          "respuesta": "I can't put a number on it here — the price depends a lot on the material you choose and on the state of the walls, which is why the space gets assessed before it's quoted. Within Rhode Island and nearby areas that assessment visit isn't charged.\n\nWhere's the nursery, and do you have a look in mind already?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "2025: A New Beginning for Your Spaces!",
+              "tier": "A",
+              "score": 0.692,
+              "url": "https://rgwallcovering.com/2025-a-new-beginning-for-your-spaces"
+            },
+            {
+              "titulo": "What a site visit is for",
+              "tier": "C",
+              "score": 0.688,
+              "url": ""
+            },
+            {
+              "titulo": "What drives the cost of a wallcovering project",
+              "tier": "C",
+              "score": 0.66,
+              "url": ""
+            },
+            {
+              "titulo": "COMBINE WALLPAPER",
+              "tier": "A",
+              "score": 0.656,
+              "url": "https://rgwallcovering.com/combine-wallpaper"
+            },
+            {
+              "titulo": "Wall preparation and wallpaper removal",
+              "tier": "C",
+              "score": 0.654,
+              "url": ""
+            },
+            {
+              "titulo": "How RG Wallcovering works — confirmed by the owner",
+              "tier": "A",
+              "score": 0.637,
+              "url": ""
+            }
+          ],
+          "segundos": 7.58,
+          "tokens_entrada": 2712,
+          "tokens_salida": 233
+        },
+        {
+          "pregunta": "It's a small room, about 10 by 11, in our house in Warwick.",
+          "consultas": [
+            "It's a small room, about 10 by 11, in our house in Warwick.",
+            "is the assessment visit free, and which areas do you serve"
+          ],
+          "respuesta": "Warwick is well within Rhode Island, so the assessment visit wouldn't be charged.\n\nDo you have a style or material in mind for the nursery, or would you want help figuring that out?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "What a site visit is for",
+              "tier": "C",
+              "score": 0.7,
+              "url": ""
+            },
+            {
+              "titulo": "How RG Wallcovering works — confirmed by the owner",
+              "tier": "A",
+              "score": 0.641,
+              "url": ""
+            }
+          ],
+          "segundos": 6.11,
+          "tokens_entrada": 1255,
+          "tokens_salida": 194
+        },
+        {
+          "pregunta": "Priya Raman, priya.raman@example.com — we'd like it before the baby arrives in March.",
+          "consultas": [
+            "Priya Raman, priya.raman@example.com — we'd like it before the baby arrives in March."
+          ],
+          "respuesta": "Thanks, Priya — your details are with the team, and they'll be in touch to arrange the visit and talk through options for the room. If you do land on a look or a reference in the meantime, just send it over and I'll pass it along.",
+          "derivado": true,
+          "rechazado": false,
+          "fuentes": [],
+          "segundos": 9.36,
+          "tokens_entrada": 1081,
+          "tokens_salida": 500
+        }
+      ],
+      "derivado": true,
+      "lead": {
+        "lead_id": "fb67d309bc14",
+        "conversation_id": "Q-03",
+        "creado_en": "2026-08-13T19:14:21.273106+00:00",
+        "nombre": "Priya Raman",
+        "email": "priya.raman@example.com",
+        "tipo_proyecto": "residencial",
+        "ubicacion": "Warwick, Rhode Island",
+        "espacio": "Nursery in their house, small room roughly 10 x 11 ft",
+        "plazo": "Before the baby arrives in March",
+        "resumen": "Priya is looking to have a nursery done in her home in Warwick, RI — a small room, roughly 10 by 11 feet. She asked about cost first; I explained pricing depends on material and wall condition and that the space is assessed before quoting, and that the assessment visit isn't charged in Warwick. She hasn't told me yet whether she has a style or material in mind, or whether she'd want design help, so that's worth opening the call with. She'd like the work finished before the baby arrives in March, so timing matters to her.",
+        "entregado": false
+      },
+      "segundos": 23.05,
+      "tokens_entrada": 5048,
+      "tokens_salida": 927
+    },
+    {
+      "id": "Q-04",
+      "categoria": "calificacion",
+      "esperado": "lead",
+      "prueba": "Da los datos a regañadientes, en el último turno",
+      "turnos": [
+        {
+          "pregunta": "Just looking for now. Do you do stairwells?",
+          "consultas": [
+            "Just looking for now. Do you do stairwells?"
+          ],
+          "respuesta": "Yes — stairwells are part of what we do. We've papered whole houses including stairs and hallways, so tall or awkward stairwell walls are familiar ground.\n\nHave a look around, and if a project ever takes shape I'm happy to help.",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "What a site visit is for",
+              "tier": "C",
+              "score": 0.643,
+              "url": ""
+            },
+            {
+              "titulo": "IT IS POSSIBLE TO PRESERVE THE PERIOD STYLE",
+              "tier": "A",
+              "score": 0.637,
+              "url": "https://rgwallcovering.com/it-is-possible-to-preserve-the-period-style"
+            }
+          ],
+          "segundos": 3.61,
+          "tokens_entrada": 560,
+          "tokens_salida": 79
+        },
+        {
+          "pregunta": "Two-storey stairwell, old paper on it, probably needs removing first.",
+          "consultas": [
+            "Two-storey stairwell, old paper on it, probably needs removing first."
+          ],
+          "respuesta": "That's the part nobody can call from a photo — how old paper comes off depends on what it is and what's underneath. Strippable papers can come away in whole lengths; older or painted-over layers can pull the surface with them and turn up repair work that wasn't visible.\n\nWhich is why a look in person settles it. Want me to pass your details along when you're ready?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "IT IS POSSIBLE TO PRESERVE THE PERIOD STYLE",
+              "tier": "A",
+              "score": 0.656,
+              "url": "https://rgwallcovering.com/it-is-possible-to-preserve-the-period-style"
+            },
+            {
+              "titulo": "Wall preparation and wallpaper removal",
+              "tier": "C",
+              "score": 0.645,
+              "url": ""
+            }
+          ],
+          "segundos": 4.59,
+          "tokens_entrada": 732,
+          "tokens_salida": 140
+        },
+        {
+          "pregunta": "Fine — Tom Alder, t.alder@example.com. Don't call before six.",
+          "consultas": [
+            "Fine — Tom Alder, t.alder@example.com. Don't call before six."
+          ],
+          "respuesta": "Got it, Tom — your details are with the team, along with the note about not calling before six. Where's the house, roughly? That's what tells us whether the assessment visit carries a charge.",
+          "derivado": true,
+          "rechazado": false,
+          "fuentes": [],
+          "segundos": 8.59,
+          "tokens_entrada": 1061,
+          "tokens_salida": 395
+        }
+      ],
+      "derivado": true,
+      "lead": {
+        "lead_id": "9861c273eb7a",
+        "conversation_id": "Q-04",
+        "creado_en": "2026-08-13T19:14:38.492796+00:00",
+        "nombre": "Tom Alder",
+        "email": "t.alder@example.com",
+        "tipo_proyecto": "residencial",
+        "espacio": "two-storey stairwell, existing old wallpaper",
+        "resumen": "Tom came in browsing rather than ready to buy, and said as much. He has a two-storey stairwell with old wallpaper on it that likely needs removing before anything new goes up; he hasn't mentioned a style, a design or a timeline. I told him removal can't be judged from a description — the paper type and the condition of the wall underneath decide it — so an in-person look is what settles the scope. He asked not to be called before six, and I didn't push him on location or timing.",
+        "entregado": false
+      },
+      "segundos": 16.79,
+      "tokens_entrada": 2353,
+      "tokens_salida": 614
+    },
+    {
+      "id": "Q-05",
+      "categoria": "calificacion",
+      "esperado": "lead",
+      "prueba": "Pide ayuda de diseño, que es lo que la fase 1 dejó fuera",
+      "turnos": [
+        {
+          "pregunta": "I want something bold in the dining room but I don't know where to start.",
+          "consultas": [
+            "I want something bold in the dining room but I don't know where to start."
+          ],
+          "respuesta": "Bold in a dining room is a fun place to work — one thing worth knowing is that the ceiling is often an overlooked surface with real potential, and wallpaper there can carry a whole room.\n\nIs this for your home, and do you have any style or reference in mind yet, or would you rather have design help from scratch?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "OUT-OF-THIS-WORLD DECOR",
+              "tier": "A",
+              "score": 0.696,
+              "url": "https://rgwallcovering.com/out-of-this-world-decor"
+            },
+            {
+              "titulo": "Your favorite place in the world, in your Home",
+              "tier": "A",
+              "score": 0.687,
+              "url": "https://rgwallcovering.com/brooklyn"
+            },
+            {
+              "titulo": "FIVE INTERIOR DESIGN AND WALLPAPER IDEAS",
+              "tier": "A",
+              "score": 0.685,
+              "url": "https://rgwallcovering.com/five-interior-design-and-wallpaper-ideas"
+            },
+            {
+              "titulo": "CREATIVE IDEAS TO USE WALLPAPER IN INTERIOR DECORATION",
+              "tier": "A",
+              "score": 0.676,
+              "url": "https://rgwallcovering.com/creative-ideas-to-use-wallpaper-in-interior-decoration"
+            },
+            {
+              "titulo": "A STORY OF TIMELESS ELEGANCE",
+              "tier": "A",
+              "score": 0.673,
+              "url": "https://rgwallcovering.com/a-story-of-timeless-elegance"
+            }
+          ],
+          "segundos": 3.81,
+          "tokens_entrada": 1444,
+          "tokens_salida": 98
+        },
+        {
+          "pregunta": "Residential, in Pawtucket. I like the block-print look but nothing specific.",
+          "consultas": [
+            "Residential, in Pawtucket. I like the block-print look but nothing specific."
+          ],
+          "respuesta": "Block-print is a good direction — it reads bold without being loud. Our designers can take that starting point and put together materials and options for you.\n\nWhat's your name and the best email or phone to reach you?",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "THE BRICK, AN INVENTION THAT EVOLVES WITH HUMANITY",
+              "tier": "A",
+              "score": 0.643,
+              "url": "https://rgwallcovering.com/the-brick-an-invention-that-evolves-with-humanity"
+            },
+            {
+              "titulo": "Your favorite place in the world, in your Home",
+              "tier": "A",
+              "score": 0.643,
+              "url": "https://rgwallcovering.com/brooklyn"
+            },
+            {
+              "titulo": "Interior Design",
+              "tier": "A",
+              "score": 0.638,
+              "url": "https://rgwallcovering.com/interior-design/"
+            },
+            {
+              "titulo": "WHAT KIND OF SPACE DOES RYAN MURPHY LIVE IN?",
+              "tier": "A",
+              "score": 0.63,
+              "url": "https://rgwallcovering.com/what-kind-of-space-does-ryan-murphy-live-in-2"
+            }
+          ],
+          "segundos": 3.7,
+          "tokens_entrada": 1579,
+          "tokens_salida": 95
+        },
+        {
+          "pregunta": "Lucia Ferrer, lucia.ferrer@example.com.",
+          "consultas": [
+            "Lucia Ferrer, lucia.ferrer@example.com.",
+            "is the assessment visit charged, and where is it free"
+          ],
+          "respuesta": "Your details are with the team, Lucia — they'll reach out to talk through the space and what you're after.\n\nSince you're in Pawtucket, the assessment visit isn't charged; that only comes into play for jobs far enough away to mean hours of travel.",
+          "derivado": false,
+          "rechazado": false,
+          "fuentes": [
+            {
+              "titulo": "What a site visit is for",
+              "tier": "C",
+              "score": 0.722,
+              "url": ""
+            },
+            {
+              "titulo": "How RG Wallcovering works — confirmed by the owner",
+              "tier": "A",
+              "score": 0.648,
+              "url": ""
+            }
+          ],
+          "segundos": 10.86,
+          "tokens_entrada": 1966,
+          "tokens_salida": 623
+        }
+      ],
+      "derivado": false,
+      "lead": {
+        "lead_id": "0406290eacfd",
+        "conversation_id": "Q-05",
+        "creado_en": "2026-08-13T19:14:56.120569+00:00",
+        "nombre": "Lucia Ferrer",
+        "email": "lucia.ferrer@example.com",
+        "tipo_proyecto": "residencial",
+        "ubicacion": "Pawtucket, RI",
+        "espacio": "dining room",
+        "estilo_referencia": "block-print look, nothing specific chosen yet",
+        "necesita_diseno": true,
+        "resumen": "Lucia wants something bold for her dining room in a home in Pawtucket, RI. She likes a block-print look but has nothing specific picked out, so she needs design help from scratch rather than an installation of a chosen paper. She is early on and open to guidance — I mentioned that ceilings are an often-overlooked surface with real potential, which she may be receptive to. No timeline came up and no prices or visit costs were discussed.",
+        "entregado": false
+      },
+      "segundos": 18.37,
+      "tokens_entrada": 4989,
+      "tokens_salida": 816
+    }
+  ]
+}

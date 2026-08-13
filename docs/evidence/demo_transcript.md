@@ -172,10 +172,25 @@ their details, has no reason to reply again.
 sentence, word for word*. The shape is deterministic; only whether it fires
 varies.
 
-**Status: not fixed.** It is the next change — a sentence establishing that
-registering comes first and questions continue afterwards — and it will be
-measured the same way the language defect was, before and after, on more than
-one sample. Full detail: `07_failure_analysis.md` §F2.
+**Status: fixed after this transcript was recorded, and measured.** The
+missing sentence was added to `<saving_the_lead>` — register the moment there
+is a name and a contact method, then keep asking. Across six samples the
+assistant now does both, in that order, in the same message:
+
+> *"Thanks Marcus — **your details are with the team** and they'll reach out to
+> set up an assessment. Where is the office located?"*
+
+6 of 6 after, 0 of 7 before. The count alone would not carry it (six clean
+runs come up by chance 12.8% of the time at a 29% failure rate) — the change
+in shape does. A full 30-question control run afterwards held S2 at zero
+violations and captured 5 of 5 leads. `07_failure_analysis.md` §F2.
+
+**The transcript is left as recorded.** The failure was real, it is what the
+demo showed, and rewriting it after the fact would erase the only reason
+anyone can check the fix. **The live badly-handled case is now turn 3 above** —
+correct and unauditable at the same time — together with `A-02` and the
+service-boundary answers in §F3 and §F4, all of which remain open with their
+reasons.
 
 **Why it is the right failure to show.** It is not a wrong answer or an
 invented fact. It is the assistant being *too diligent* about qualifying and

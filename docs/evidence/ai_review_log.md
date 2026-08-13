@@ -454,6 +454,41 @@ of the fix.
 
 ---
 
+### Entry 14 — Six clean samples are not a fix; the change in shape is
+
+**Dimension:** correctness of the *claim*, not of the code
+**Severity:** low as a defect, high as a habit
+
+`Q-02` lost its lead in 2 of 7 samples. A precedence sentence was added to
+`<saving_the_lead>` and the next six samples came back clean — 6 of 6.
+
+The tempting write-up is "fixed: 6/6". It would be wrong. With a 29% failure
+rate, **six clean runs come up by chance 12.8% of the time** — better than a
+coin flip's worth of evidence, and nowhere near proof. This is the exact
+mistake entry 11 recorded: a phase 3 fix verified against the single
+conversation that exposed it, which then failed on a different one.
+
+What makes the claim defensible is not the count but the **change in shape**.
+Before, the assistant chose between banking the lead and asking the
+outstanding question, and sometimes chose wrong:
+
+> *"Thanks, Marcus. Where's the office located?"*
+
+After, it stops choosing:
+
+> *"Thanks Marcus — your details are with the team… Where is the office
+> located?"*
+
+That behaviour appears in 6 of 6 runs after and in 0 of 7 before. It is direct
+evidence that the added rule is what is acting, rather than that three coins
+landed the same way — and it is the kind of evidence a pass/fail count cannot
+produce on its own.
+
+**The habit worth keeping:** when a fix is probabilistic, look for a
+mechanism you can see in the output, not just a rate you can count.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was

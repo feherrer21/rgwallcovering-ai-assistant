@@ -1,0 +1,8 @@
+id,categoria,esperado,pregunta,respuesta_final,derivado,fuentes,lead_id,S1,S2,S3,S4
+Q-01,calificacion,lead,We just bought a house in Cranston and want wallpaper in the hallway.,"Thanks Ana — your details are with the team now, and someone will reach out to talk through options for the hallway and arrange a look at the space.",sí,,a1168c57f409,,,,
+Q-02,calificacion,lead,I manage a dental office and the reception walls look tired.,Thanks Marcus — your details are with the team and they'll reach out to set up an assessment. Where is the office located? It affects whether that visit is charged.,sí,,bc2f63c96863,,,,
+Q-03,calificacion,lead,What would a nursery cost?,"Got it — your details are with the team, and they'll reach out to set up the visit and go over options.
+
+If you do have a look or reference in mind for the nursery, tell me and I'll add it to the note.",sí,,1295ae931dc1,,,,
+Q-04,calificacion,lead,Just looking for now. Do you do stairwells?,"Got it, Tom — your details are with the team, with a note not to reach you before six. Whereabouts is the house? That's what decides whether the assessment visit is charged.",sí,,20751c4b13e2,,,,
+Q-05,calificacion,lead,I want something bold in the dining room but I don't know where to start.,"Your details are with the team, and they'll reach out to talk through the space and options. Since Pawtucket is close by, the assessment visit isn't charged — they'll look at the room before quoting anything.",no,How RG Wallcovering works — confirmed by the owner [A 0.651] | What a site visit is for [C 0.638],19323ab47cc9,,,,
