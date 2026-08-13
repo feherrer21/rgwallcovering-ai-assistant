@@ -15,6 +15,34 @@ Why the assistant defers so readily, and what the trust tiers mean, is in
 [`docs/03_spec.md`](docs/03_spec.md). Problem, users and how success is
 measured are in [`docs/01_problem_statement.md`](docs/01_problem_statement.md).
 
+## Try it live
+
+**→ [rgwallcovering-ai-assistant.streamlit.app](https://rgwallcovering-ai-assistant.streamlit.app/)**
+
+The running assistant, on the real 365-chunk corpus. Worth asking it:
+
+| Ask | What to watch |
+|---|---|
+| *"How much would it cost to paper my hallway?"* | There is no price anywhere in the corpus. It should explain what drives the cost and offer to pass your details along — never produce a figure |
+| *"Do you install hardwood floors?"* | A clean "no", instead of stretching to fit a job the company doesn't do |
+| *"Do you work in Rhode Island?"* | A grounded answer — open the **Sources** panel on the left to see which passages it rests on, their trust tier and their cosine score |
+| Describe a real project and give a name and email | It qualifies you and captures a lead. Use an invented persona — anything you enter is a real lead record |
+
+The sources panel is the point: every answer shows what it rests on, so a
+wrong one can be traced rather than argued about.
+
+**Notes for a reviewer.** The app sleeps when idle — the first load takes a
+moment while it wakes and loads the embedding model, and the first question
+takes a few seconds longer than the rest. Sessions are capped at a limited
+number of messages because the endpoint spends the owner's API budget. The
+**Leads** and **Recipients** tabs are password-gated and stay closed without
+the admin token, so no personal data is exposed.
+
+What the deployed app does *not* show is the evidence behind it: the committed
+baseline, the three measured experiments, the six named failures and the demo
+transcript live in [`docs/`](docs/), and every number there cites a specific
+input, output or file.
+
 ---
 
 ## Layout
@@ -91,7 +119,8 @@ curl -X POST http://127.0.0.1:8000/chat \
 ## Deploying the demo (Streamlit Community Cloud)
 
 The demo is what the owner is shown; the API is what his website would call.
-Only the demo is deployed.
+Only the demo is deployed —
+[rgwallcovering-ai-assistant.streamlit.app](https://rgwallcovering-ai-assistant.streamlit.app/).
 
 1. Point Community Cloud at this repository and `demo_streamlit/app.py`. The
    index is committed, so there is nothing to build.
