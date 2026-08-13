@@ -77,11 +77,13 @@ def main() -> None:
 
     panel_lateral()
 
-    chat, bandeja = st.tabs(["Chat", "Leads"])
+    chat, bandeja, entrega = st.tabs(["Chat", "Leads", "Recipients"])
     with chat:
         vista_chat()
     with bandeja:
         vista_leads()
+    with entrega:
+        vista_destinatarios()
 
 
 def vista_chat() -> None:
@@ -170,6 +172,65 @@ def vista_leads() -> None:
         tipo = registro.get("tipo_proyecto", "")
         with st.expander(f"{etiqueta} — {tipo}" if tipo else etiqueta):
             st.text(leads.formatear(registro))
+
+
+def valida(direccion: str) -> bool:
+    """Comprobación mínima: si esto pasa algo roto, el lead no llega a nadie."""
+    if direccion.count("@") != 1 or " " in direccion:
+        return False
+    usuario, dominio = direccion.split("@")
+    return bool(usuario) and "." in dominio and not dominio.endswith(".")
+
+
+def vista_destinatarios() -> None:
+    """Quién recibe los leads. Editable en caliente, y honesta sobre su límite.
+
+    En Streamlit Cloud los secretos son de solo lectura desde la app y el disco
+    es efímero: lo que se cambie aquí vale para el contenedor vivo y se pierde
+    en el siguiente reinicio o redespliegue. Por eso la pantalla no dice
+    "guardado" y calla — enseña la línea exacta que hay que pegar en los
+    secretos para que sea permanente.
+
+    Escribe sobre `settings`, que es el mismo objeto que lee `leads.entregar()`
+    y sobrevive a los reruns porque el módulo ya está importado.
+    """
+    if not desbloqueado():
+        return
+
+    if not settings.envio_configurado:
+        st.warning(
+            "No email credentials configured, so enquiries are stored but not "
+            "delivered. Set SMTP_USER and SMTP_PASSWORD in the app secrets."
+        )
+
+    st.caption("Every enquiry captured in a conversation is emailed to these.")
+    texto = st.text_area(
+        "One address per line",
+        value="\n".join(settings.destinatarios_lead),
+        height=120,
+    )
+
+    if st.button("Apply"):
+        direcciones = [linea.strip() for linea in texto.splitlines() if linea.strip()]
+        invalidas = [d for d in direcciones if not valida(d)]
+        if not direcciones:
+            st.error("At least one address is needed, or enquiries reach nobody.")
+        elif invalidas:
+            st.error("These do not look like addresses: " + ", ".join(invalidas))
+        else:
+            settings.lead_email_to = ", ".join(direcciones)
+            st.success("Applied. The next enquiry goes to these addresses.")
+
+    st.divider()
+    st.caption(
+        "This change lasts as long as the app stays running — a restart or a "
+        "redeploy brings back whatever is in the secrets. To make it "
+        "permanent, paste this line into the app's Secrets:"
+    )
+    st.code(
+        f'LEAD_EMAIL_TO = "{", ".join(settings.destinatarios_lead)}"',
+        language="toml",
+    )
 
 
 def panel_lateral() -> None:

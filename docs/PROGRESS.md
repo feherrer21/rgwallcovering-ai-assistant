@@ -186,6 +186,14 @@ Dos decisiones que el spec dejaba abiertas, resueltas: `/leads` va detrás de
 defecto no existe—, y el límite por IP entra ahora y no antes de desplegar,
 porque `/chat` gasta el presupuesto de Ronald desde el primer visitante.
 
+**Preparado para Streamlit Community Cloud** (2026-08-13), que es el canal
+elegido para enseñárselo a Ronald. La URL es pública, así que el demo lleva
+ahora lo que en la web haría la API: tope de 20 turnos por sesión —este camino
+no pasa por el limitador por IP— y clave (`ADMIN_TOKEN`) delante de los leads y
+de la pestaña de destinatarios. El índice pasa a estar versionado: Cloud
+despliega desde el repositorio. El repositorio será **público**, decisión de
+Fabián.
+
 **Hallazgo de T4.1:** `streamlit run` pone en `sys.path` la carpeta del script,
 no la raíz del repositorio, así que el demo no encontraba `agent_core`. No
 salió en el arranque —el servidor devuelve 200 antes de ejecutar el script— y
@@ -258,6 +266,8 @@ uso real en la web de Ronald.
 | ~~`GET /leads` expone datos personales~~ | cerrado: token, y 503 si no se configura |
 | El limitador usa la IP del socket e ignora `X-Forwarded-For` | detrás de un proxy inverso todos los visitantes comparten un cubo; hay que limitar en el proxy o resolver allí la IP real. Documentado en el README |
 | Un solo proceso, límite en memoria | con dos réplicas el tope se aplica por réplica. Para lo que protege, sirve |
+| El demo no pasa por el limitador por IP | llama a `run_turn()` directamente; en la URL pública lo tapa el tope de turnos por sesión, que es más burdo |
+| Cambiar destinatarios desde la app no persiste | los secretos son de solo lectura y el disco es efímero; la pestaña lo dice y da la línea TOML para dejarlo fijo |
 | Piso de relevancia sin calibrar | fase 6 |
 | Una fuente que devuelve 0 fragmentos no es error | detectado en la entrada 2 del registro; sin arreglar |
 | Inspiración de diseño fuera de alcance | cortada a propósito; requiere que Ronald etiquete 15-20 fotos |

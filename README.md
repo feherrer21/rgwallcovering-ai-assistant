@@ -112,8 +112,13 @@ Only the demo is deployed.
 
 Two things exist in the demo *because* the URL is public. The per-IP limiter
 lives in the API, and this path does not go through it, so `MAX_TURNOS_DEMO`
-caps how many messages one session can spend. And the Leads tab asks for
-`ADMIN_TOKEN` — without that secret set, the tab does not open at all.
+caps how many messages one session can spend. And the Leads and Recipients
+tabs ask for `ADMIN_TOKEN` — without that secret set, neither opens at all.
+
+**The Recipients tab** changes who gets the lead emails without a redeploy.
+Secrets are read-only from inside the app, so a change there lasts only while
+the app keeps running; the tab says so, and prints the `LEAD_EMAIL_TO` line to
+paste into Secrets to make it permanent.
 
 The container's disk is ephemeral: `data/leads.jsonl` there empties on every
 restart, and nothing is lost by it. The lead left the process by email the
