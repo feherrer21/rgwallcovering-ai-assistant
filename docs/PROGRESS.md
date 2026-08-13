@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 38 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 41 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -30,7 +30,7 @@ Fase 4.5 Entrega ████████████████░░░   83%
 Fase 5  Evaluación███████████████████  100%   baseline commiteado
 Fase 6  Mejora   ███████████████████  100%   3 experimentos, 6 corridas
 Fase 7  Fallos   ███████████████████  100%   6 nombrados, 2 arreglados
-Fase 8  Revisión ███████████████████  100%   14 entradas, cerrado
+Fase 8  Revisión ███████████████████  100%   14 entradas + dimensiones
 Fase 9  Comunicar███████████████████  100%   slide, demo y horas
 ```
 
@@ -63,7 +63,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 38 commits
+- Árbol de git limpio, 41 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -334,7 +334,7 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
-| ✅ | Revisión del output de IA + un error cazado | 11 entradas; las 2, 8, 9 y 10 son errores cazados y corregidos |
+| ✅ | Revisión del output de IA + un error cazado | 14 entradas **y** una sección por dimensión: seguridad, rendimiento, pruebas, mantenibilidad |
 | ✅ | Análisis de fallos con inputs concretos | `07_failure_analysis.md`, 6 fallos |
 | ✅ | Una mejora medida, con lo que empeoró | `measured_improvement.md` |
 | ✅ | Slide para el cliente | `08_client_slide.md` |

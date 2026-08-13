@@ -489,6 +489,94 @@ mechanism you can see in the output, not just a rate you can count.
 
 ---
 
+## Review by dimension
+
+The 14 entries above are all correctness, because that is where the damage was.
+The brief asks for review across **intent, tests, security, performance and
+maintainability**, so here is each of the other four, with what was found and
+what was done — measured against the repository as it stands, not asserted.
+
+### Security
+
+Four issues found in AI-generated code and fixed before they could ship:
+
+| Found | Resolution |
+|---|---|
+| `GET /leads` returned personal data to anyone who asked — the spec's own §5 had specified it that way | Behind `X-Admin-Token`, compared with `hmac.compare_digest`; **503 when no token is configured**, which is the shipped default |
+| `POST /chat` was an unauthenticated endpoint spending the owner's API budget | Per-IP limiter, two windows (10/min, 60/h). The hourly one exists because a slow drip passes under a per-minute limit all day |
+| The public Streamlit URL bypasses that limiter entirely — it calls `run_turn()` directly | Per-session message cap in the demo, and both PII tabs password-gated |
+| The API key had been pasted into a chat | Rotated, and **verified against the API** rather than assumed |
+
+Verified rather than trusted: after publishing the repository publicly, both
+`.env` and `data/leads.jsonl` were checked against the GitHub API — **404 on
+both**. The prompt-injection defence was tested, not hoped for: case `X-A3`
+holds in every run.
+
+Left open and declared, not silently accepted: the limiter keys on the socket
+address, so behind a reverse proxy every visitor shares one bucket.
+
+### Performance
+
+| Metric | Before | After | Change |
+|---|---|---|---|
+| Input tokens, 30-question run | 64,179 | ~41,000 | **−36%** |
+| Cost per full run | $0.48 | $0.37 | −23% |
+| Latency per turn | 5–13 s | 4–10 s | unchanged in kind |
+
+The token reduction was not the goal of the phase 6 change — it fell out of
+removing a tool round trip, since each search re-sent the whole conversation
+to deliver the result. It is the most concrete improvement the project
+produced, and it was found by measuring rather than by profiling intuition.
+
+The latency is the honest weak point: 4–10 s of still screen per turn on a
+website. Streaming would fix the perception and is cut on purpose, recorded in
+`06_effort.md` with the reason.
+
+### Tests
+
+56 tests, none of which spend a model call — the API client, SMTP and the
+retriever are all replaced by doubles, so the suite is free to run and the
+lead fixtures are invented people.
+
+The finding worth keeping is what the tests **could not see**: a green suite
+and an HTTP 200 said nothing about a Streamlit app that had never executed a
+line (entries 9 and 10). The fix was not more assertions but a *different
+instrument* — `streamlit.testing.v1.AppTest`, which runs the script with a real
+session context. Three regression tests now cover the class of bug the old
+checks were structurally blind to, and the first of them fails against the
+previous commit.
+
+### Maintainability
+
+The architecture boundary was checked mechanically, not by reading:
+
+- **`agent_core` imports no web framework** — 0 matches for fastapi/streamlit.
+- **`backend/`, `eval/` and `demo_streamlit/` import no `anthropic`** — 0 files.
+  They consume `run_turn()` and the `Turno` dataclass, which is why swapping
+  the model provider touches 15 lines in 4 files instead of the whole project.
+
+Module sizes against the project's own ~250-line guideline:
+
+| | Lines | |
+|---|---|---|
+| `demo_streamlit/app.py` | 278 | Over — and deliberately so; it is the declared disposable surface |
+| `agent_core/retrieval.py` | 253 | **Marginally over the guideline.** Flagged rather than "refactored" — the excess is the docstrings explaining why the relevance floor exists, and shortening those would remove the reason the module is safe to change |
+| everything else | ≤ 233 | Within |
+
+The rule that did the most work is not in the code: `PROGRESS.md` is updated
+as work happens, so the seven-hour gap between the two sessions cost no
+re-derivation. The tracker's own blocker table is the reason the API key
+rotation was not forgotten.
+
+### Intent
+
+Covered by the entries above rather than repeated here — entries 2, 8, 11 and
+13 are all cases where generated code or a generated instruction did something
+other than what was asked, and each names the divergence. Entry 13 is the
+sharpest: an instruction that was followed **exactly**, and was wrong.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was
