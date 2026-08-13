@@ -84,6 +84,24 @@ third-party directories, but that data ages without warning and the assistant
 would be asserting something Ronald has never seen. If he confirms it, it
 moves from tier B to tier A.
 
+### 7. Is the service list complete?
+
+> *"So the work is wallcovering, wallpaper removal, murals, painting and the
+> design side. Is that the whole list — is there anything else you take on, and
+> anything people ask for that you always turn down?"*
+
+**Added 2026-08-13, from the phase 7 failure analysis.** The assistant already
+tells visitors "no, flooring isn't something we do", and it is right — but
+that "no" rests on an inference from what he told us he *does*, not on
+anything he has confirmed. Until he answers, the negative cannot be written
+into the corpus as a tier A fact without breaking the zero-fabrication rule,
+which is why `F-03`, `F-04` and `X-A5` stay unauditable in
+`07_failure_analysis.md` §F4.
+
+The second half of the question is the valuable half: the things people ask
+for and never get are exactly the enquiries worth deflecting before they cost
+him a call.
+
 ---
 
 ## Two operational things needed from him

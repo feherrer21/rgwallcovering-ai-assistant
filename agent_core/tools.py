@@ -104,7 +104,10 @@ REGISTRAR_LEAD = {
                     "before the first call: what the person wants, how far "
                     "along they are, anything that changes how that call "
                     "should go, and anything you told them the team would "
-                    "confirm. In the conversation's language. Not a list."
+                    "confirm. Not a list. **Always in English**, whatever "
+                    "language the conversation was in: the visitor never "
+                    "reads this, and the rest of the email around it is in "
+                    "English."
                 ),
             },
         },

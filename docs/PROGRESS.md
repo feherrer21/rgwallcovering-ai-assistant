@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 35 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 36 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,10 +10,10 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 6 completa (2026-08-13) — tres experimentos, seis
-corridas, dos muestras por configuración. Ninguno movió S1 más de lo que se
-mueve solo entre corridas idénticas; el que se queda baja los tokens un tercio
-y estabiliza qué casos fallan. Antes, el baseline de la fase 5.
+**Último movimiento:** fase 7 completa (2026-08-13) — seis fallos nombrados
+con entrada, salida y causa mecánica. El arreglado: los resúmenes que llegaban
+en español, del 45% al 0 en 15 muestras. Dos quedan sin arreglar con su razón
+escrita, y uno de ellos es ahora una pregunta para Ronald.
 
 ---
 
@@ -29,12 +29,12 @@ Fase 4  Frontends███████████████████  100%
 Fase 4.5 Entrega ████████████████░░░   83%   correo real recibido
 Fase 5  Evaluación███████████████████  100%   baseline commiteado
 Fase 6  Mejora   ███████████████████  100%   3 experimentos, 6 corridas
-Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 12 entradas
+Fase 7  Fallos   ███████████████████  100%   6 fallos nombrados, 1 arreglado
+Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 13 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~21 h · restante ~4 h.**
+**Estimado 25 h · consumido ~23 h · restante ~2 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -64,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 35 commits
+- Árbol de git limpio, 36 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -88,15 +88,13 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 
 ### Lo siguiente
 
-**Fase 7, el análisis de fallos.** Ya no hay que buscarlos: la fase 6 los dejó
-nombrados y estables entre corridas. Los cinco casos que fallan son A-01,
-A-02, F-03, F-04 y X-A5, con dos causas, y las dos son del corpus — no hay
-documento que diga qué hace y qué no hace la empresa, y para *"where are you
-based?"* el modelo de embeddings pone un ensayo del blog (0.602) por encima
-del documento que tiene la dirección (0.559).
+**Fase 9, comunicar.** La slide para Ronald, la demo con un caso que falla y
+la declaración de horas. La fase 8 se cierra sola: el registro lleva 13
+entradas escritas cuando ocurrieron.
 
-Dos defectos más, encontrados al etiquetar y fuera de lo que miden S1–S4: los
-resúmenes se van al español solos, y `Q-02` pierde el lead en 2 de 5 corridas.
+El caso que falla para la demo ya está elegido y documentado: **`Q-02`**,
+que pierde el lead en 2 de 7 muestras con la misma frase palabra por palabra.
+Transcripción completa en `07_failure_analysis.md` §F2.
 
 ### Hilos abiertos que no están en ninguna tarea
 
@@ -105,8 +103,13 @@ resúmenes se van al español solos, y `Q-02` pierde el lead en 2 de 5 corridas.
   existe en nivel A, y en la prueba de humo no derivaba *"can you install
   flooring for me?"* —esto último ya lo resuelve el inventario del prompt—.
   El barrido de la fase 6 va en pasos de 0.02, no de 0.1.
-- La regresión de la entrada 8 **volvió** en el baseline (`Q-05`, entrada 11).
-  Sigue sin arreglar a propósito: el arreglo y su medición son de la fase 6.
+- La regresión de la entrada 8 (resumen que narra una corrección que nunca
+  ocurrió) apareció 1 vez en 33 leads. La regla del prompt sigue puesta y
+  aguanta casi siempre; ahora tiene 33 muestras detrás en vez de una.
+  `07_failure_analysis.md` §F5.
+- **`Q-02` pierde el lead en 2 de 7 muestras** y es el siguiente arreglo:
+  falta una frase que diga qué manda cuando el visitante da su contacto con
+  un campo aún sin preguntar. §F2.
 - `LEAD_EMAIL_TO` apunta al correo de Fabián, no al de Ronald. Cambiarlo solo
   cuando esto deje de ser una prueba.
 - La latencia medida por HTTP (5,4 s y 7,3 s en la transcripción de T4.3)
@@ -277,7 +280,27 @@ ya registradas se ve que en A-02, A-06, F-03, F-04 y X-A5 **el agente no buscó
 nada**: no era el piso, era que el prompt ya contenía la respuesta. Ningún
 valor del piso arregla eso.
 
-### Fases 7 a 9 — pendientes
+### Fase 7 — Análisis de fallos · completa
+
+| | Tarea | Resultado |
+|:--:|---|---|
+| ✅ | T7.1 A1–A5 con entrada, salida y causa | los cinco aguantaron; ninguno falló donde yo apuntaba |
+| ✅ | T7.2 Recoger todo lo que soltaron las fases 5 y 6 | 6 fallos nombrados |
+| ✅ | T7.3 Arreglar uno y medirlo | resúmenes en español: **45% → 0** en 15 muestras |
+| ✅ | T7.4 `07_failure_analysis.md` | 6 fallos, 2 sin arreglar con su razón |
+
+**El arreglo:** el campo `resumen` del esquema de `registrar_lead` decía *"in
+the conversation's language"*. El resumen tiene un solo lector, siempre el
+mismo. Ahora dice inglés siempre.
+
+**Dos sin arreglar a propósito.** `A-02` no se arregla bajando el piso porque
+el ranking está invertido —un ensayo del blog a 0.602 por encima del documento
+con la dirección a 0.559— y las tres salidas posibles son peores que el fallo.
+Y el "no hacemos suelos" no se puede hacer auditable sin escribir en el corpus
+un hecho que Ronald **no ha confirmado**: que la lista de servicios es
+exhaustiva. Eso es ahora la pregunta 7 de `client_questions_ronald.md`.
+
+### Fases 8 y 9 — pendientes
 
 Sin empezar. Ver `05_tasks.md` para el desglose completo.
 
@@ -310,13 +333,13 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
 | ✅ | Revisión del output de IA + un error cazado | 11 entradas; las 2, 8, 9 y 10 son errores cazados y corregidos |
-| ⬜ | Análisis de fallos con inputs concretos | fase 7 |
-| ⬜ | Una mejora medida, con lo que empeoró | fase 6 |
+| ✅ | Análisis de fallos con inputs concretos | `07_failure_analysis.md`, 6 fallos |
+| ✅ | Una mejora medida, con lo que empeoró | `measured_improvement.md` |
 | ⬜ | Slide para el cliente | fase 9 |
 | ⬜ | Demo con un caso que falla | fase 9 |
 | ⬜ | Declaración de horas y qué se cortó | fase 9 |
 
-**9 de 13 completas, 4 sin empezar.**
+**11 de 13 completas, 2 sin empezar.**
 
 ---
 

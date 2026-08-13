@@ -424,6 +424,36 @@ documents sit just below the floor, not for predicting a run.
 
 ---
 
+## Phase 7 — Failure analysis
+
+### Entry 13 — The instruction was in two places, and the weaker-looking one won
+
+**Dimension:** correctness / instruction design
+**Severity:** medium — 45% of the product's actual deliverable was affected
+
+Lead summaries arrived in Spanish for English conversations — 15 of 33 across
+seven samples. The cause was not drift. It was an instruction: the `resumen`
+field of the `registrar_lead` schema said *"In the conversation's language."*
+
+Two things came out of fixing it.
+
+**First, the instruction existed twice** — in the tool schema and in
+`<saving_the_lead>` in the system prompt, worded differently, saying the same
+wrong thing. Finding one and declaring the cause found would have produced a
+fix that didn't work, and a confident write-up explaining why it should have.
+
+**Second, and more useful: only the schema was changed, and the result went to
+15 of 15 English while the system prompt still said the opposite.** The
+field-level description beat the system prompt outright. That is worth
+remembering the next time an instruction in the prompt appears to be ignored:
+check whether a tool schema is quietly contradicting it.
+
+The prompt line was then corrected too, for coherence — but after the
+measurement, and it is recorded here as the cleanup it was rather than as part
+of the fix.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was

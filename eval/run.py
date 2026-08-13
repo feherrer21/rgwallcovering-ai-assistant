@@ -17,6 +17,7 @@ Dos cosas se apartan a propósito durante la corrida:
 
 import csv
 import json
+import sys
 import time
 from datetime import date
 from pathlib import Path
@@ -156,13 +157,24 @@ def resumir(registros: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def main() -> None:
+    # Filtro opcional por categoría: `python -m eval.run calificacion` corre
+    # solo esas 5 conversaciones. Medir un arreglo que solo toca los leads no
+    # necesita las 30 preguntas, y el set completo cuesta tres veces más.
+    solo = sys.argv[1] if len(sys.argv) > 1 else ""
+
     # El piso va en el nombre: una corrida no debe pisar la anterior, y el
     # baseline commiteado es intocable.
     marca = f"{date.today():%Y%m%d}_piso{settings.relevance_floor}"
+    if solo:
+        marca = f"{marca}_{solo}"
     preparar_aislamiento(marca)
     consultas = espiar_consultas()
 
     casos = yaml.safe_load((EVAL_DIR / "questions.yaml").read_text(encoding="utf-8"))
+    if solo:
+        casos = [c for c in casos if c["categoria"] == solo]
+        if not casos:
+            raise SystemExit(f"Ninguna categoría se llama {solo!r}")
     print(f"{len(casos)} casos · piso {settings.relevance_floor} · {settings.model}")
 
     arranque = time.monotonic()

@@ -165,7 +165,7 @@ than filling it with a guess.
 
 The `resumen` field is the point of the whole conversation — Ronald reads it
 right before picking up the phone. Write three or four sentences of plain
-prose in the conversation's language: what the person wants, how far along
+prose, always in English: what the person wants, how far along
 they are, and anything that would change how that first call should go. Do not
 restate the structured fields as a list; write the context around them. If
 they were hesitant, mentioned a budget concern, or have a deadline, that
