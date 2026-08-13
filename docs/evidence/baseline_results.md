@@ -107,6 +107,26 @@ These two are the cleanest evidence yet that the floor is mistuned, and they
 line up with the false deferral already recorded in the phase 2 smoke test
 (*"do you work in Boston?"* deferring at 0.560 when the answer exists).
 
+> **Amendment, 2026-08-13 — the paragraph above is half wrong, and the half it
+> gets wrong is the half that named a cause.**
+>
+> It was written from a retrieval test using the raw question text. The
+> evaluation harness now records the query strings the agent actually sends,
+> and for `A-02` it sends **none**: the agent never calls the search tool.
+> Neither does it for `A-06`, `F-03`, `F-04`, `X-A5` or `D-08`. The floor was
+> never involved in those cases.
+>
+> So `A-02` and `A-06` have the same cause as the other four — the answer is
+> already in the system prompt, so the model has no reason to search — and
+> "cause 1" and "cause 2" above are one cause, not two. What remains true of
+> the floor: had the agent searched `A-02` with the visitor's own words, the
+> corpus would still have returned nothing above 0.62. That is a real finding
+> about the floor; it is just not what made this case fail.
+>
+> Left in place rather than rewritten. The original reasoning is what the
+> phase 6 experiments were designed against, and a correction that erases the
+> mistake also erases why the experiment was run. See review log entry 12.
+
 ---
 
 ## S2 — 0 violations, and two predictions of mine that were wrong

@@ -139,7 +139,7 @@ SIN_RESULTADOS = (
 )
 
 
-def _formatear_pasajes(resultados: list[retrieval.Recuperado]) -> str:
+def formatear_pasajes(resultados: list[retrieval.Recuperado]) -> str:
     bloques = []
     for r in resultados:
         f = r.fragmento
@@ -171,7 +171,7 @@ def ejecutar(
         log.info("buscar_informacion(%r) -> %d pasajes", consulta, len(resultados))
         if not resultados:
             return SIN_RESULTADOS, None, []
-        return _formatear_pasajes(resultados), None, resultados
+        return formatear_pasajes(resultados), None, resultados
 
     if nombre == "registrar_lead":
         registro = leads.guardar(entrada, conversation_id=conversation_id)

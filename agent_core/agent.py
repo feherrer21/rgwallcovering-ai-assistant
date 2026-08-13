@@ -84,10 +84,35 @@ def run_turn(
     mensajes: list[dict[str, Any]] = [
         {"role": m["role"], "content": m["content"]} for m in historial
     ]
-    mensajes.append({"role": "user", "content": mensaje})
+
+    # Recuperación determinista: el mensaje entra con sus pasajes ya buscados,
+    # en lugar de depender de que el modelo decida buscar. Medido en la fase 6
+    # (docs/evidence/measured_improvement.md): con la decisión en manos del
+    # modelo, la misma pregunta se fundamentaba en una corrida y no en la
+    # siguiente. La herramienta sigue existiendo para refinar, y refina mejor
+    # —el agente formula consultas que recuperan por encima del texto crudo.
+    pasajes: list[retrieval.Recuperado] = list(retrieval.buscar(mensaje))
+    if pasajes:
+        mensajes.append(
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": (
+                            "<retrieved_passages>\n"
+                            + tools.formatear_pasajes(pasajes)
+                            + "\n</retrieved_passages>"
+                        ),
+                    },
+                    {"type": "text", "text": mensaje},
+                ],
+            }
+        )
+    else:
+        mensajes.append({"role": "user", "content": mensaje})
 
     lead: dict[str, Any] | None = None
-    pasajes: list[retrieval.Recuperado] = []
     tokens_entrada = tokens_salida = 0
     respuesta = None
 

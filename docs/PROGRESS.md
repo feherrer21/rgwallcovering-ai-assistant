@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 33 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 35 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,10 +10,10 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 5 completa (2026-08-13) — baseline de 30 casos
-corrido, etiquetado y commiteado antes de tocar nada. S2, la puerta dura, pasa
-con 0 violaciones; S1 se queda en 80% contra un objetivo de 90. Antes, la fase
-4 con API, demo desplegado en Streamlit Cloud y límite por IP.
+**Último movimiento:** fase 6 completa (2026-08-13) — tres experimentos, seis
+corridas, dos muestras por configuración. Ninguno movió S1 más de lo que se
+mueve solo entre corridas idénticas; el que se queda baja los tokens un tercio
+y estabiliza qué casos fallan. Antes, el baseline de la fase 5.
 
 ---
 
@@ -28,13 +28,13 @@ Fase 3  Agente   ███████████████████  100%
 Fase 4  Frontends███████████████████  100%   T4.1–T4.4, API + demo
 Fase 4.5 Entrega ████████████████░░░   83%   correo real recibido
 Fase 5  Evaluación███████████████████  100%   baseline commiteado
-Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
+Fase 6  Mejora   ███████████████████  100%   3 experimentos, 6 corridas
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 11 entradas
+Fase 8  Revisión ████████████░░░░░░░   60%   registro abierto, 12 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~19 h · restante ~6 h.**
+**Estimado 25 h · consumido ~21 h · restante ~4 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -64,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 33 commits
+- Árbol de git limpio, 35 commits
 - Remoto: **github.com/feherrer21/rgwallcovering-ai-assistant**, público.
   Verificado tras el push que ni `.env` ni `data/leads.jsonl` llegaron allí
 
@@ -88,15 +88,15 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 
 ### Lo siguiente
 
-**Fase 6, la mejora medida.** El baseline ya está commiteado, así que ahora
-hay contra qué medir. Los tres candidatos salen de `baseline_results.md` y
-están ordenados por valor: barrer el piso de relevancia en pasos de 0.02, hacer
-recuperable el inventario de servicios que hoy solo vive en el prompt, y
-arreglar la regresión del resumen de `Q-05` verificándola contra las cinco
-conversaciones, no contra una.
+**Fase 7, el análisis de fallos.** Ya no hay que buscarlos: la fase 6 los dejó
+nombrados y estables entre corridas. Los cinco casos que fallan son A-01,
+A-02, F-03, F-04 y X-A5, con dos causas, y las dos son del corpus — no hay
+documento que diga qué hace y qué no hace la empresa, y para *"where are you
+based?"* el modelo de embeddings pone un ensayo del blog (0.602) por encima
+del documento que tiene la dirección (0.559).
 
-Regla que no se negocia: se cambia **una** cosa, se vuelve a correr `eval/run.py`
-y se compara. Lo que empeore se escribe igual que lo que mejore.
+Dos defectos más, encontrados al etiquetar y fuera de lo que miden S1–S4: los
+resúmenes se van al español solos, y `Q-02` pierde el lead en 2 de 5 corridas.
 
 ### Hilos abiertos que no están en ninguna tarea
 
@@ -244,7 +244,40 @@ llamadas al modelo. Durante la corrida los leads van a `eval/results/` y el
 envío por correo se apaga — lo que se mide es el asistente, no el SMTP, y sin
 eso cada corrida serían cinco correos.
 
-### Fases 6 a 9 — pendientes
+### Fase 6 — Mejora medida · completa
+
+| | Tarea | Resultado |
+|:--:|---|---|
+| ✅ | T6.1 Barrido del piso | `eval/sweep.py`, solo recuperación, sin gastar modelo |
+| ✅ | T6.2 S1 contra S2 en tres experimentos | 6 corridas, 2 muestras por configuración |
+| ✅ | T6.3 Piso elegido: **se queda en 0.62** | justificado contra S2, no contra la media |
+| ✅ | T6.4 `evidence/measured_improvement.md` | con lo que empeoró y lo que no se movió |
+
+**Lo medido, en una línea: ninguna de las tres intervenciones movió S1 más de
+lo que se mueve solo entre dos corridas idénticas.** Esa es la conclusión, y
+está escrita como tal.
+
+Lo que sí cambió con la recuperación determinista (experimento 3, el que se
+queda): los tokens de entrada bajan de 64.179 a ~41.000 —un tercio menos, que
+lo paga Ronald— y los casos que fallan **dejan de cambiar entre corridas**. Con
+el modelo decidiendo si buscaba, dos corridas de la misma configuración
+discrepaban en cinco casos; ahora fallan los mismos cinco, con dos causas
+nombradas, y ambas son del corpus. Eso es lo que hace posible la fase 7.
+
+**Experimento 1 — bajar el piso de 0.62 a 0.58.** S1 80% → 83,3% (un caso),
+S2 0 violaciones, S3 100%. La diferencia está dentro del ruido declarado en
+`02` §2.3. Lo que el barrido enseñó es más útil que el resultado: justo debajo
+del piso esperan un ensayo decorativo (0.602 para *"where are you based?"*,
+por encima del documento que sí tiene la dirección, a 0.559) y prosa de
+marketing (0.597 en la pregunta de suelos). Bajar el piso compra un caso y
+mete el material que empuja al sí accidental.
+
+**El diagnóstico del baseline estaba a medias.** Con las consultas del agente
+ya registradas se ve que en A-02, A-06, F-03, F-04 y X-A5 **el agente no buscó
+nada**: no era el piso, era que el prompt ya contenía la respuesta. Ningún
+valor del piso arregla eso.
+
+### Fases 7 a 9 — pendientes
 
 Sin empezar. Ver `05_tasks.md` para el desglose completo.
 

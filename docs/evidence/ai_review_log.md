@@ -395,6 +395,35 @@ the verification is five conversations, not one.
 
 ---
 
+## Phase 6 — Measured improvement
+
+### Entry 12 — My sweep measured an input the system never receives
+
+**Dimension:** correctness of the *measurement*
+**Severity:** would have been high — it would have justified a parameter change
+with evidence about something else
+
+The first version of `eval/sweep.py` swept the relevance floor by retrieving
+with each question's raw visitor text. Its output contradicted the baseline
+immediately: it claimed `A-04` retrieves nothing above 0.56, when that case had
+retrieved six passages in the real run with a top score of 0.791.
+
+The contradiction was the sweep's, not the run's. **The agent does not search
+with the visitor's words.** It calls `buscar_informacion` with a query it
+formulates itself, and that query retrieves considerably better than the raw
+question. Sweeping raw text measures a distribution the retriever never sees.
+
+Caught only because the two numbers sat next to each other and disagreed. A
+sweep run before the baseline would have looked perfectly reasonable, and the
+floor would have been chosen against it.
+
+**Fix:** `run.py` now records the agent's actual query strings per turn, so the
+real distribution is recoverable from any run. `sweep.py` keeps the raw-text
+sweep, relabelled as what it is — a worst case, useful for seeing which
+documents sit just below the floor, not for predicting a run.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was

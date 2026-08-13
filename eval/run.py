@@ -24,7 +24,7 @@ from typing import Any
 
 import yaml
 
-from agent_core import run_turn
+from agent_core import retrieval, run_turn
 from agent_core.config import settings
 
 EVAL_DIR = Path(__file__).resolve().parent
@@ -39,19 +39,42 @@ def preparar_aislamiento(marca: str) -> None:
     settings.smtp_password = ""
 
 
-def ejecutar_caso(caso: dict[str, Any]) -> dict[str, Any]:
+def espiar_consultas() -> list[str]:
+    """Registra con qué texto busca el agente, no con cuál pregunta el visitante.
+
+    Los dos no se parecen: ante "how long have you been doing this?" el agente
+    formula su propia consulta, y es esa la que decide qué recupera. Sin esto,
+    cualquier análisis del piso de relevancia mide una entrada que el sistema
+    nunca recibe.
+    """
+    registro: list[str] = []
+    original = retrieval.buscar
+
+    def espia(pregunta: str, *args: Any, **kwargs: Any):
+        registro.append(pregunta)
+        return original(pregunta, *args, **kwargs)
+
+    # `tools` hace `from . import retrieval`, así que ve el mismo módulo y
+    # basta con parchear aquí.
+    retrieval.buscar = espia  # type: ignore[assignment]
+    return registro
+
+
+def ejecutar_caso(caso: dict[str, Any], consultas: list[str]) -> dict[str, Any]:
     """Corre los turnos de un caso y devuelve el registro completo."""
     historial: list[dict[str, str]] = []
     turnos: list[dict[str, Any]] = []
     lead: dict[str, Any] | None = None
 
     for mensaje in caso["turnos"]:
+        consultas.clear()
         turno = run_turn(mensaje, historial=historial, conversation_id=caso["id"])
         historial = turno.historial
         lead = turno.lead or lead
         turnos.append(
             {
                 "pregunta": mensaje,
+                "consultas": list(consultas),
                 "respuesta": turno.respuesta,
                 "derivado": turno.derivado,
                 "rechazado": turno.rechazado,
@@ -133,8 +156,11 @@ def resumir(registros: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def main() -> None:
-    marca = f"{date.today():%Y%m%d}"
+    # El piso va en el nombre: una corrida no debe pisar la anterior, y el
+    # baseline commiteado es intocable.
+    marca = f"{date.today():%Y%m%d}_piso{settings.relevance_floor}"
     preparar_aislamiento(marca)
+    consultas = espiar_consultas()
 
     casos = yaml.safe_load((EVAL_DIR / "questions.yaml").read_text(encoding="utf-8"))
     print(f"{len(casos)} casos · piso {settings.relevance_floor} · {settings.model}")
@@ -142,7 +168,7 @@ def main() -> None:
     arranque = time.monotonic()
     registros = []
     for n, caso in enumerate(casos, start=1):
-        registro = ejecutar_caso(caso)
+        registro = ejecutar_caso(caso, consultas)
         registros.append(registro)
         print(
             f"[{n:>2}/{len(casos)}] {registro['id']:<6} "
@@ -161,8 +187,8 @@ def main() -> None:
         "casos": registros,
     }
 
-    ruta_json = RESULTADOS / f"baseline_{marca}.json"
-    ruta_csv = RESULTADOS / f"baseline_{marca}.csv"
+    ruta_json = RESULTADOS / f"run_{marca}.json"
+    ruta_csv = RESULTADOS / f"run_{marca}.csv"
     ruta_json.write_text(
         json.dumps(salida, ensure_ascii=False, indent=2), encoding="utf-8"
     )
