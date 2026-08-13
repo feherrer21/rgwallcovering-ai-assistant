@@ -94,12 +94,23 @@ def formatear(registro: dict[str, Any]) -> str:
         "estilo_referencia": "Style / reference",
         "plazo": "Timing",
     }
+    # Los valores del enum están en español porque el esquema de la
+    # herramienta lo está; el correo que lee Ronald va en inglés como el resto
+    # de la interfaz.
+    traduccion = {
+        "residencial": "residential",
+        "comercial": "commercial",
+        "no_definido": "not established",
+    }
+
     for campo, etiqueta in etiquetas.items():
         valor = registro.get(campo)
         if valor in (None, ""):
             continue
         if isinstance(valor, bool):
             valor = "yes" if valor else "no"
+        elif campo == "tipo_proyecto":
+            valor = traduccion.get(valor, valor)
         lineas.append(f"{etiqueta}: {valor}")
 
     lineas.append("")

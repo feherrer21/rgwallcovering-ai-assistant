@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-12 · **Commits:** 14 · **Pruebas:** 31 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 17 · **Pruebas:** 31 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,7 +10,9 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** fase 3 al 83%; T3.6 bloqueada por falta de clave de API.
+**Último movimiento:** fase 3 **completa**. Primera conversación real de
+extremo a extremo ejecutada; un fallo alto encontrado y corregido en el
+resumen del lead (entrada 8 del registro de revisión).
 
 ---
 
@@ -21,7 +23,7 @@ Especificación  ████████████████████  1
 Fase 0  Contexto ███████████████████  100%   T0.1–T0.4
 Fase 1  Ingesta  ███████████████████  100%   T1.1–T1.7
 Fase 2  Retrieval███████████████████  100%   T2.1–T2.4
-Fase 3  Agente   ████████████████░░░   83%   T3.6 bloqueada
+Fase 3  Agente   ███████████████████  100%   T3.1–T3.6
 Fase 4  Frontends░░░░░░░░░░░░░░░░░░░    0%
 Fase 4.5 Entrega ░░░░░░░░░░░░░░░░░░░    0%
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
@@ -31,7 +33,7 @@ Fase 8  Revisión ██████░░░░░░░░░░░░░   30
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
-**Estimado 25 h · consumido ~12 h · restante ~13 h.**
+**Estimado 25 h · consumido ~14 h · restante ~11 h.**
 Las horas consumidas son una estimación mía a partir del plan; Fabián las
 ajusta con el tiempo real para `06_effort.md`.
 
@@ -41,11 +43,10 @@ ajusta con el tiempo real para `06_effort.md`.
 
 | Qué | Bloquea | Quién lo desbloquea |
 |---|---|---|
-| **Falta `ANTHROPIC_API_KEY`** | T3.6, y todas las fases 4 a 7 | Fabián: copiar `.env.example` a `.env` y poner la clave |
 | Credenciales de correo saliente | T4.5.1 (entrega del lead) | Fabián / Ronald |
+| ⚠️ La clave de API se pegó en el chat y no se rotó | nada ahora; sí antes de desplegar | Fabián: rotarla en la consola |
 
-Sin la clave no se puede ejecutar una sola conversación real, así que el
-proyecto está parado en la práctica. Es el desbloqueo prioritario.
+`ANTHROPIC_API_KEY` resuelto — `.env` configurado y verificado 2026-08-12.
 
 ---
 
@@ -100,7 +101,15 @@ proyecto está parado en la práctica. Es el desbloqueo prioritario.
 | ✅ | T3.3 Persistencia de leads | + formato legible y asunto triageable |
 | ✅ | T3.4 `run_turn()` | bucle, `refusal`, cacheo del prompt |
 | ✅ | T3.5 Pruebas de leads | 12 pruebas, personas inventadas |
-| ⛔ | **T3.6 Conversación real de extremo a extremo** | **bloqueada: falta la clave** |
+| ✅ | T3.6 Conversación real de extremo a extremo | 5 turnos, lead capturado con resumen |
+
+**Hallazgo de T3.6:** el resumen para Ronald narraba una autocorrección que
+nunca ocurrió. Corregido en el prompt y verificado reejecutando la misma
+conversación. Entrada 8 del registro de revisión; se guarda como caso de
+regresión para el set de evaluación.
+
+Latencia observada: 6–13 s por turno. Tokens de entrada por turno: 1.558 →
+4.979 según crece la conversación.
 
 ### Fases 4 a 9 — pendientes
 
@@ -127,7 +136,7 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ✅ | Problem statement: dominio, usuario, problema, éxito | `01` |
 | ✅ | Por qué merece resolverse, en términos del cliente | `01` |
 | ✅ | Data provenance: origen, límites, datos sensibles | `02` |
-| 🔶 | Prototipo funcionando de extremo a extremo | núcleo listo, sin ejecutar |
+| ✅ | Prototipo funcionando de extremo a extremo | T3.6 ejecutada, lead capturado |
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
@@ -138,7 +147,7 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 | ⬜ | Demo con un caso que falla | fase 9 |
 | ⬜ | Declaración de horas y qué se cortó | fase 9 |
 
-**7 de 13 completas, 2 a medias, 4 sin empezar.**
+**8 de 13 completas, 1 a medias, 4 sin empezar.**
 
 ---
 
@@ -163,6 +172,7 @@ uso real en la web de Ronald.
 |---|---|
 | ⬜ | **La página de Services sirve texto sobre turbinas eólicas.** Está en vivo. |
 | ⬜ | Cuánto cobra por una visita lejana (que cerca no cobra ya está confirmado) |
+| ⬜ | Rotar la clave de API: se pegó en el chat |
 | ⬜ | Cuánto tarda en pasar un presupuesto desde el primer contacto |
 | ⬜ | Condiciones concretas de la garantía |
 | ⬜ | Si instala wallpaper comprado por el cliente |

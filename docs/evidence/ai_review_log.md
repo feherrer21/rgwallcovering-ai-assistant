@@ -207,6 +207,90 @@ to nothing.
 
 ---
 
+## Phase 3 — Agent
+
+### Entry 7 — Two suspected fabrications, both wrong. Mine, not the model's.
+
+**Dimension:** correctness of the *review process*
+**Severity:** would have been high — a false finding in a report is worse than
+no finding
+
+The first end-to-end conversation produced two claims I flagged as
+fabrications on sight:
+
+1. *"Paula on our team does full interior design"* — a named employee, in a
+   corpus whose only named person is Ronald Giraldo.
+2. *"dry-erase wallcovering for conference rooms… works as a writable surface
+   instead of a whiteboard"* — a specific product claim, oddly detailed.
+
+**Both are grounded in tier A.** Paula is the interior designer, described at
+length on the company's own Interior Design page — a Suffolk University
+graduate, with her design philosophy set out in the first person. The
+dry-erase product occupies several paragraphs of the Commercial page,
+including its resistance to ghosting.
+
+Checked with a grep before writing either of them down, which is the only
+reason this is an entry about my judgement rather than a false finding in the
+failure analysis.
+
+**The lesson is about calibration, not about the model.** Fluent, specific,
+confident output *reads* like fabrication when you are looking for
+fabrication. Suspicion is not evidence in either direction; two greps settled
+both in under a minute. Every claim in the failure analysis gets the same
+treatment, and any that cannot be checked gets labelled as unverified rather
+than asserted.
+
+---
+
+### Entry 8 — The real one: a fabricated correction in the handoff summary
+
+**Dimension:** correctness
+**Severity:** high — in the single field the whole product exists to produce
+
+The lead summary written for Ronald contained:
+
+> "Note: I first told her the assessment visit would be free because she's
+> nearby, then corrected myself and said the team confirms whether there's a
+> charge depending on travel — worth clearing that up early in the call."
+
+**No such exchange happened.** The visitor asked whether the visit is charged
+and received one clean sentence: *"Pawtucket's right nearby, so no charge for
+the assessment visit."* There was no correction, no walk-back, nothing to
+clear up.
+
+The most likely cause is that the model weighed both answers internally —
+Ronald's confirmed rule says nearby visits are not charged, while the tier C
+material says practice varies — settled on the right one, and then narrated
+the deliberation as though it had been an exchange with the visitor.
+
+**Why this is the worst kind of error for this product.** The summary is not a
+convenience; it is the deliverable. Ronald reads it and picks up the phone.
+Acting on this one, he would have opened the call apologising for a confusion
+that never existed, in front of a customer who was never confused — damaging
+his own credibility using a tool that was supposed to protect it. And it would
+have been invisible: the summary is plausible, well written, and the only
+person who could catch it is the visitor, who never sees it.
+
+**Fix:** the prompt now states that the summary records only what the visitor
+actually saw, that weighing an answer and settling on it is not a correction
+and does not belong in the summary at all, and *why* — that an invented
+correction is worse than telling Ronald nothing.
+
+**Verified by re-running the same five-turn conversation.** The new summary:
+
+> "I told her the assessment visit isn't charged since Pawtucket is nearby,
+> and gave her only a rough sense of timing… so pricing and dates are still
+> open."
+
+Every clause corresponds to something actually said. Kept as a permanent
+regression case for phase 5's evaluation set.
+
+**Also fixed:** the tool schema's enum values are Spanish (`comercial`), and
+they were reaching Ronald's English-language email verbatim. Translated at
+formatting time.
+
+---
+
 ## Running observations
 
 - **Three of the five entries were silent failures.** The one that crashed was
