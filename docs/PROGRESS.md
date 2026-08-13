@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 24 · **Pruebas:** 53 en verde
+**Actualizado:** 2026-08-13 · **Commits:** 27 · **Pruebas:** 53 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -30,7 +30,7 @@ Fase 4.5 Entrega ████████████████░░░   83%
 Fase 5  Evaluación░░░░░░░░░░░░░░░░░░    0%   ← el hito que importa
 Fase 6  Mejora   ░░░░░░░░░░░░░░░░░░░    0%
 Fase 7  Fallos   ░░░░░░░░░░░░░░░░░░░    0%
-Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 8 entradas
+Fase 8  Revisión ████████░░░░░░░░░░░   40%   registro abierto, 9 entradas
 Fase 9  Comunicar░░░░░░░░░░░░░░░░░░░    0%
 ```
 
@@ -42,14 +42,17 @@ ajusta con el tiempo real para `06_effort.md`.
 
 ## Bloqueos
 
-**Ninguno bloquea el trabajo ahora mismo.**
+**Ninguno bloquea el trabajo ahora mismo, y ya ninguno bloquea el despliegue.**
 
-| Riesgo abierto | Bloquea | Quién lo cierra |
-|---|---|---|
-| ⚠️ La clave de API se pegó en el chat y sigue activa | nada hoy; sí el despliegue | Fabián: rotarla en la consola |
+Resueltos: `ANTHROPIC_API_KEY` (2026-08-12), credenciales SMTP con correo real
+recibido en bandeja (2026-08-13) y **la clave de API rotada** (2026-08-13) — la
+anterior se había pegado en un chat; la nueva está en el `.env` y verificada
+contra la API.
 
-Resueltos: `ANTHROPIC_API_KEY` (2026-08-12) y credenciales SMTP con correo
-real recibido en bandeja (2026-08-13).
+Lo que queda antes de publicar en la web de Ronald no son bloqueos sino
+trabajo pendiente, y está en la tabla de deuda: IP real detrás del proxy,
+`ALLOWED_ORIGINS` al dominio, `LEAD_EMAIL_TO` a su correo y el piso de
+relevancia calibrado.
 
 ---
 
@@ -61,7 +64,7 @@ Estado del entorno en la máquina de Fabián a 2026-08-13:
 - `.env` configurado y verificado: clave de Anthropic + SMTP de Gmail
 - `data/index/` construido: 365 fragmentos
 - `data/cache/` con las páginas del sitio descargadas
-- Árbol de git limpio, 24 commits
+- Árbol de git limpio, 27 commits
 
 ```bash
 # pruebas
@@ -265,7 +268,7 @@ uso real en la web de Ronald.
 
 | | |
 |---|---|
-| ⬜ | Rotar la clave de API: se pegó en el chat y sigue activa |
+| ✅ | Rotar la clave de API (2026-08-13). La nueva está en `.env` y verificada |
 
 ## Pendiente de Ronald
 
