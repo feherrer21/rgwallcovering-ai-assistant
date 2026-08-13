@@ -1,0 +1,158 @@
+# AI Output Review — running log
+
+**Task:** T8.1 (`05_tasks.md`)
+**Started:** 2026-08-12, at the first implementation task
+
+Errors are recorded here **as they happen**, during the phase that produced
+them. Reconstructing them at the end produces the vague, flattering version —
+"the AI occasionally made mistakes which I corrected" — which is worth
+nothing. The write-up across intent / tests / security / performance /
+maintainability is phase 8; this file is the raw material.
+
+---
+
+## Phase 1 — Ingestion
+
+### Entry 1 — Crash: iterating a tree while mutating it
+
+**Dimension:** correctness
+**Severity:** low (loud failure, immediate)
+
+```
+AttributeError: 'NoneType' object has no attribute 'get'
+  extract.py:24 in _es_ruido
+```
+
+The generated `extraer()` collected `sopa.find_all(True)` and called
+`.decompose()` on matching tags while still iterating that list. Decomposing a
+parent invalidates its descendants, which remain in the already-materialised
+list with `attrs` set to `None`.
+
+**Fix:** freeze the list with `list(...)` before mutating, and make
+`_es_ruido` return `False` for a tag whose `attrs` is falsy.
+
+This is the easy category of error: it announces itself.
+
+---
+
+### Entry 2 — The one that mattered: a filter that silently emptied the corpus
+
+**Dimension:** correctness
+**Severity:** high (silent, and would have poisoned everything downstream)
+
+The first successful build reported **41 chunks and exited 0**. Every local
+document was present. Every web source returned **zero**, and nothing in the
+output said so — the per-source table showed `0` next to five sources and the
+run looked like a success.
+
+Cause: the noise filter matched class and id attributes by substring against
+`("menu", "nav", "sidebar", "footer", "header", "cookie", ..., "widget")`.
+rgwallcovering.com is built with Elementor, which wraps **every** content
+element in classes containing `widget` — `elementor-widget`,
+`elementor-widget-container`. The filter therefore decomposed the entire page
+on every page.
+
+Diagnosis: instrument the extractor and count blocks before and after
+filtering.
+
+```
+=== https://rgwallcovering.com/
+  bloques: 53 | con >=25 chars: 16
+  bloques bajo un ancestro marcado como ruido: 53      <-- 53 of 53
+  texto extraido: 0 chars
+```
+
+**Fix:** replace the generic needles with the containers Elementor actually
+uses for template chrome — `elementor-location-header`,
+`elementor-location-footer` — plus specific names like `nav-menu`,
+`menu-item`, `breadcrumb`. Result: 41 → 361 chunks.
+
+**Why this is the entry worth reading.** The failure mode was not a wrong
+answer, it was an *absence* reported as a success. Had it gone unnoticed, the
+assistant would have been grounded on 41 chunks of local knowledge with none
+of the client's own content, and it would still have produced fluent,
+confident answers — the retrieval would simply have had nothing real to
+retrieve. Nothing in the pipeline would have complained.
+
+**Process lesson, not a code fix:** a build that produces zero output from a
+source should be an error, not a row in a table. Not yet implemented; recorded
+as a real gap.
+
+---
+
+### Entry 3 — Encoding assumed rather than forced
+
+**Dimension:** correctness
+**Severity:** medium (silent, reached the corpus)
+
+Page titles arrived as `RG Wallcovering � We turn your walls into works of
+art`. `requests` falls back to ISO-8859-1 when a response declares no charset;
+the site is UTF-8. The damaged characters were written into the first index.
+
+Secondary effect: the regex that strips the site name from `<title>` failed to
+match, because the separator it was looking for had been corrupted.
+
+**Fix:** set `respuesta.encoding = respuesta.apparent_encoding` when the
+declared encoding is absent or the ISO-8859-1 default.
+
+**Verified rather than assumed:** counted U+FFFD occurrences across all 361
+chunks after the rebuild — zero. The `�` still visible in terminal output is
+the Windows console codepage, not the data. Worth separating, because the two
+look identical and one of them is harmless.
+
+---
+
+### Entry 4 — Correct content, wrong provenance
+
+**Dimension:** correctness / data integrity
+**Severity:** medium
+
+Blog link discovery returned 29 URLs. Two — `/commercial/` and
+`/residential/` — are service pages, not posts, and were ingested with
+`source_id: "S2-blog"`.
+
+The text was real and useful, so nothing looked broken. But in a system whose
+central safety mechanism is that every claim is traceable to a source, content
+filed under the wrong source is a defect regardless of whether the text is
+good.
+
+**Fix:** declare both as their own sources and exclude them from discovery.
+This also resolved the 28-vs-27 discrepancy recorded in the provenance note —
+see `corpus_stats.md`.
+
+---
+
+### Entry 5 — A catch that was applied before it broke anything
+
+**Dimension:** correctness
+**Severity:** would have been high
+
+During the context-artifact experiment, the generating subagent flagged
+unprompted that it had used fastembed's `query_embed()` — which applies the
+BGE query-instruction prefix — and that this is correct only if ingestion
+embeds passages with plain `embed()`.
+
+BGE is an asymmetric model. Getting this backwards degrades every similarity
+score in the system by a small amount, uniformly, with no error and no
+symptom other than retrieval that is quietly worse than it should be.
+
+Applied preventively in `build.py`, with a comment explaining why, before any
+index was built.
+
+Recorded because it is a case of the model catching something rather than
+causing it, and both directions belong in an honest review.
+
+---
+
+## Running observations
+
+- **Three of the five entries were silent failures.** The one that crashed was
+  by far the cheapest to fix. The expensive ones all reported success.
+- Generated code defaults to defensive breadth — matching many possible class
+  names, tolerating many possible schemas — which reads as robustness and in
+  practice was the direct cause of entries 2 and 4.
+- The pattern that caught entries 2, 3 and 4 was the same each time: **measure
+  the output rather than read the code**. Counting blocks before and after a
+  filter, counting U+FFFD, listing discovered URLs. None of these bugs were
+  visible by inspection; all three were obvious within one command of
+  instrumenting.
