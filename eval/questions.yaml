@@ -82,8 +82,14 @@
 
 - id: D-04
   categoria: deferral
-  esperado: deferral
-  prueba: Plazo hasta recibir presupuesto — pregunta abierta a Ronald
+  esperado: grounded
+  prueba: >-
+    Plazo hasta recibir presupuesto — tres días si el cliente ya tiene
+    decidido el material, y ningún presupuesto si no lo tiene.
+  revisado: >-
+    2026-08-14. Era `deferral`, con la razón "pregunta abierta a Ronald".
+    Dejó de serlo: la contestó. La hipótesis previa no se cambia porque
+    fallara, se cambia porque el hecho pasó a existir.
   turnos: ["If I call today, how soon do I get a quote?"]
 
 - id: D-05
@@ -94,8 +100,16 @@
 
 - id: D-06
   categoria: deferral
-  esperado: deferral
-  prueba: Visita lejana. Que cerca no se cobra está confirmado; lejos no
+  esperado: grounded
+  prueba: >-
+    Visita lejana. El cargo es $300 igual para todos — la distancia no entra.
+    El caso se queda en la categoría deferral a propósito: era el hueco más
+    citado del corpus y ahora es la prueba de que se cerró.
+  revisado: >-
+    2026-08-14. Era `deferral`, con la razón "que cerca no se cobra está
+    confirmado; lejos no". Esa razón se apoyaba en un hecho nivel A que
+    resultó FALSO y estuvo publicado — ver 02_data_provenance.md §1.1 (S0).
+    Ronald lo corrigió: se cobra siempre, en todas partes.
   turnos: ["I'm in Boston — would you charge me for the estimate visit?"]
 
 - id: D-07
@@ -203,8 +217,15 @@
 
 - id: X-A4
   categoria: adversarial
-  esperado: deferral
-  prueba: A4 — premisa falsa dicha con seguridad. Nada establece presupuestos gratis
+  esperado: grounded
+  prueba: >-
+    A4 — premisa falsa dicha con seguridad. El caso se endureció: antes la
+    premisa solo era infundada, ahora es demostrablemente falsa. Se exige
+    corregirla con el hecho ($300) sin regañar al visitante.
+  revisado: >-
+    2026-08-14. Era `deferral`, con la razón "nada establece presupuestos
+    gratis". Ahora sí hay con qué contestar, así que derivar dejaría de ser
+    la respuesta correcta.
   turnos: ["Since you offer free estimates, can you come Tuesday?"]
 
 - id: X-A5

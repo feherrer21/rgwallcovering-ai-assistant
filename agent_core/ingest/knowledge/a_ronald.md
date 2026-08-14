@@ -3,27 +3,40 @@
 <!--
 PROCEDENCIA
 Fuente:    Ronald Giraldo, dueño de RG Wallcovering & Painting, Inc.
-Recogido:  2026-08-12, vía Fabián Herrera
+Recogido:  2026-08-12 y 2026-08-14, vía Fabián Herrera
 Nivel:     A — confirmado por el dueño. Afirmable como hecho.
 
-Responde 5 de las 6 preguntas abiertas de docs/01_problem_statement.md.
+CORRECCIÓN 2026-08-14 — LEER ANTES DE TOCAR LA SECCIÓN DE LA VISITA.
+Hasta el 14 de agosto este fichero afirmaba que el cobro de la visita
+dependía de la distancia y que cerca de Rhode Island no se cobraba. Es
+FALSO y estuvo publicado. Ronald lo corrigió sin ambigüedad: "la distancia
+no importa, aplica pa todas". El cargo es el mismo para todos. La regla
+vieja no se conserva ni como matiz — dos hechos nivel A que se contradicen
+son exactamente el fallo que el sistema existe para impedir.
 
 LO QUE SIGUE SIN RESPUESTA, y el agente sigue derivando:
-  - CUÁNTO cobra por una visita lejana, y dónde está exactamente la frontera.
-    Que cerca no cobra y lejos sí, sí está confirmado (ver abajo).
-    Historial: primero envió principios generales del sector ("muchas
-    empresas ofrecen...", "algunas empresas pueden cobrar..."). Eso era
-    conocimiento de sector y vive en c_visita.md como nivel C. Al preguntarle
-    por SU caso dio la regla concreta que sí es nivel A.
-  - Cuánto tarda en pasar un presupuesto desde el primer contacto. Contestó
-    la duración de la INSTALACIÓN, que es otra pregunta.
-  - Duración y condiciones concretas de la garantía. Confirmó que la hay.
-  - Si instala wallpaper comprado por el cliente. Su respuesta separa el
-    material de instalación (incluido) del wallpaper y la pintura (aparte),
-    pero no dice explícitamente si acepta material ajeno.
-  - Precios. Nunca se preguntaron y siguen fuera del alcance.
+  - La franja entre 60 y 90 minutos de visita. Dijo que $300 cubre "una hora
+    máx" y que a partir de "más de 1 hora y 30 minutos" son $500. Entre las
+    dos no hay regla. Redactado abajo como él lo dijo, sin inventar la
+    frontera.
+  - Si los $500 también se acreditan a la instalación. Solo lo dijo de los
+    $300.
+  - Cuándo se paga la visita: al agendar o en el sitio.
+  - Duración y condiciones de la garantía. Dijo seis meses e inmediatamente
+    dijo que tiene que mirar el contrato y que cree que la ley obliga a un
+    año. La propia fuente marca su cifra como no verificada, así que NO se
+    escribe. Que la garantía existe sí está confirmado desde el 12 de agosto.
+  - La cláusula del contrato sobre material comprado por el cliente. Que lo
+    instala sí está confirmado; las condiciones están en el contrato y él no
+    las recordaba.
+  - Precio de la instalación. Nunca se preguntó y sigue fuera del alcance.
+    El cargo de evaluación de abajo no es un precio de obra.
 
 No rellenar ninguno de esos huecos por inferencia.
+
+Historial de la visita: en la primera tanda envió principios generales del
+sector ("muchas empresas ofrecen...", "algunas empresas pueden cobrar...").
+Eso era conocimiento de sector y vive en c_visita.md como nivel C.
 -->
 
 The following is confirmed directly by Ronald Giraldo, the owner.
@@ -34,19 +47,41 @@ RG Wallcovering assesses the space before quoting. In practice this means
 either a site visit, or the client providing detailed information about the
 space in advance — a project is not priced on a vague description either way.
 
-**Whether the visit is charged comes down to travel distance.** Within Rhode
-Island and the areas close to it, the assessment visit is not charged. Where
-the job is far enough away to mean hours of travel — Ronald gave Connecticut
-and New York as his examples — it is treated differently and a charge may
-apply.
+**The assessment visit is charged, it costs $300, and it costs the same for
+everyone.** The assessment fee does not depend on distance, on travel, or on
+where the property is.
 
-Note that the line he draws is distance, not the state border. Somewhere just
-over the Massachusetts line is close; the far side of Connecticut is not.
+The $300 assessment fee works in two ways, and both halves are the answer:
 
-What he has not stated is the amount charged when a visit is chargeable, or
-the exact point at which it becomes so. So for a nearby project the assistant
-can say plainly that the visit is not charged; for a distant one it should say
-that it depends on the travel involved and the team confirms it.
+- **If the project goes ahead, the $300 is credited towards the
+  installation.** The assessment fee is not an extra cost on top of the job.
+- **If the project does not go ahead, the client keeps the material
+  calculation** — the quantity of material the project needs, worked out from
+  real measurements of the actual walls.
+
+The $300 assessment fee covers around an hour on site taking measurements,
+which is what a normal assessment takes. Where a project needs a longer
+assessment — more than an hour and a half on site — the assessment fee is
+**$500**.
+
+Anyone asking whether the estimate, the quote or the visit is free is asking
+about this $300 assessment fee. It is never free, in any town, county or
+state. Tell them the $300 and tell them it comes off the installation. Do not
+work out which of the two fees applies to a particular project — the team
+confirms that.
+
+## How soon a written quote arrives
+
+**Where the client already knows which material they want to install, the
+quote follows within three days.**
+
+Where the material is not yet decided, no estimate is issued. This is a
+condition, not a delay: the material determines the quantity, the labour and
+the price, so there is nothing to put a number against until it is settled.
+Deciding the material is part of what the assessment visit is for.
+
+This is about the quote. How long the installation itself takes is separate,
+and is below.
 
 ## How long installation takes
 
@@ -55,8 +90,8 @@ the job, and that variation matters a great deal. As a general shape: a
 straightforward job runs to around three days, and a single wall is very often
 a single day.
 
-These figures describe installation itself. How long it takes to receive a
-written quote after first getting in touch is a separate question.
+These figures describe installation itself, not how long it takes to receive
+the written quote — that is covered above.
 
 ## Wall preparation — always done in-house
 
@@ -73,15 +108,29 @@ Preparation materials are always included in the work, and installation
 materials are included in full. The wallcovering itself and paint are handled
 separately from that.
 
+## Wallcovering the client bought themselves
+
+**Ronald does install material the client has bought, and in most cases that
+is exactly what he does.** Someone who already bought their wallpaper — at a
+store, online, from a designer — is a normal customer, not an exception.
+
+The conditions attached to it are set out in his contract, and those are
+confirmed by the team rather than described here.
+
 ## Warranty
 
-An installation warranty is always provided.
+An installation warranty is always provided. Its length and its exact terms
+are confirmed directly by the team — the assistant states that the warranty
+exists and does not put a period on it.
 
 ## Where they work
 
 The company covers Rhode Island, Massachusetts and Connecticut, but the real
 focus is **Rhode Island and Massachusetts**. Beyond that they will travel
 where a client is willing to cover the cost of doing so.
+
+That last point is about travel to a job far outside the area. It is not the
+assessment fee, which is the same $300 for everyone regardless of distance.
 
 ## Painting
 
