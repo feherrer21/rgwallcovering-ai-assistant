@@ -62,12 +62,17 @@ Desglose por fase, qué se cortó y el gasto de API: `06_effort.md`.
 
 ## Bloqueos
 
-**Abierto (2026-08-14): el demo desplegado sigue diciendo que la visita es
-gratis cerca de Rhode Island.** El corpus ya está corregido y el índice
-reconstruido en local, pero `data/index/` va versionado y el despliegue sale
-del repositorio — hasta que esto se empuje, lo que hay publicado promete gratis
-algo que cuesta $300. No es un bloqueo de trabajo, es un dato falso en vivo, y
-por eso está aquí arriba y no en la tabla de deuda.
+**Resuelto el mismo día (2026-08-14): el demo desplegado decía que la visita es
+gratis cerca de Rhode Island.** Estuvo dos días en vivo prometiendo gratis algo
+que cuesta $300. Corregido el corpus, reconstruido el índice y empujado a
+`main` (`f206006`); Community Cloud redespliega solo al detectar el push.
+**Falta confirmarlo en la app publicada**, no solo en local — es un dato falso
+en vivo y no cuenta como cerrado hasta verse ahí.
+
+Queda anotado porque enseña algo del despliegue: `data/index/` va versionado y
+el demo se construye del repositorio, así que **corregir el corpus en local no
+cambia nada de cara al cliente hasta que se empuja.** Cualquier hecho que
+Ronald corrija tiene ese retraso.
 
 Aparte de eso, **ninguno bloquea el trabajo, y ya ninguno bloquea el
 despliegue.**
