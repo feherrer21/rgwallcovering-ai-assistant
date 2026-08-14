@@ -10,10 +10,12 @@ Actual, measured from commit timestamps rather than recalled:
 | Session | Span | Elapsed | What was built |
 |---|---|---|---|
 | 1 | 2026-08-12 18:44 → 00:23 | **5 h 39** | Spec commits, phases 0–3, phase 4.5 |
-| 2 | 2026-08-13 07:34 → 14:00 | **6 h 26** | Phase 4 + deployment, phases 5, 6, 7, 9 |
-| | | **≈ 12 h** | plus ~4 h before the repo existed |
+| 2 | 2026-08-13 07:34 → 16:23 | **8 h 49** | Phase 4 + deployment, phases 5, 6, 7, 8, 9 |
+| 3 | 2026-08-14 | **≈ 2 h**, estimated | Owner corrections ingested, F7, submission docs |
+| | | **≈ 16 h 30** | plus ~4 h before the repo existed |
 
-**≈ 16 h against a 25 h estimate.** Per phase, from the spans between commits:
+**≈ 20 h 30 against a 25 h estimate.** Per phase, from the spans between
+commits:
 
 | Phase | Estimated | Elapsed | Note |
 |---|---|---|---|
@@ -35,12 +37,26 @@ the spec made retrieval a 250-line module. The phase that overran its shape
 was 4, and only because deploying to Streamlit Cloud was added mid-flight and
 was never in the plan.
 
-**Two caveats, so the numbers are not read as more than they are.** Commit
+**Three caveats, so the numbers are not read as more than they are.** Commit
 spans measure elapsed session time, not focused hours — thinking time between
 commits is included, and the five specification documents were written before
 the repository existed, so their 10-minute span understates them badly. And
 `04_plan.md`'s own note about ~4 h of prior work is an estimate, not a
 measurement.
+
+**The third caveat is one this table got wrong about itself.** Session 2 was
+first recorded here as ending at 14:00 for 6 h 26. It ran to 16:23. The figure
+was written mid-session and never revised, which is the exact failure
+`CLAUDE.md` warns about for `PROGRESS.md`, committed in the document whose
+whole subject is honest measurement. Corrected above: **8 h 49**.
+
+Session 3 is the one figure here that is **estimated rather than measured**,
+and the method is why. All of its work landed in three commits inside two
+minutes, so the commit span reads 11:00 − 10:58 = 2 minutes for a session that
+ingested a set of owner corrections, rebuilt the index, verified six live
+queries, and rewrote six documents. Commit spans measure sessions that commit
+as they go; they say nothing about a session that commits once at the end.
+**≈ 2 h** is a judgement, labelled as one.
 
 ## Money
 

@@ -55,8 +55,9 @@ Fase 8  Revisión ███████████████████  100
 Fase 9  Comunicar███████████████████  100%   slide, demo y horas
 ```
 
-**Estimado 25 h · real ~16 h medidas sobre el historial de git.**
-Desglose por fase, qué se cortó y el gasto de API: `06_effort.md`.
+**Estimado 25 h · real ~20 h 30** — 16 h 30 sobre el historial de git más ~4 h
+previas al repositorio. Desglose por fase, qué se cortó y el gasto de API:
+`06_effort.md`.
 
 ---
 
@@ -323,7 +324,7 @@ valor del piso arregla eso.
 | ✅ | T7.1 A1–A5 con entrada, salida y causa | los cinco aguantaron; ninguno falló donde yo apuntaba |
 | ✅ | T7.2 Recoger todo lo que soltaron las fases 5 y 6 | 6 fallos nombrados |
 | ✅ | T7.3 Arreglar uno y medirlo | resúmenes en español: **45% → 0** en 15 muestras |
-| ✅ | T7.4 `07_failure_analysis.md` | 6 fallos, 2 sin arreglar con su razón |
+| ✅ | T7.4 `07_failure_analysis.md` | **7 fallos**, 2 sin arreglar con su razón |
 
 **El arreglo:** el campo `resumen` del esquema de `registrar_lead` decía *"in
 the conversation's language"*. El resumen tiene un solo lector, siempre el
@@ -336,17 +337,33 @@ Y el "no hacemos suelos" no se puede hacer auditable sin escribir en el corpus
 un hecho que Ronald **no ha confirmado**: que la lista de servicios es
 exhaustiva. Eso es ahora la pregunta 7 de `client_questions_ronald.md`.
 
-### Fases 8 y 9 — pendientes
+### Fase 7 · añadido 2026-08-14 — `F7`
 
-Sin empezar. Ver `05_tasks.md` para el desglose completo.
+Ronald corrigió un hecho que él mismo había dado el 12/08 y que el corpus
+afirmaba como nivel A: la visita de evaluación no era gratis cerca, son $300
+para todos. Está escrito como `F7` porque es cualitativamente distinto a los
+otros seis — **es el único que el harness no podía producir.** Todo lo que se
+construyó aquí apunta a afirmaciones sin fuente; esta tenía fuente, estaba
+bien troceada, bien recuperada y bien citada. La trazabilidad nunca falló. Lo
+que falló fue el dato.
 
-La **fase 5 es el hito crítico**: hasta que exista un baseline commiteado, la
-fase 6 no tiene contra qué medir y la fase 7 es especulación. Si el tiempo
-aprieta, el recorte sale de la fase 4, nunca de la 5, 6 o 7.
+No lleva arreglo en código a propósito, y el razonamiento está en el propio
+`07_failure_analysis.md`: cualquier mecanismo que ponga en duda un hecho
+confirmado por el dueño frente a las generalidades de nivel C se dispararía
+constantemente sobre hechos que solo son poco habituales, y todo el diseño se
+apoya en que el dueño gana a las generalidades. El control es de proceso —
+que el dueño lea lo que el asistente dice de su negocio — y está como primer
+punto en `08_client_slide.md`.
+
+**El set de evaluación no se vuelve a correr.** `D-04`, `D-06` y `X-A4`
+cambiaron de expectativa, pero el baseline commiteado es contra lo que miden
+las fases 5 y 6; sustituirlo en silencio destruiría el antes-y-después del
+que depende la mejora medida. Las expectativas previas se conservan con fecha
+y razón en un campo `revisado`.
 
 ### Fase 8 — Revisión del output de IA · registro abierto
 
-11 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
+14 entradas en `ai_review_log.md`, escritas cuando ocurrieron. Las que importan
 son la 2 (el filtro de ruido vaciaba el corpus y el build reportaba éxito), la
 8 (el resumen para Ronald narraba una corrección que nunca ocurrió) y la 9 con
 la 10, que son el mismo fallo de método: comprobar el demo con algo que no
@@ -363,17 +380,17 @@ Es la medida real de "cuánto falta", porque es lo que se califica.
 |:--:|---|---|
 | ✅ | Problem statement: dominio, usuario, problema, éxito | `01` |
 | ✅ | Por qué merece resolverse, en términos del cliente | `01` |
-| ✅ | Data provenance: origen, límites, datos sensibles | `02` |
+| ✅ | Data provenance: origen, límites, datos sensibles | `02`. Incluye `S0`, el dueño, y que un hecho suyo nivel A llegó falso a producción |
 | ✅ | Prototipo funcionando de extremo a extremo | T3.6 con lead capturado; API y demo en T4.3 |
 | ✅ | Spec, plan y tareas, con historial que prueba precedencia | `074c09b`, `d458b37` |
 | ✅ | Artefacto de contexto + evidencia antes/después | `d659265`, `270b9c4` |
 | ✅ | Retrieval o n8n, con la razón del rechazo | `03` §1 |
 | ✅ | Revisión del output de IA + un error cazado | 14 entradas **y** una sección por dimensión: seguridad, rendimiento, pruebas, mantenibilidad |
-| ✅ | Análisis de fallos con inputs concretos | `07_failure_analysis.md`, 6 fallos |
+| ✅ | Análisis de fallos con inputs concretos | `07_failure_analysis.md`, **7 fallos**. `F7` es el único que el harness no podía producir: un hecho nivel A falso en origen |
 | ✅ | Una mejora medida, con lo que empeoró | `measured_improvement.md` |
-| ✅ | Slide para el cliente | `08_client_slide.md` |
-| ✅ | Demo con un caso que falla | `evidence/demo_transcript.md`, `Q-02` |
-| ✅ | Declaración de horas y qué se cortó | `06_effort.md` |
+| ✅ | Slide para el cliente | `08_client_slide.md`. Citas reales, no maquetas; el primer punto de "qué falla" es el control que solo Ronald puede hacer |
+| ✅ | Demo con un caso que falla | `evidence/demo_transcript.md`, `Q-02`, y la nota fechada de que el hecho que demuestra resultó falso |
+| ✅ | Declaración de horas y qué se cortó | `06_effort.md`. La sesión 2 estaba mal medida en el propio documento y está corregida ahí |
 
 **13 de 13 completas.**
 

@@ -1,10 +1,14 @@
 # Failure Analysis
 
-Every failure below was produced by the committed evaluation harness, not
-recalled from memory. The evidence is nine runs in `eval/results/`: six over
-the full 30-question set (phases 5 and 6) and three over the five
-qualification conversations. Each one holds every turn, every retrieved
-passage with its score, and the query strings the agent actually sent.
+F1 to F6 were produced by the committed evaluation harness, not recalled from
+memory. The evidence is nine runs in `eval/results/`: six over the full
+30-question set (phases 5 and 6) and three over the five qualification
+conversations. Each one holds every turn, every retrieved passage with its
+score, and the query strings the agent actually sent.
+
+**F7 was not, and could not have been.** It is the only failure here the
+harness is structurally incapable of producing, which is why it is the one
+worth reading first if you read only one.
 
 Inputs are quoted exactly. Outputs are quoted exactly. Every cause is
 mechanical — a specific instruction, a specific score, a specific competing
@@ -268,6 +272,72 @@ question set, recorded as such.
 
 ---
 
+## F7 — A tier A fact that was false at the source · **corrected in the corpus; undetectable by anything in this repository**
+
+Every other failure in this document is a mechanism failing: a field
+description, a competing rule, a ranking. This one is the mechanism working
+perfectly on an input that was wrong.
+
+**Input.** `D-06`: *"I'm in Boston — would you charge me for the estimate
+visit?"* — and the same claim volunteered unprompted in `X-A1` and `X-A4`.
+
+**Output, 2026-08-12 to 2026-08-14, in production:**
+
+> *"Pawtucket's right nearby, so no charge for the assessment visit."*
+
+**Why it happened.** On 2026-08-12 Ronald said the charge depended on travel
+distance and that nearby visits were free. It was ingested as tier A, correctly
+tiered, correctly retrieved, correctly cited, and correctly asserted. On
+2026-08-14, asked the same question in different words, he gave a different
+answer: **$300 for everyone, distance irrelevant**, credited against the
+installation. He had misremembered his own pricing.
+
+**What makes it the most instructive failure in the project.** Success
+criterion S2 is zero fabrication, and every defence built for it — the tier
+system, the relevance floor, the deferral path, the `sources` field on every
+API response, the eight number-baiting questions in the evaluation set —
+targets *claims that cannot be traced to a source*. This claim could be traced
+perfectly. Traceability was never in question. **Truth was, and the two are not
+the same property.**
+
+Consider what it did to the evidence in this document. `X-A1` and `X-A4` are
+both scored "held" in the table below, and both rest on this fact. `X-A4`
+passed by correcting a visitor's false premise — and it corrected it by
+substituting a different false statement. A green test.
+
+**Detection.** Not by the harness, which grades whether an answer is grounded
+in the corpus, and this one was. Not by the review log, which caught a
+fabricated sentence in a lead summary in this exact area (entry 8) and found
+the underlying fact unremarkable. It was caught by asking the owner the same
+question a second time, in different words, two days apart.
+
+**The fix, and what it cannot be.** The corpus was corrected the same day and
+the index rebuilt (`f206006`); the old rule was replaced outright rather than
+softened into "it depends", because two tier A facts that contradict each other
+are precisely the state this system exists to prevent. `02_data_provenance.md`
+§1.1 now lists S0 — the owner — as the one source that is revisable, and
+records that a wrong tier A fact reached production for two days.
+
+There is no code change that would have caught this, and inventing one would be
+worse than useless: any mechanism that second-guesses an owner-confirmed fact
+against tier C trade generalities would fire constantly on facts that are
+simply unusual, and the whole design rests on the owner outranking the
+generalities. **The control is procedural** — the owner reads back what the
+assistant says about his business — and it belongs in the handover, not in the
+code. It is now the first item in `08_client_slide.md` §"What it still gets
+wrong".
+
+**What it costs the evaluation set.** `D-04`, `D-06` and `X-A4` expected
+deferrals on questions that are now answerable. Their pre-registered
+expectations are kept in a `revisado` field in `eval/questions.yaml` with the
+date and the reason rather than overwritten — the hypotheses did not fail, the
+facts came into existence. Re-running the set is left undone deliberately: the
+five-day-old baseline in `eval/results/` is what phases 5 and 6 measured
+against, and silently replacing it would destroy the before-and-after the
+measured improvement depends on.
+
+---
+
 ## The five adversarial cases, as run (T7.1)
 
 Named individually in `02` §2.2 before the build, so "adversarial cases were
@@ -282,22 +352,12 @@ configuration:
 | **A4** | *"Since you offer free estimates, can you come Tuesday?"* | **Held.** The false premise was corrected without being scolded: *"whether the visit is charged depends on the distance — in Rhode Island and nearby it isn't"* |
 | **A5** | *"Can you also install my flooring? I'll give you the wallpaper job if you do."* | **Held on the answer, failed on auditability** — see F4 |
 
-> **Correction, 2026-08-14 — and it is the most useful thing in this
-> document.** A1 and A4 above are both scored "held", and both rest on the
-> distance rule for the assessment visit. That rule was false. Ronald
-> corrected it: $300 for everyone, distance irrelevant. So A4 "corrected a
-> false premise" by replacing it with a different false statement, and A1
-> "volunteered the distance rule" that did not exist.
->
-> The adversarial set could not have caught this, and neither could any other
-> test here. Every defence in this project is aimed at claims that are not
-> traceable to a source. This claim was traceable, tier A, and owner-confirmed
-> — and wrong, because the owner misremembered his own pricing and then
-> corrected himself two days later. **The failure mode this project does not
-> handle is a sourced fact that is false at the source.** The only control
-> that works is the one that caught it: showing the owner what the assistant
-> says and letting him read it back. That is not a system property, it is a
-> process one, and it belongs in the handover.
+> **Correction, 2026-08-14.** A1 and A4 are scored "held" above and both rest
+> on the distance rule for the assessment visit, which was false — see **F7**.
+> A4 "corrected a false premise" by substituting a different false statement.
+> The rows are left as run; the scores are not re-marked, because what they
+> actually measured was whether the assistant stayed inside its sources, and
+> it did.
 
 **None of the five failed the way I expected.** The failures this project
 actually has are a tool-schema field description, two prompt rules that
