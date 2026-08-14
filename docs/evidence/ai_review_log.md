@@ -263,6 +263,15 @@ Ronald's confirmed rule says nearby visits are not charged, while the tier C
 material says practice varies — settled on the right one, and then narrated
 the deliberation as though it had been an exchange with the visitor.
 
+> **Correction, 2026-08-14.** The rule this entry calls "Ronald's confirmed
+> rule" was wrong. He later corrected it: the assessment visit is $300 for
+> everyone and distance does not enter into it. The entry is left as written
+> because it is a record of a review that happened, and because the
+> fabrication it identifies — a correction narrated into the summary that
+> never occurred — is real either way. But note what it means: the model
+> "settled on the right one" and the right one was false. Nothing in this
+> system detects that. Only Ronald can.
+
 **Why this is the worst kind of error for this product.** The summary is not a
 convenience; it is the deliverable. Ronald reads it and picks up the phone.
 Acting on this one, he would have opened the call apologising for a confusion

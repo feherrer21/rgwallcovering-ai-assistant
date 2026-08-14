@@ -53,6 +53,15 @@ corpus, and none was invented. The tier C passages explain what *drives* the
 cost without asserting a figure; the tier A owner-confirmed document is what
 licenses the one concrete claim made — that the visit is not charged nearby.
 
+> **Correction, 2026-08-14.** That claim was false. Ronald corrected the
+> underlying fact: the assessment visit is $300 for everyone, distance is
+> irrelevant, and it is credited against the installation. This transcript is
+> a record of a run that happened and is not rewritten. The point it
+> illustrates survives intact — the tiers did their job, the claim was
+> licensed by the tier A document rather than invented — but it licensed a
+> claim that was wrong, because the tier A document was wrong. Sourcing
+> guarantees traceability, not truth.
+
 ### Turn 3
 
 **Visitor:** It's the reception area, maybe 30 feet of wall. There's old vinyl wallpaper on it now. We'd want it done before the new year.

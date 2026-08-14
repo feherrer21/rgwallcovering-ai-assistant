@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-**Actualizado:** 2026-08-13 · **Commits:** 41 · **Pruebas:** 56 en verde
+**Actualizado:** 2026-08-14 · **Commits:** 41 · **Pruebas:** 56 en verde
 
 Documento vivo. **Se actualiza según avanza el trabajo, no al cerrar cada
 fase** — cuando una tarea se mueve, cuando aparece o se resuelve un bloqueo, y
@@ -10,10 +10,31 @@ cuando una estimación resulta equivocada. Convención registrada en
 Fuente de la verdad para "qué queda": `04_plan.md` (fases) y `05_tasks.md`
 (tareas). Este fichero es el estado, no el plan.
 
-**Último movimiento:** `Q-02` arreglado y medido (2026-08-13) — el lead que se
-perdía en 2 de 7 muestras ahora se registra en 6 de 6, y el asistente registra
-**antes** de seguir preguntando. Con eso, **las nueve fases cerradas, las 13
-casillas del checklist y el último fallo abierto que dependía de nosotros.**
+**Último movimiento (2026-08-14): Ronald contestó cinco preguntas y una de
+ellas corrigió un hecho nivel A que estaba publicado y era falso.**
+
+Hasta hoy el corpus afirmaba que la visita de evaluación no se cobra cerca de
+Rhode Island. Él lo dijo así el 12 de agosto y lo desmintió hoy: **$300 para
+todos, la distancia no entra**, acreditados a la instalación si el trabajo se
+hace. El asistente desplegado estuvo dos días prometiendo gratis algo que
+cuesta $300 — el sentido peor posible del error.
+
+Corregido en el corpus, índice reconstruido (370 fragmentos), verificado con
+seis consultas en vivo, 56 pruebas en verde. También entraron el plazo de
+presupuesto (3 días si el material está decidido, ninguno si no) y el material
+comprado por el cliente (sí, y es el caso común). La garantía **no** entró: dio
+seis meses y acto seguido dijo que tenía que mirar el contrato.
+
+**Lo que esto enseña, y es lo más valioso que ha salido del proyecto:** todas
+las defensas aquí apuntan a afirmaciones sin fuente. Esta tenía fuente, era
+nivel A y estaba confirmada por el dueño — y era falsa, porque el dueño
+recordó mal su propio precio. Ningún test de este repositorio puede detectar
+eso. Escrito en `07_failure_analysis.md` §A y en `02_data_provenance.md` §1.1.
+
+Previo: `Q-02` arreglado y medido (2026-08-13) — el lead que se perdía en 2 de
+7 muestras ahora se registra en 6 de 6. Con eso, **las nueve fases cerradas,
+las 13 casillas del checklist y el último fallo abierto que dependía de
+nosotros.**
 
 ---
 
@@ -41,7 +62,15 @@ Desglose por fase, qué se cortó y el gasto de API: `06_effort.md`.
 
 ## Bloqueos
 
-**Ninguno bloquea el trabajo ahora mismo, y ya ninguno bloquea el despliegue.**
+**Abierto (2026-08-14): el demo desplegado sigue diciendo que la visita es
+gratis cerca de Rhode Island.** El corpus ya está corregido y el índice
+reconstruido en local, pero `data/index/` va versionado y el despliegue sale
+del repositorio — hasta que esto se empuje, lo que hay publicado promete gratis
+algo que cuesta $300. No es un bloqueo de trabajo, es un dato falso en vivo, y
+por eso está aquí arriba y no en la tabla de deuda.
+
+Aparte de eso, **ninguno bloquea el trabajo, y ya ninguno bloquea el
+despliegue.**
 
 Resueltos: `ANTHROPIC_API_KEY` (2026-08-12), credenciales SMTP con correo real
 recibido en bandeja (2026-08-13) y **la clave de API rotada** (2026-08-13) — la
@@ -375,9 +404,14 @@ uso real en la web de Ronald.
 | | |
 |---|---|
 | ⬜ | **La página de Services sirve texto sobre turbinas eólicas.** Está en vivo. |
-| ⬜ | Cuánto cobra por una visita lejana (que cerca no cobra ya está confirmado) |
-| ⬜ | Cuánto tarda en pasar un presupuesto desde el primer contacto |
-| ⬜ | Condiciones concretas de la garantía |
-| ⬜ | Si instala wallpaper comprado por el cliente |
+| ✅ | ~~Cuánto cobra por una visita~~ (2026-08-14) — $300 para todos, $500 si pasa de 90 min. **Corrigió lo que había dicho el 12/08** |
+| ✅ | ~~Plazo para pasar un presupuesto~~ (2026-08-14) — 3 días si el material está decidido |
+| ✅ | ~~Si instala wallpaper comprado por el cliente~~ (2026-08-14) — sí, y es el caso común |
+| 🟡 | **El contrato.** Ofreció mandarlo. Cierra dos cosas: el plazo de garantía (dijo 6 meses y dudó) y la cláusula del material del cliente |
+| ⬜ | Entre 1 h y 1 h 30 de visita, ¿$300 o $500? Dio regla para "hasta 1 h" y para "más de 1 h 30", no para el medio |
+| ⬜ | ¿Los $500 también se acreditan a la instalación? |
+| ⬜ | ¿La visita se paga al agendar o en el sitio? |
+| ⬜ | Preparación de pared: cómo aparece en el presupuesto (pregunta 3) |
+| ⬜ | Confirmar el área de servicio (pregunta 6) |
 | ⬜ | Etiquetar 15-20 fotos del portafolio (opcional, revive una función) |
-| ⬜ | **¿La lista de servicios está completa?** Pregunta 7, nueva: sin su respuesta el "no hacemos suelos" no se puede hacer auditable (F4) |
+| ⬜ | **¿La lista de servicios está completa?** Pregunta 7: sin su respuesta el "no hacemos suelos" no se puede hacer auditable (F4) |

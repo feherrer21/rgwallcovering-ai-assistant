@@ -23,6 +23,47 @@ I can't know without asking you."*
 
 ---
 
+## Status, 2026-08-14
+
+He answered five. Where each one landed:
+
+| | Question | Status |
+|---|---|---|
+| 1 | Site visit | ✅ **$300**, same for everyone, credited to the installation; $500 for assessments over 90 minutes on site |
+| 2 | Timelines | ✅ Quote in **3 days** if the material is decided; **no quote at all** until it is |
+| 3 | Wall preparation | ⬜ Not answered — how it appears on the quote is still open |
+| 4 | Customer-supplied material | ✅ Yes, and it is the common case. Conditions are in his contract |
+| 5 | Warranty | 🟡 Said six months, then said he had to check the contract. **Not usable** — see below |
+| 6 | Service area | ⬜ Not answered |
+| 7 | Is the service list complete | ⬜ Not answered — still blocks `F-03`, `F-04`, `X-A5` |
+
+**The visit answer reversed a fact that was already published.** On 12 August
+he said the charge depended on distance and nearby visits were free. That went
+into the corpus as tier A and the assistant asserted it to visitors for two
+days. Asking the question a second time, in different words, is what caught
+it. Worth remembering when planning the handover: the only control that
+catches a wrong tier A fact is Ronald reading back what the assistant says.
+
+**The warranty answer is why "he said it" is not the same as "it is
+confirmed."** He gave a number and in the same breath said he had to check the
+contract and thought the law might say otherwise. A source flagging its own
+answer as unverified is not a source. It stays deferred until the contract
+arrives.
+
+### Still to ask him
+
+Four follow-ups from the answers themselves, plus what was never answered:
+
+- **The contract** — settles the warranty term and the customer-material
+  clause. He offered to send it.
+- **Between one hour and an hour and a half** — is that $300 or $500? He gave
+  a rule for "up to an hour" and a rule for "more than an hour and a half".
+- **Are the $500 also credited** against the installation, like the $300?
+- **When is the fee paid** — at booking, or on the day?
+- Questions **3, 6 and 7** above, and the two operational ones below.
+
+---
+
 ## The questions, ordered by value
 
 ### 1. The site visit

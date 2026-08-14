@@ -45,7 +45,10 @@ $ curl -s -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json"
 Two things worth noticing. The claim that the visit is not charged rests on a
 tier A passage confirmed by the owner, not on the tier C explainer sitting next
 to it — the tiers survived ingestion, retrieval and the prompt, which is what
-`sources` exists to make checkable from outside the process. And no
+`sources` exists to make checkable from outside the process. (That tier A
+passage was corrected on 2026-08-14 — the visit is charged, $300 for everyone.
+The mechanism this paragraph demonstrates is unaffected; the fact it carried
+was not. See `02_data_provenance.md` §1.1.) And no
 `conversation_id` was sent, so the server issued one; the client sends it back
 on the next turn.
 

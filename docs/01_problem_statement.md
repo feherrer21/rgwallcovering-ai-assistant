@@ -161,15 +161,35 @@ invent answers. Each one answered moves a question from "deferred" to
    Cumberland, Cumberland Hill, Coventry, North Providence, Johnston, Lincoln,
    Greenville, Foster) plus Massachusetts and Connecticut. Needs confirmation
    from Ronald — third-party directory data goes stale.
-2. Is there a site visit to measure and assess? Free or paid? Required before
-   a quote?
-3. Typical time from first contact to written quote, and typical installation
-   duration.
+2. ~~Site visit — free or paid?~~ — **resolved 2026-08-14 by Ronald.** Paid,
+   **$300**, the same for everyone regardless of distance; credited against
+   the installation if the project goes ahead, and if it does not the client
+   keeps the material calculation. Longer assessments — over an hour and a
+   half on site — are $500.
+
+   **This one had a wrong answer in the corpus first.** On 2026-08-12 he said
+   the charge depended on distance and that nearby visits were free. That was
+   ingested as tier A, published, and asserted to visitors for two days before
+   he corrected it. Recorded in `02_data_provenance.md` §1.1 (S0), and it is
+   the reason S0 is the one source treated as revisable.
+3. ~~Time from first contact to written quote~~ — **resolved 2026-08-14:**
+   three days where the client already knows which material they want; no
+   estimate is issued at all until the material is settled. Installation
+   duration was resolved 2026-08-12 (≈3 days for a straightforward job, often
+   a single day for one wall).
 4. Is wall preparation (removing old covering, repairs) included or quoted
    separately? Note: wallpaper removal *is* listed as a service on Houzz, so
    it is offered — but whether it is bundled or billed separately is unknown.
-5. Can a client supply their own material?
-6. Any warranty on the installation.
+   Partially covered since 2026-08-12: preparation is always done in-house and
+   the warranty rests on it. How it appears on the quote is still open.
+5. ~~Can a client supply their own material?~~ — **resolved 2026-08-14:** yes,
+   and it is the most common case. The attached conditions are in his contract
+   and are not in the corpus.
+6. Any warranty on the installation. That there *is* one was confirmed
+   2026-08-12. The **term is still open**: on 2026-08-14 he said six months
+   and immediately said he had to check the contract because he thought a year
+   might be required by law. A figure the source itself flags as unverified
+   does not enter the corpus, so the assistant still defers on the length.
 7. ~~Should the assistant handle painting enquiries?~~ — **decided
    2026-08-12: yes.** Painting, murals and wallpaper removal are real services
    per BBB and Houzz; excluding them would cost the client work. Ronald should

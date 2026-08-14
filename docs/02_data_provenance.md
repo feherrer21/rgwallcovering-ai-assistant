@@ -22,12 +22,24 @@ sensitivity, so they are treated separately.
 
 | ID | Source | Type | Retrieved | Trust tier |
 |----|--------|------|-----------|------------|
+| S0 | Ronald Giraldo, owner — direct answers relayed by Fabián Herrera | First-party, owner-stated | 2026-08-12, 2026-08-14 | A — confirmed by the owner |
 | S1 | rgwallcovering.com — Home, About, Services, Interior Design, Contact | First-party, client-owned | 2026-08-12 | A — verified |
 | S2 | rgwallcovering.com/blog/ — 28 posts, Jul 2021 → Jan 2025 | First-party, client-owned | 2026-08-12 | A — verified |
 | S3 | rgwallcovering.com/portfolio/ — 84 images (37 residential, 47 commercial) | First-party, client-owned | 2026-08-12 | A — verified, but see 1.3 |
 | S4 | BBB business profile | Third-party directory | 2026-08-12 | B — attributable, unconfirmed |
 | S5 | Houzz professional profile | Third-party directory | 2026-08-12 | B — attributable, unconfirmed |
 | S6 | Generic wallcovering/painting trade knowledge, written by me | Synthetic, domain-general | 2026-08-12 | C — general, never attributed to the client |
+
+**S0 is the only source that can be wrong and then corrected.** The website
+does not change under us; the owner's account does. On 2026-08-14 he reversed
+what he had said on 2026-08-12 about the assessment visit — the earlier
+version, that the visit was free within Rhode Island, was published and being
+asserted to visitors. Corrections to S0 replace the earlier statement outright
+and are dated in the header of
+`agent_core/ingest/knowledge/a_ronald.md`; nothing contradicted is kept as a
+hedge. Where he flags his own answer as unverified — the warranty period, on
+which he said six months and then said he had to check the contract — it does
+not enter the corpus at all.
 
 **Tier A** the assistant may assert as fact about RG Wallcovering.
 **Tier B** the assistant may assert, but the note that it comes from a
